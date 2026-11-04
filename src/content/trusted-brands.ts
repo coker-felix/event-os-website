@@ -5,9 +5,9 @@ import type { TrustedBrand } from '#/features/trusted/visible'
  * the "Trusted by" section on the landing page shows them and stays hidden
  * while this list is empty. Only list partners who have agreed to be shown.
  *
- * Put logos in `public/logos/` and refer to them as "/logos/acme.svg" (or use
+ * Put logos in `public/logos/` and refer to them as "/logos/osu-nights-live.svg" (or use
  * an https URL). Dark-on-transparent logos are fine: each sits on a white tile.
  *
- *   { name: 'Acme Live', logo: '/logos/acme-live.svg', href: 'https://acme.example', kind: 'organizer' },
+ *   { name: 'Osu Nights Live', logo: '/logos/osu-nights-live.svg', href: 'https://osunights.example', kind: 'organizer' },
  */
 export const TRUSTED_BRANDS: Array<TrustedBrand> = []
