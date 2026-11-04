@@ -75,6 +75,15 @@ export function clampQty(t: PublicTicketType, qty: number): number {
   return Math.min(Math.max(qty, min), max)
 }
 
+/** One tap on + or −. From zero, + jumps to the minimum order. */
+export function stepQty(t: PublicTicketType, qty: number, dir: 1 | -1): number {
+  const { min, max } = qtyBounds(t)
+  if (max === 0) return 0
+  if (dir === 1) return qty <= 0 ? min : Math.min(qty + 1, max)
+  const next = qty - 1
+  return next < min ? 0 : next
+}
+
 function tierFor(t: PublicTicketType, qty: number): VolumeTier | undefined {
   return [...(t.volumeTiers ?? [])]
     .sort((a, b) => b.minQty - a.minQty)

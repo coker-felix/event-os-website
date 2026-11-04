@@ -30,7 +30,27 @@ export function eventParts(date: Date, tz?: string) {
   }
 }
 
-const WEEK_MS = 7 * 24 * 60 * 60 * 1000
+/** "Sat 15 Nov 2025 · 7:00 pm WAT", read in the event's own time zone. */
+export function formatEventWhen(date: Date, tz?: string): string {
+  const timeZone = zone(tz)
+  const day = new Intl.DateTimeFormat('en-GB', {
+    timeZone,
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(date)
+  const time = new Intl.DateTimeFormat('en-GB', {
+    timeZone,
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+    timeZoneName: 'short',
+  }).format(date)
+  return `${day} · ${time}`
+}
+
+const WEEK_MS =7 * 24 * 60 * 60 * 1000
 
 export function isUpcoming(e: PublicEvent, now: number): boolean {
   const end = toDate(e.endsAt) ?? toDate(e.startsAt)

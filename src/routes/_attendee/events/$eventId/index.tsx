@@ -1,11 +1,197 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { ShellPage } from '#/components/layout/shell-page'
+import { useMemo, useState } from 'react'
+import { Link, createFileRoute, notFound } from '@tanstack/react-router'
+import { useQuery } from '@tanstack/react-query'
+import { About } from '#/components/event-details/about'
+import { EventHero } from '#/components/event-details/event-hero'
+import { KeyFacts } from '#/components/event-details/key-facts'
+import { MobileBuyBar } from '#/components/event-details/mobile-buy-bar'
+import { SimilarEvents } from '#/components/event-details/similar-events'
+import { Sponsors } from '#/components/event-details/sponsors'
+import { TicketList } from '#/components/event-details/ticket-list'
+import { startCheckout } from '#/features/checkout/start'
+import { isEventId } from '#/features/events/ids'
+import { categoriesQuery } from '#/features/events/queries'
+import { selectedLines, stepQty } from '#/features/tickets/state'
+import { eventPageQuery } from '#/features/tickets/queries'
+import { ApiError } from '#/lib/api'
+import type { PublicTicketType } from '#/features/tickets/types'
 
 export const Route = createFileRoute('/_attendee/events/$eventId/')({
-  head: () => ({ meta: [{ title: 'Event Details | Event OS' }] }),
+  // Warm the cache on the server; a failing API must never fail the page.
+  loader: async ({ context: { queryClient }, params }) => {
+    if (!isEventId(params.eventId)) throw notFound()
+    try {
+      const { event } = await queryClient.ensureQueryData(
+        eventPageQuery(params.eventId),
+      )
+      return {
+        title: event.title,
+        description: (event.promoTagline ?? event.description ?? '').slice(0, 160),
+        image: event.heroImageUrl ?? '',
+      }
+    } catch (err) {
+      // A missing event is a real 404 (right status, no soft 404 for search
+      // engines). Any other failure still renders; the page shows a retry.
+      if (err instanceof ApiError && err.status === 404) throw notFound()
+      return null
+    }
+  },
+  notFoundComponent: EventNotFound,
+  head: ({ loaderData }) => ({
+    meta: [
+      { title: loaderData ? `${loaderData.title} | Event OS` : 'Event | Event OS' },
+      ...(loaderData
+        ? [
+            { name: 'description', content: loaderData.description },
+            { property: 'og:title', content: loaderData.title },
+            { property: 'og:description', content: loaderData.description },
+            ...(loaderData.image
+              ? [{ property: 'og:image', content: loaderData.image }]
+              : []),
+          ]
+        : []),
+    ],
+  }),
   component: EventDetailsPage,
 })
 
+function EventNotFound() {
+  return (
+    <div className="rounded-2xl border border-line bg-card p-6" role="alert">
+      <h1 className="text-2xl font-bold">We can't find that event</h1>
+      <p className="mt-1 text-mist">
+        It may have been removed or the link is wrong.
+      </p>
+      <Link
+        to="/events"
+        className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+      >
+        Browse all events
+      </Link>
+    </div>
+  )
+}
+
 function EventDetailsPage() {
-  return <ShellPage title="Event Details" />
+  const { eventId } = Route.useParams()
+  const navigate = Route.useNavigate()
+  const pageQuery = useQuery(eventPageQuery(eventId))
+  const categories = useQuery(categoriesQuery)
+
+  const [qtys, setQtys] = useState<Record<string, number>>({})
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | undefined>()
+
+  const names = useMemo(
+    () => new Map((categories.data ?? []).map((c) => [c.id, c.name] as const)),
+    [categories.data],
+  )
+
+  if (pageQuery.isPending) {
+    return (
+      <p className="text-mist" role="status">
+        Loading event…
+      </p>
+    )
+  }
+  if (pageQuery.isError) {
+    const notFound =
+      pageQuery.error instanceof ApiError && pageQuery.error.status === 404
+    return (
+      <div className="rounded-2xl border border-line bg-card p-6" role="alert">
+        <h1 className="text-2xl font-bold">
+          {notFound ? "We can't find that event" : "We couldn't load this event"}
+        </h1>
+        <p className="mt-1 text-mist">
+          {notFound
+            ? 'It may have been removed or the link is wrong.'
+            : 'Check your connection, then try again.'}
+        </p>
+        <div className="mt-4 flex gap-3">
+          {!notFound && (
+            <button
+              type="button"
+              onClick={() => pageQuery.refetch()}
+              className="h-12 rounded-full bg-violet px-6 font-semibold text-white"
+            >
+              Try again
+            </button>
+          )}
+          <Link
+            to="/events"
+            className="inline-flex h-12 items-center rounded-full border border-line px-6 font-semibold"
+          >
+            Browse all events
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  const page = pageQuery.data
+  const { event } = page
+
+  const onStep = (type: PublicTicketType, dir: 1 | -1) =>
+    setQtys((q) => ({ ...q, [type.id]: stepQty(type, q[type.id] ?? 0, dir) }))
+
+  async function onBuy() {
+    setBusy(true)
+    setError(undefined)
+    try {
+      await startCheckout(eventId, selectedLines(qtys))
+      await navigate({
+        to: '/events/$eventId/checkout',
+        params: { eventId },
+      })
+    } catch {
+      setError(
+        "We couldn't start your order. Check your connection and try again.",
+      )
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <div className="pb-24 lg:pb-0">
+      <EventHero
+        event={event}
+        categoryName={event.categoryId ? names.get(event.categoryId) : undefined}
+      />
+
+      <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_400px]">
+        <div className="min-w-0">
+          <KeyFacts event={event} />
+          <About text={event.description} />
+          <Sponsors sponsors={page.sponsors} />
+        </div>
+
+        <aside
+          aria-label="Tickets"
+          className="hidden self-start rounded-2xl border border-line bg-card p-5 lg:sticky lg:top-6 lg:block"
+        >
+          <TicketList
+            page={page}
+            qtys={qtys}
+            onStep={onStep}
+            variant="panel"
+            onBuy={onBuy}
+            busy={busy}
+            error={error}
+          />
+        </aside>
+      </div>
+
+      <SimilarEvents current={event} />
+
+      <MobileBuyBar
+        page={page}
+        qtys={qtys}
+        onStep={onStep}
+        onBuy={onBuy}
+        busy={busy}
+        error={error}
+      />
+    </div>
+  )
 }

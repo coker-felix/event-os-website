@@ -7,10 +7,12 @@ import {
   normaliseTicketType,
   qtyBounds,
   selectedLines,
+  stepQty,
   subtotalMinor,
   ticketStatus,
   volumeHint,
 } from './state'
+import { waitlistPayload } from './waitlist'
 import type { PublicEventPage, PublicTicketType } from './types'
 
 const NOW = 1_800_000_000
@@ -71,6 +73,45 @@ describe('qtyBounds and clampQty', () => {
   })
   it('limits to what is available', () => {
     expect(clampQty(tt({ available: 3 }), 8)).toBe(3)
+  })
+})
+
+describe('stepQty', () => {
+  it('steps up from zero to the minimum order, then one at a time', () => {
+    const t = tt({ minPerOrder: 2, maxPerOrder: 4 })
+    expect(stepQty(t, 0, 1)).toBe(2)
+    expect(stepQty(t, 2, 1)).toBe(3)
+  })
+  it('steps down to zero rather than below the minimum order', () => {
+    const t = tt({ minPerOrder: 2 })
+    expect(stepQty(t, 3, -1)).toBe(2)
+    expect(stepQty(t, 2, -1)).toBe(0)
+  })
+  it('stops at the maximum and never goes below zero', () => {
+    const t = tt({ maxPerOrder: 3 })
+    expect(stepQty(t, 3, 1)).toBe(3)
+    expect(stepQty(t, 0, -1)).toBe(0)
+  })
+  it('stays at zero when nothing can be bought', () => {
+    expect(stepQty(tt({ minPerOrder: 2, available: 1 }), 0, 1)).toBe(0)
+  })
+})
+
+describe('waitlistPayload', () => {
+  it('sends an email as email and a phone number as phone', () => {
+    expect(waitlistPayload('e1', 't1', 'a@b.co')).toEqual({
+      eventId: 'e1',
+      ticketTypeId: 't1',
+      email: 'a@b.co',
+    })
+    expect(waitlistPayload('e1', 't1', '+234 801 234 5678')).toEqual({
+      eventId: 'e1',
+      ticketTypeId: 't1',
+      phone: '+2348012345678',
+    })
+  })
+  it('returns null for something that is neither', () => {
+    expect(waitlistPayload('e1', 't1', 'hello')).toBeNull()
   })
 })
 
