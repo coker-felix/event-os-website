@@ -5,6 +5,7 @@ import {
   closesInLabel,
   filterCallouts,
   joinCalloutsWithEvents,
+  pointInventedAtEvents,
   serviceKindLabel,
 } from './callouts'
 import { isVendorId } from './ids'
@@ -145,5 +146,27 @@ describe('isVendorId', () => {
     expect(isVendorId('does-not-exist')).toBe(false)
     expect(isVendorId('')).toBe(false)
     expect(isVendorId('32db6ca3-dabf-469f-adca-02dce5641c18-x')).toBe(false)
+  })
+})
+
+describe('pointInventedAtEvents', () => {
+  const real = callout({ id: 'real', eventId: 'e-real' })
+  const fake = (id: string) => callout({ id, eventId: 'mock-event-x', invented: true })
+
+  it('moves invented callouts onto real events in turn, and leaves real ones alone', () => {
+    const out = pointInventedAtEvents(
+      [real, fake('a'), fake('b'), fake('c')],
+      [event({ id: 'e1' }), event({ id: 'e2' })],
+    )
+    expect(out.map((c) => c.eventId)).toEqual(['e-real', 'e2', 'e1', 'e2'])
+  })
+
+  it('changes nothing when there are no events to point at', () => {
+    const list = [fake('a')]
+    expect(pointInventedAtEvents(list, [])).toEqual(list)
+  })
+
+  it('changes nothing when no callout is invented', () => {
+    expect(pointInventedAtEvents([real], [event({ id: 'e1' })])).toEqual([real])
   })
 })

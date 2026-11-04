@@ -54,3 +54,18 @@ export function filterCallouts(
     return true
   })
 }
+
+/**
+ * Invented callouts are made without knowing which events exist. Point them
+ * at real events in turn so their cards show real event details. Real callouts
+ * are left alone, and nothing changes when there are no events.
+ */
+export function pointInventedAtEvents(
+  callouts: Array<Callout>,
+  events: Array<PublicEvent>,
+): Array<Callout> {
+  if (events.length === 0) return callouts
+  return callouts.map((c, i) =>
+    c.invented ? { ...c, eventId: events[i % events.length].id } : c,
+  )
+}

@@ -29,6 +29,7 @@ export function mockCallouts(
     serviceKinds: row.kinds,
     opensAt: nowSec - DAY,
     closesAt: nowSec + row.days * DAY,
+    invented: true,
   }))
 }
 

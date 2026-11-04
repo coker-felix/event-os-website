@@ -1,7 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { apiGet } from '#/lib/api'
 import { MOCKS_ENABLED } from '#/lib/mocks'
-import { mockVendorProfile, mockVendors } from './mocks'
 import {
   normaliseCalloutList,
   normaliseVendorList,
@@ -29,7 +28,16 @@ export const calloutsQuery = (p: { category?: string; page: number }) => {
         `/api/v1/vendor-callouts?${qs.toString()}`,
         { timeoutMs: 4000 },
       )
-      return normaliseCalloutList(raw, limit)
+      const list = normaliseCalloutList(raw, limit)
+      // Dev only: with no open callouts, invented ones stand in so the pages can be seen.
+      if (MOCKS_ENABLED && list.callouts.length === 0) {
+        const { mockCallouts } = await import('./mocks')
+        const fill = mockCallouts([]).filter(
+          (c) => !p.category || c.category === p.category,
+        )
+        return { callouts: fill, hasMore: false }
+      }
+      return list
     },
     staleTime: 60 * 1000,
     retry: false,
@@ -56,6 +64,7 @@ export const vendorDirectoryQuery = (p: {
       const list = normaliseVendorList(raw, limit)
       // Dev only: pad a thin directory with invented vendors that match the filters.
       if (MOCKS_ENABLED && list.vendors.length < MOCK_FILL) {
+        const { mockVendors } = await import('./mocks')
         const extra = mockVendors().filter(
           (v) =>
             (!p.category || v.category === p.category) &&
@@ -84,6 +93,7 @@ export const vendorQuery = (id: string) =>
       } catch (err) {
         // Dev only: an invented vendor from the padded directory.
         if (MOCKS_ENABLED) {
+          const { mockVendorProfile } = await import('./mocks')
           const mock = mockVendorProfile(id)
           if (mock) return mock
         }

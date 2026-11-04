@@ -59,13 +59,18 @@ The website calls the API gateway from both the server and the browser.
    `POST /api/v1/carts` answers 404 and checkout cannot start.
 4. The payment return page needs an order-status endpoint and the Paystack
    callback URL set to `/checkout/return` (backend request section 8).
+5. The vendors pages send "Sign in" and "Create profile" to the vendor portal
+   (`event-os-ui`) at `VITE_VENDOR_PORTAL_URL`, which must be running for
+   those links to work. The portal has no screen to apply to a callout yet.
 
 ## Structure
 
 ```
 src/routes/            file-based routes (/, /events, /events/$eventId,
                        /events/$eventId/checkout, /checkout/return,
-                       /blog, /blog/$slug, /contact, vendors, venues)
+                       /blog, /blog/$slug, /contact, /venues, and the vendors
+                       section: /vendors, /vendors/callouts,
+                       /vendors/directory, /vendors/$vendorId)
 src/features/<name>/   API calls, types and pure logic (tested)
 src/components/<name>/ UI for each page
 src/stores/            zustand stores (city and saved events, carts)

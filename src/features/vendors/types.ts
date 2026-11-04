@@ -15,6 +15,8 @@ export interface Callout {
   /** Unix seconds. Absent when the API sends zero (protojson omits zero). */
   opensAt?: number
   closesAt?: number
+  /** Set only on invented callouts (development). Real ones never have it. */
+  invented?: boolean
 }
 
 /** A callout with its event attached, when the event is known. */

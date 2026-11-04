@@ -123,6 +123,10 @@ describe('dev mocks', () => {
     expect(out.every((c) => (c.closesAt ?? 0) > 1_800_000_000)).toBe(true)
   })
 
+  it('mockCallouts marks every callout as invented', () => {
+    expect(mockCallouts(['e1'], 1_800_000_000).every((c) => c.invented === true)).toBe(true)
+  })
+
   it('mockCallouts uses placeholder event ids when there are no events', () => {
     expect(mockCallouts([], 1_800_000_000)[0].eventId).toBe('mock-event-1')
   })
