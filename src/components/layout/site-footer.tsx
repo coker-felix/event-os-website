@@ -1,16 +1,19 @@
 import { Link } from '@tanstack/react-router'
 import { FOOTER_COLUMNS } from '#/config/footer'
 import { portalUrl } from '#/features/vendors/portal'
+import { getJobs, getTeam } from '#/features/company/data'
 import { useConsent } from '#/stores/consent'
 
 const LINK = 'text-white/80 hover:text-white'
 
 export function SiteFooter() {
   const openSettings = useConsent((s) => s.openSettings)
+  // Team and Careers appear only when there is something to show.
+  const has = { team: getTeam().length > 0, careers: getJobs().length > 0 }
 
   return (
     <footer className="mt-20 bg-ink text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-3 lg:grid-cols-[1.4fr_repeat(6,1fr)]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-3 lg:grid-cols-[1.4fr_repeat(7,1fr)]">
         <div className="sm:col-span-3 lg:col-span-1">
           <Link to="/" className="font-display text-xl font-extrabold">
             Event OS
@@ -26,7 +29,9 @@ export function SiteFooter() {
               {col.heading}
             </h2>
             <ul className="mt-3 space-y-1 text-sm">
-              {col.links.map((l) => (
+              {col.links
+                .filter((l) => !('when' in l) || has[l.when])
+                .map((l) => (
                 <li key={l.label}>
                   {'to' in l ? (
                     <Link

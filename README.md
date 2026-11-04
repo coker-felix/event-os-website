@@ -56,6 +56,15 @@ Public organizer profiles live at `/organizers/<id>` inside the same layout.
 The copy states every organizer feature as available; the backend work that
 makes those claims true is `event-os-backend/docs/specs/organizer-platform.md`.
 
+### Company pages
+
+`/about`, `/about/team` and `/careers`, with a Company column in the footer. Copy,
+team and open roles are static files in `src/content/company.ts` (add real people
+and roles there; photos go in `public/team/`). The Team and Careers pages and
+their links appear only when the list has entries; in dev, fictional placeholders
+fill them in. `COMPANY.founded`, `.location` and `.email` are optional and hidden
+until set. A copy test rejects superlatives such as "best" or "leading".
+
 ### Cookies and browser storage
 
 Everything the site keeps in the browser is listed in

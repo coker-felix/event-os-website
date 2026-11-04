@@ -7,6 +7,7 @@ interface Link {
   hash?: string
   portal?: string
   action?: string
+  when?: string
 }
 const links = FOOTER_COLUMNS.flatMap((c) => c.links as ReadonlyArray<Link>)
 const internal = links.filter((l): l is Link & { to: string } => !!l.to)
@@ -23,6 +24,9 @@ const REAL_ROUTES = [
   '/venues',
   '/venues/directory',
   '/organizers',
+  '/about',
+  '/about/team',
+  '/careers',
   '/terms',
   '/privacy',
   '/cookies',
@@ -58,8 +62,24 @@ describe('footer', () => {
       'Vendors',
       'Venues',
       'Organizers',
+      'Company',
       'Help',
       'Legal',
     ])
+  })
+
+  it('has a Company column with About, Team, Careers and Contact', () => {
+    const col = FOOTER_COLUMNS.find((c) => c.heading === 'Company')
+    expect(col?.links).toEqual([
+      { label: 'About us', to: '/about' },
+      { label: 'Our team', to: '/about/team', when: 'team' },
+      { label: 'Careers', to: '/careers', when: 'careers' },
+      { label: 'Contact us', to: '/contact' },
+    ])
+  })
+
+  it('keeps Contact us out of the Help column so it is not listed twice', () => {
+    const help = FOOTER_COLUMNS.find((c) => c.heading === 'Help')
+    expect((help?.links as ReadonlyArray<Link>).map((l) => l.to)).not.toContain('/contact')
   })
 })
