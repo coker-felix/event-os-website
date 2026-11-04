@@ -4,10 +4,13 @@ const API_URL = (
 
 export class ApiError extends Error {
   status: number
-  constructor(status: number, message: string) {
+  /** Parsed JSON body of the error response, or null when there was none. */
+  body: unknown
+  constructor(status: number, message: string, body: unknown = null) {
     super(message)
     this.name = 'ApiError'
     this.status = status
+    this.body = body
   }
 }
 
@@ -17,34 +20,56 @@ interface ApiFetchOptions {
   timeoutMs?: number
 }
 
-/** GET a JSON resource from the Event OS API. */
-export async function apiGet<T>(
-  path: string,
-  { signal, timeoutMs = 8000 }: ApiFetchOptions = {},
-): Promise<T> {
-  const timeout = AbortSignal.timeout(timeoutMs)
-  const res = await fetch(`${API_URL}${path}`, {
-    headers: { Accept: 'application/json' },
-    signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
-  })
-  if (!res.ok) throw new ApiError(res.status, `GET ${path} failed`)
-  return (await res.json()) as T
+export interface ApiRequestOptions extends ApiFetchOptions {
+  body?: unknown
+  headers?: Record<string, string>
 }
 
-/** POST a JSON body to the Event OS API. Resolves with the parsed body, or `null` for empty responses. */
-export async function apiPost<T = null>(
+type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+
+async function readBody(res: Response): Promise<unknown> {
+  const text = await res.text()
+  if (!text) return null
+  try {
+    return JSON.parse(text)
+  } catch {
+    return null
+  }
+}
+
+/** Call the Event OS API. Resolves with the parsed body, or `null` for an empty one. */
+export async function apiRequest<T = null>(
+  method: Method,
   path: string,
-  body: unknown,
-  { signal, timeoutMs = 8000 }: ApiFetchOptions = {},
+  { body, headers, signal, timeoutMs = 8000 }: ApiRequestOptions = {},
 ): Promise<T> {
   const timeout = AbortSignal.timeout(timeoutMs)
   const res = await fetch(`${API_URL}${path}`, {
-    method: 'POST',
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+    method,
+    headers: {
+      Accept: 'application/json',
+      ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+      ...headers,
+    },
+    body: body === undefined ? undefined : JSON.stringify(body),
     signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
   })
-  if (!res.ok) throw new ApiError(res.status, `POST ${path} failed`)
-  const text = await res.text()
-  return (text ? JSON.parse(text) : null) as T
+  if (!res.ok) {
+    throw new ApiError(res.status, `${method} ${path} failed`, await readBody(res))
+  }
+  return (await readBody(res)) as T
+}
+
+/** GET a JSON resource from the Event OS API. */
+export function apiGet<T>(path: string, opts: ApiFetchOptions = {}): Promise<T> {
+  return apiRequest<T>('GET', path, opts)
+}
+
+/** POST a JSON body to the Event OS API. */
+export function apiPost<T = null>(
+  path: string,
+  body: unknown,
+  opts: ApiFetchOptions = {},
+): Promise<T> {
+  return apiRequest<T>('POST', path, { ...opts, body })
 }
