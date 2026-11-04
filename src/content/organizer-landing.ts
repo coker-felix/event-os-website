@@ -1,3 +1,5 @@
+import type { Faq } from './faqs'
+
 /**
  * Copy for the "For organizers" section on the attendee landing page. The
  * owner chose to state every feature here as available. The backend work that
@@ -83,6 +85,60 @@ export const PERSONAS: Array<Persona> = [
     ],
   },
 ]
+
+interface Step {
+  title: string
+  body: string
+}
+
+export const HOW_TO_START: Array<Step> = [
+  { title: 'Create your event', body: 'Add the details, set up your tickets, and publish when you are ready.' },
+  { title: 'Book what you need', body: 'Request a venue and book vendors from your event dashboard.' },
+  { title: 'Promote and sell', body: 'Share your page, give promoters their links, and scan tickets at the gate.' },
+]
+
+export const ORGANIZER_FAQS: Array<Faq> = [
+  {
+    question: 'How do I create an event?',
+    answer: "Create your event in the portal: add the details, set up your tickets, and publish when you're ready.",
+  },
+  {
+    question: 'What can my buyers pay with?',
+    answer: 'Cards and mobile money, on a secure payment page.',
+  },
+  {
+    question: 'Can I run a free event?',
+    answer: 'Yes. Offer free RSVPs with going, maybe and can\u2019t go, or make the event invite-only.',
+  },
+  {
+    question: 'How do I get paid?',
+    answer: 'Ticket sales are held and released to you after the event.',
+  },
+  {
+    question: 'Can I book a venue and vendors from my dashboard?',
+    answer: 'Yes. Send a booking request to a venue and book vendors or open a callout, all from your event. Vendors and venues are verified before they are paid.',
+  },
+  {
+    question: 'How does check-in work at the gate?',
+    answer: 'Every ticket has a QR code. Scan it with a phone, even without signal. Entries sync when you are back online, and a ticket can only enter once.',
+  },
+  {
+    question: 'Can promoters sell tickets for me?',
+    answer: 'Yes. Give each promoter their own link and see the tickets they sell and the commission they have earned. You can also keep a guest list, including complimentary guests.',
+  },
+  {
+    question: 'Can you help me promote my event?',
+    answer: 'Yes. Your event gets a branded page, and you can request featured placement on the Event OS homepage and send alerts to people who follow your city and category.',
+  },
+]
+
+/** The slim band on the attendee landing page that leads to the organizers page. */
+export const TEASER = {
+  eyebrow: 'Hosting an event?',
+  heading: 'Run your entire event from one dashboard',
+  body: 'Sell tickets, book vendors and venues, and promote your event, all in one place.',
+  cta: 'Explore Event OS for organizers',
+}
 
 export const CLOSING = {
   heading: 'Ready to build your next event?',

@@ -46,6 +46,16 @@ details, the alerts signup, the contact form, payment status). Until it does,
 - Everything that is invented is listed as a backend request in
   `event-os-backend/docs/specs/website-landing-api.md`.
 
+### Organizers page
+
+`/organizers` is the fourth product (Attendees, Vendors, Venues, Organizers). Its
+copy is in `src/content/organizer-landing.ts`; the "Trusted by" brand list is
+`src/content/trusted-brands.ts` (empty until you add real partners; hidden while
+empty). The attendee landing page carries only a slim "Hosting an event?" band.
+Public organizer profiles live at `/organizers/<id>` inside the same layout.
+The copy states every organizer feature as available; the backend work that
+makes those claims true is `event-os-backend/docs/specs/organizer-platform.md`.
+
 ### Cookies and browser storage
 
 Everything the site keeps in the browser is listed in

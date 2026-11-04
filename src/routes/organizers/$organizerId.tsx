@@ -13,7 +13,7 @@ import { categoriesQuery, eventsQuery } from '#/features/events/queries'
 import { ApiError } from '#/lib/api'
 import { CTA } from '#/lib/cta'
 
-export const Route = createFileRoute('/_attendee/organizers/$organizerId')({
+export const Route = createFileRoute('/organizers/$organizerId')({
   // A malformed id or a missing organizer is a real 404; any other failure
   // still renders, and the page shows a retry.
   loader: async ({ context: { queryClient }, params }) => {

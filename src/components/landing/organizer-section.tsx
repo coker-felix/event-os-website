@@ -1,60 +1,74 @@
 import { useId, useRef, useState } from 'react'
 import { Check } from 'lucide-react'
-import { Reveal } from '#/components/motion/reveal'
 import { CLOSING, HERO, PERSONAS, PILLARS } from '#/content/organizer-landing'
 import { portalUrl } from '#/features/vendors/portal'
 import { CTA } from '#/lib/cta'
 import { nextTab } from '#/lib/tabs'
 
-/** The pitch to organizers, on the attendee landing page. */
-export function OrganizerSection() {
+/** Full-width hero for the organizers page. */
+export function OrganizerHero() {
   return (
-    <section id="organizers" aria-labelledby="organizers-h" className="mt-20">
-      <div className="grid items-center gap-10 lg:grid-cols-2">
+    <section
+      aria-label="Run your entire event"
+      className="full-bleed animate-in bg-ink text-white duration-700 fade-in slide-in-from-bottom-2"
+    >
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2">
         <div>
-          <p className="text-xs font-semibold tracking-[0.18em] text-mist uppercase">
+          <p className="text-xs font-semibold tracking-[0.18em] text-white/70 uppercase">
             {HERO.eyebrow}
           </p>
-          <h2
-            id="organizers-h"
-            className="mt-3 text-3xl leading-tight font-extrabold sm:text-4xl"
-          >
+          <h1 className="mt-3 max-w-xl text-4xl leading-[1.05] font-extrabold sm:text-5xl">
             {HERO.headline}
-          </h2>
-          <p className="mt-3 max-w-md text-lg text-mist">{HERO.subline}</p>
-          <a href={portalUrl('/register')} className={`mt-6 ${CTA.primary}`}>
-            {HERO.cta}
-          </a>
+          </h1>
+          <p className="mt-4 max-w-md text-lg text-white/80">{HERO.subline}</p>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <a href={portalUrl('/register')} className={CTA.onDark}>
+              {HERO.cta}
+            </a>
+            <a href="#features" className={CTA.outlineOnDark}>
+              See what you get
+            </a>
+          </div>
         </div>
         <DashboardIllustration />
       </div>
+    </section>
+  )
+}
 
-      <Reveal>
-        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {PILLARS.map((p) => (
-            <li key={p.id} className="rounded-2xl border border-line bg-card p-6">
-              <h3 className="text-lg font-bold">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-mist">{p.body}</p>
-            </li>
-          ))}
-        </ul>
-      </Reveal>
+export function OrganizerPillars() {
+  return (
+    <section id="features" aria-label="What you get" className="mt-16">
+      <h2 className="text-2xl font-bold">Everything in one place</h2>
+      <ul className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {PILLARS.map((p) => (
+          <li key={p.id} className="rounded-2xl border border-line bg-card p-6">
+            <h3 className="text-lg font-bold">{p.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-mist">{p.body}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
 
-      <Reveal>
-        <PersonaTabs />
-      </Reveal>
+export function OrganizerPersonas() {
+  return (
+    <section id="who" aria-label="Who it is for" className="mt-16">
+      <h2 className="text-2xl font-bold">Built for the way you run events</h2>
+      <PersonaTabs />
+    </section>
+  )
+}
 
-      <Reveal>
-        <div className="mt-6 rounded-2xl bg-ink p-6 text-white sm:p-10">
-          <h3 className="max-w-xl text-2xl leading-tight font-extrabold sm:text-3xl">
-            {CLOSING.heading}
-          </h3>
-          <p className="mt-2 max-w-md text-white/80">{CLOSING.body}</p>
-          <a href={portalUrl('/register')} className={`mt-6 ${CTA.onDark}`}>
-            {CLOSING.cta}
-          </a>
-        </div>
-      </Reveal>
+export function OrganizerClosing() {
+  return (
+    <section aria-label={CLOSING.cta} className="mt-16 rounded-3xl bg-ink p-6 text-white sm:p-10">
+      <h2 className="max-w-xl text-3xl leading-tight font-extrabold">{CLOSING.heading}</h2>
+      <p className="mt-2 max-w-md text-white/80">{CLOSING.body}</p>
+      <a href={portalUrl('/register')} className={`mt-6 ${CTA.onDark}`}>
+        {CLOSING.cta}
+      </a>
     </section>
   )
 }
@@ -74,7 +88,7 @@ function PersonaTabs() {
   }
 
   return (
-    <div className="mt-6 rounded-2xl border border-line bg-card p-6">
+    <div className="mt-4 rounded-2xl border border-line bg-card p-6">
       <div role="tablist" aria-label="What kind of event do you run?" className="flex flex-wrap gap-2">
         {PERSONAS.map((p, i) => (
           <button

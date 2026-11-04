@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { CLOSING, HERO, PERSONAS, PILLARS } from './organizer-landing'
+import {
+  CLOSING,
+  HERO,
+  HOW_TO_START,
+  ORGANIZER_FAQS,
+  PERSONAS,
+  PILLARS,
+  TEASER,
+} from './organizer-landing'
 
 function allCopy(): Array<string> {
   const out: Array<string> = []
@@ -12,6 +20,9 @@ function allCopy(): Array<string> {
   add(PILLARS)
   add(PERSONAS)
   add(CLOSING)
+  add(HOW_TO_START)
+  add(ORGANIZER_FAQS)
+  add(TEASER)
   return out
 }
 
@@ -46,5 +57,24 @@ describe('organizer section copy', () => {
   it('has three personas in order, each with at least three points', () => {
     expect(PERSONAS.map((p) => p.id)).toEqual(['promoters', 'corporate', 'community'])
     for (const p of PERSONAS) expect(p.points.length).toBeGreaterThanOrEqual(3)
+  })
+
+  it('has three steps to start and at least six questions answered', () => {
+    expect(HOW_TO_START).toHaveLength(3)
+    expect(ORGANIZER_FAQS.length).toBeGreaterThanOrEqual(6)
+    for (const f of ORGANIZER_FAQS) {
+      expect(f.question.trim()).not.toBe('')
+      expect(f.answer.trim()).not.toBe('')
+    }
+  })
+
+  it('answers how organizers are paid without escrow or fee wording', () => {
+    const q = ORGANIZER_FAQS.find((f) => /paid/i.test(f.question))
+    expect(q?.answer).toMatch(/after the event/i)
+  })
+
+  it('has a teaser for the attendee page that leads to the organizers page', () => {
+    expect(TEASER.cta.length).toBeGreaterThan(0)
+    expect(TEASER.heading.length).toBeGreaterThan(0)
   })
 })
