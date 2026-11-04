@@ -62,3 +62,12 @@ export function createGatedStorage(
     removeItem: (name) => inner.removeItem(name),
   }
 }
+
+/**
+ * The banner is fixed to the bottom of the screen, which on the checkout page
+ * is where the mobile pay bar sits. Checkout has its own "Cookie settings"
+ * prompt, so the banner stays off that one page.
+ */
+export function showBannerOn(pathname: string): boolean {
+  return !/^\/events\/[^/]+\/checkout\/?$/.test(pathname)
+}

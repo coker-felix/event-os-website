@@ -7,6 +7,7 @@ import {
   parseConsent,
   readCookie,
   serializeConsent,
+  showBannerOn,
 } from './consent'
 import { PREFERENCE_KEYS, STORAGE } from './storage-registry'
 import { useConsent } from '#/stores/consent'
@@ -159,5 +160,18 @@ describe('useConsent', () => {
     useConsent.getState().forgetDetails()
     expect(ls.data.has('event-os:contact')).toBe(false)
     expect(ls.data.has('event-os:preferences')).toBe(true)
+  })
+})
+
+describe('showBannerOn', () => {
+  it('stays off the checkout page, where it would cover the mobile pay bar', () => {
+    expect(showBannerOn('/events/11111111-1111-4111-8111-111111111111/checkout')).toBe(false)
+    expect(showBannerOn('/events/abc/checkout/')).toBe(false)
+  })
+  it('shows everywhere else, including the payment return page', () => {
+    expect(showBannerOn('/')).toBe(true)
+    expect(showBannerOn('/events')).toBe(true)
+    expect(showBannerOn('/events/abc')).toBe(true)
+    expect(showBannerOn('/checkout/return')).toBe(true)
   })
 })

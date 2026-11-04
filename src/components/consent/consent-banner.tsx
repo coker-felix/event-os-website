@@ -1,5 +1,6 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { Button } from '#/components/ui/button'
+import { showBannerOn } from '#/lib/consent'
 import { useConsent } from '#/stores/consent'
 
 /** Non-blocking bar, shown only until the visitor makes a choice. */
@@ -7,9 +8,10 @@ export function ConsentBanner() {
   const status = useConsent((s) => s.status)
   const accept = useConsent((s) => s.accept)
   const decline = useConsent((s) => s.decline)
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
 
   // 'loading' on the server and first client render, so markup matches.
-  if (status !== 'none') return null
+  if (status !== 'none' || !showBannerOn(pathname)) return null
 
   return (
     <section

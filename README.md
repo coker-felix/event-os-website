@@ -46,6 +46,46 @@ details, the alerts signup, the contact form, payment status). Until it does,
 - Everything that is invented is listed as a backend request in
   `event-os-backend/docs/specs/website-landing-api.md`.
 
+### Cookies and browser storage
+
+Everything the site keeps in the browser is listed in
+`src/lib/storage-registry.ts`. The Cookies page is generated from it, and a
+test fails if the source uses an `event-os:` key that is not in the registry.
+
+| Key | Category | Holds |
+|---|---|---|
+| `eos_consent` (cookie, 1 year) | Necessary | the Accept or Decline choice |
+| `event-os:carts` | Necessary | cart id and token per event |
+| `event-os:preferences` | Preferences | city, saved events |
+| `event-os:theme` | Preferences | light, dark or system |
+| `event-os:contact` | Preferences | phone, email, delivery channel |
+
+- **Preferences** keys are written only after Accept, through a gated storage
+  (`createGatedStorage`). Decline, or "Forget my details", deletes them and
+  empties the in-memory copy. On load, any Preferences key found without an
+  Accept is deleted.
+- Adding a new thing to store: add it to the registry first, then use the gated
+  storage if it is a preference.
+- To ask everyone again (for example after adding a new Preferences key), raise
+  `CONSENT_VERSION` in `src/lib/consent.ts`.
+- There is no analytics, advertising or tracking, and the copy says so. If that
+  ever changes, the banner, Cookies page and Privacy page must change first.
+
+### Dark mode
+
+Follows the device. The header button cycles System, Light, Dark; the choice is
+remembered only after Accept. An inline script in the head sets the theme before
+first paint (`themeScript` in `src/lib/theme.ts`). Dark tokens live under `.dark`
+in `src/styles.css`; use `text-violet-ink` (not `text-violet`) for violet text.
+`src/lib/contrast.test.ts` fails if a key colour pair drops below 4.5:1.
+
+### Legal pages
+
+`/terms`, `/privacy` and `/cookies` are drafts written from what the product
+does. Business and legal decisions are `[To confirm: ...]` placeholders (search
+`src/content/legal`). Set `VITE_LEGAL_REVIEWED=true` only after a lawyer has
+signed them off and every placeholder is resolved.
+
 ## Running against the backend
 
 The website calls the API gateway from both the server and the browser.
