@@ -1,7 +1,13 @@
 import { COMING_SOON } from '#/content/vendor-landing'
 
+interface Item {
+  id: string
+  title: string
+  body: string
+}
+
 /** Not live yet, and visibly so: a dashed box that says "Coming soon". */
-export function ComingSoon() {
+export function ComingSoon({ items = COMING_SOON }: { items?: Array<Item> }) {
   return (
     <section
       aria-label="Coming soon"
@@ -10,7 +16,7 @@ export function ComingSoon() {
       <h2 className="text-xl font-bold">Coming soon</h2>
       <p className="mt-1 text-sm text-mist">Not available yet.</p>
       <ul className="mt-3 grid gap-4 md:grid-cols-3">
-        {COMING_SOON.map((c) => (
+        {items.map((c) => (
           <li key={c.id}>
             <h3 className="font-bold">{c.title}</h3>
             <p className="mt-1 text-sm text-mist">{c.body}</p>
