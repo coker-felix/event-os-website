@@ -1,3 +1,4 @@
+import { CTA } from '#/lib/cta'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
@@ -72,7 +73,7 @@ export function HeroBanner() {
           )}
           <BannerLink
             banner={active}
-            className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-ink hover:bg-white/90"
+            className={`mt-7 ${CTA.onDark}`}
           >
             {active.ctaLabel}
             <ArrowRight className="size-4" aria-hidden />

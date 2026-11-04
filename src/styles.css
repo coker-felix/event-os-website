@@ -1,5 +1,6 @@
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/figtree';
+@import '@fontsource-variable/inter';
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
@@ -57,6 +58,7 @@
 
 @theme inline {
   --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui,
     sans-serif;
   --color-ink: var(--ink);
@@ -161,8 +163,9 @@
   }
 }
 
+/* Clear the sticky header (one row from md up, two on phones). */
 [id] {
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 6rem;
 }
 
 /* Scroll reveal: set by <Reveal> after mount, only below the fold. */

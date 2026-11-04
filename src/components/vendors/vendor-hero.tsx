@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { HERO } from '#/content/vendor-landing'
+import { CTA } from '#/lib/cta'
 import { portalUrl } from '#/features/vendors/portal'
 
 export function VendorHero() {
@@ -19,13 +20,13 @@ export function VendorHero() {
       <div className="mt-7 flex flex-wrap items-center gap-3">
         <Link
           to="/vendors/callouts"
-          className="inline-flex h-12 items-center rounded-full bg-white px-6 font-semibold text-ink hover:bg-white/90"
+          className={CTA.onDark}
         >
           See open callouts
         </Link>
         <a
           href={portalUrl('/register')}
-          className="inline-flex h-12 items-center rounded-full border border-white/40 px-6 font-semibold hover:border-white"
+          className={CTA.outlineOnDark}
         >
           Create your profile
         </a>

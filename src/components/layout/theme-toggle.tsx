@@ -41,9 +41,9 @@ export function ThemeToggle() {
         type="button"
         onClick={cycle}
         aria-label={`Theme: ${LABEL[choice]}. Switch to ${LABEL[nextChoice(choice)].toLowerCase()}.`}
-        className="grid size-11 place-items-center rounded-full border border-line bg-card text-foreground hover:border-foreground"
+        className="grid size-9 place-items-center rounded-sm text-muted-foreground hover:text-foreground"
       >
-        <Icon className="size-5" aria-hidden />
+        <Icon className="size-[18px]" aria-hidden />
       </button>
       <span className="sr-only" role="status" aria-live="polite">
         {mounted ? `Theme: ${LABEL[choice]}` : ''}

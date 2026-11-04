@@ -1,3 +1,4 @@
+import { CTA } from '#/lib/cta'
 import { portalUrl } from '#/features/vendors/portal'
 
 /** A closing call to action that leads into the portal. Defaults are the vendors copy. */
@@ -21,7 +22,7 @@ export function ClosingCta({
       <p className="mt-2 max-w-md text-white/80">{body}</p>
       <a
         href={portalUrl(path)}
-        className="mt-6 inline-flex h-12 items-center rounded-full bg-white px-6 font-semibold text-ink hover:bg-white/90"
+        className={`mt-6 ${CTA.onDark}`}
       >
         {label}
       </a>
