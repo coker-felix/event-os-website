@@ -2,12 +2,16 @@
  * Invented data for fields the backend does not return yet (event price,
  * venue, stock; banners; blog posts; alert signup).
  *
- * On in `pnpm dev`. Off in production builds unless VITE_ENABLE_MOCKS=true,
- * so fake data cannot reach real visitors by accident. Real API values
- * always win over mock ones.
+ * On in `pnpm dev` and in tests. Off in production builds unless
+ * VITE_ENABLE_MOCKS=true, so fake data cannot reach real visitors by
+ * accident. Real API values always win over mock ones.
+ *
+ * `__MOCKS_ENABLED__` is replaced by a literal at build time (see
+ * vite.config.ts), which lets the bundler remove every mock when it is off.
  */
-export const MOCKS_ENABLED: boolean =
-  import.meta.env.DEV || import.meta.env.VITE_ENABLE_MOCKS === 'true'
+declare const __MOCKS_ENABLED__: boolean
+
+export const MOCKS_ENABLED: boolean = __MOCKS_ENABLED__
 
 /** Small stable hash (FNV-1a) so mock values do not change between renders. */
 export function hash(input: string): number {

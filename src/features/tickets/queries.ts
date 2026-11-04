@@ -1,7 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { apiGet } from '#/lib/api'
 import { MOCKS_ENABLED } from '#/lib/mocks'
-import { withEventExtras } from '#/features/events/enrich'
 import type { PublicEvent } from '#/features/events/types'
 import { mockTicketTypes, withTicketExtras } from './mocks'
 import { normaliseTicketType } from './state'
@@ -23,17 +22,19 @@ export const eventPageQuery = (eventId: string) =>
         `/api/v1/events/${encodeURIComponent(eventId)}`,
       )
       let ticketTypes = (raw.ticketTypes ?? []).map(normaliseTicketType)
-      // Dev only: a published event with no ticket types gets invented ones.
-      if (
-        MOCKS_ENABLED &&
-        ticketTypes.length === 0 &&
-        raw.event.status === 'published'
-      ) {
-        ticketTypes = mockTicketTypes(eventId)
+      let event = raw.event
+      // Dev only: invented ticket types, descriptions, venue and availability.
+      if (MOCKS_ENABLED) {
+        if (ticketTypes.length === 0 && event.status === 'published') {
+          ticketTypes = mockTicketTypes(eventId)
+        }
+        ticketTypes = ticketTypes.map((t) => withTicketExtras(t))
+        const { withEventExtras } = await import('#/features/events/enrich')
+        event = withEventExtras(event)
       }
       return {
-        event: withEventExtras(raw.event),
-        ticketTypes: ticketTypes.map((t) => withTicketExtras(t)),
+        event,
+        ticketTypes,
         sponsors: raw.sponsors ?? [],
         questionnaire: raw.questionnaire,
       }

@@ -1,203 +1,83 @@
-Welcome to your new TanStack Start app!
+# Event OS website
 
-# Getting Started
+The attendee-facing website for Event OS: find events, get tickets, read the
+blog, get support, and reach the vendor and venue products. Server-rendered
+with TanStack Start (Router, Query), React 19, Tailwind v4, shadcn and zustand.
 
-To run this application:
+## Run it
 
-```bash
+```sh
 pnpm install
-pnpm dev
+pnpm dev          # http://localhost:3000
 ```
 
-# Building For Production
+| Script | What it does |
+|---|---|
+| `pnpm dev` | Dev server on port 3000 |
+| `pnpm build` | Production build into `dist/` |
+| `pnpm test` | Unit tests (vitest) |
+| `pnpm lint` | ESLint |
 
-To build this application for production:
+Typecheck with `pnpm exec tsc --noEmit`. Run all four (tests, types, lint,
+build) before committing.
 
-```bash
-pnpm build
+## Configuration
+
+Copy `.env.example` to `.env` if you need to change anything.
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `VITE_API_URL` | `http://localhost:8080` | Base URL of the Event OS API gateway |
+| `VITE_ENABLE_MOCKS` | unset | Set to `true` to keep invented data in a production build |
+
+### Invented data
+
+The backend does not provide everything the pages show yet (event price,
+venue and availability, ticket descriptions, banners, blog posts, support
+details, the alerts signup, the contact form, payment status). Until it does,
+`src/features/mocks` and the `enrich`/`mocks` modules fill the gaps.
+
+- **On** in `pnpm dev` and in tests. **Off** in a production build, unless
+  `VITE_ENABLE_MOCKS=true`. It is a build-time switch (`__MOCKS_ENABLED__` in
+  `vite.config.ts`), so with it off no mock is called and none is loaded.
+- Real API values always win over invented ones.
+- Everything that is invented is listed as a backend request in
+  `event-os-backend/docs/specs/website-landing-api.md`.
+
+## Running against the backend
+
+The website calls the API gateway from both the server and the browser.
+
+1. Start the gateway in dev mode so the browser may call it from `:3000`:
+   `cd services/api-gateway && APP_ENV=local go run ./cmd/server`
+   (or set `CORS_ALLOWED_ORIGINS=http://localhost:3000`).
+2. Guest checkout sends the cart token as `X-Cart-Token`. The gateway's CORS
+   list must include that header (it listed `X-Cart-Tokens`); see the backend
+   request doc.
+3. Carts need the organization's `mutable_carts` feature flag. With it off,
+   `POST /api/v1/carts` answers 404 and checkout cannot start.
+4. The payment return page needs an order-status endpoint and the Paystack
+   callback URL set to `/checkout/return` (backend request section 8).
+
+## Structure
+
+```
+src/routes/            file-based routes (/, /events, /events/$eventId,
+                       /events/$eventId/checkout, /checkout/return,
+                       /blog, /blog/$slug, /contact, vendors, venues)
+src/features/<name>/   API calls, types and pure logic (tested)
+src/components/<name>/ UI for each page
+src/stores/            zustand stores (city and saved events, carts)
+docs/superpowers/      design spec and implementation plan
 ```
 
-## Styling
+Routes load their data on the server (`loader`) and never fail the page when
+the API is down: they render a clear message instead.
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+## Tests
 
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Remove `@tailwindcss/vite` and `tailwindcss` from `package.json`
-
-## Linting & Formatting
-
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
-
-```bash
-pnpm lint
-pnpm format
-pnpm check
-```
-
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+`pnpm test` covers the logic that has edge cases: event filtering and URL
+state, ticket rules, checkout error handling and idempotency, payment return,
+blog helpers, and contact hours and validation. Pages are checked by
+type-check, lint, build and rendered output; a browser pass at 390px wide is
+still to do.
