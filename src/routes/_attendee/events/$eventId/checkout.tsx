@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import { BillingSection } from '#/components/checkout/billing-section'
 import { ChangeNotice } from '#/components/checkout/change-notice'
 import { ContactSection } from '#/components/checkout/contact-section'
+import { RememberNote } from '#/components/checkout/remember-note'
 import { PayBar, PayButton } from '#/components/checkout/pay-bar'
 import { QuestionsSection } from '#/components/checkout/questions-section'
 import { Summary } from '#/components/checkout/summary'
@@ -27,6 +28,9 @@ import { eventPageQuery } from '#/features/tickets/queries'
 import { useCarts } from '#/stores/carts'
 import { safeHttpsUrl } from '#/lib/url'
 import { useCartsHydrated } from '#/stores/use-carts-hydrated'
+import { useContact } from '#/stores/contact'
+import { useHydrated } from '#/stores/use-hydrated'
+import { contactPrefill } from '#/features/checkout/prefill'
 import type { Answers } from '#/components/checkout/questions-section'
 import type { ContactErrors, ContactValue } from '#/components/checkout/contact-section'
 import type { IssueNotice } from '#/features/checkout/changes'
@@ -112,18 +116,15 @@ function CheckoutPage() {
   const prefilled = useRef(false)
 
   const cart = cartQuery.data
-  // Start the form from what the cart already knows, once.
+  // Start the form from what the cart already knows, else from the details
+  // remembered on this device, once.
+  const remembered = useContact((s) => s.remembered)
+  const contactHydrated = useHydrated(useContact.persist)
   useEffect(() => {
-    if (!cart || prefilled.current) return
+    if (!cart || prefilled.current || !contactHydrated) return
     prefilled.current = true
-    setContact({
-      phone: cart.contactPhone ?? '',
-      email: cart.contactEmail ?? '',
-      delivery:
-        cart.preferredDeliveryChannel ||
-        (cart.contactPhone ? 'sms' : cart.contactEmail ? 'email' : 'sms'),
-    })
-  }, [cart])
+    setContact(contactPrefill(cart, remembered))
+  }, [cart, remembered, contactHydrated])
 
   const page = pageQuery.data
   const names = useMemo(
@@ -242,6 +243,13 @@ function CheckoutPage() {
     setAnswerErrors(aErrors)
     setCountryError(cErr)
     if (!contactResult.ok || Object.keys(aErrors).length > 0 || cErr) return
+
+    // A no-op unless the visitor accepted cookies; the store is gated.
+    useContact.getState().remember({
+      phone: contactResult.phone ?? '',
+      email: contactResult.email ?? '',
+      delivery: contactResult.phone && contact.delivery !== 'email' ? 'sms' : contactResult.email ? 'email' : 'sms',
+    })
 
     setBusy(true)
     setNotice(null)
@@ -374,6 +382,7 @@ function CheckoutPage() {
             onChange={setContact}
             errors={contactErrors}
           />
+          <RememberNote />
           <QuestionsSection
             questions={questions}
             answers={answers}

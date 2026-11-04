@@ -20,9 +20,11 @@ interface ConsentState {
   closeSettings: () => void
   forgetDetails: () => void
   onAccepted: (cb: () => void) => void
+  onForget: (cb: () => void) => void
 }
 
 const callbacks: Array<() => void> = []
+const forgetCallbacks: Array<() => void> = []
 
 function removeKeys(keys: Array<string>) {
   try {
@@ -63,10 +65,17 @@ export const useConsent = create<ConsentState>()((set, get) => ({
     writeChoice('declined')
     removeKeys(PREFERENCE_KEYS)
     set({ status: 'declined' })
+    for (const cb of forgetCallbacks) cb()
   },
   openSettings: () => set({ settingsOpen: true }),
   closeSettings: () => set({ settingsOpen: false }),
-  forgetDetails: () => removeKeys([STORAGE.contact.key]),
+  forgetDetails: () => {
+    removeKeys([STORAGE.contact.key])
+    for (const cb of forgetCallbacks) cb()
+  },
+  onForget: (cb) => {
+    forgetCallbacks.push(cb)
+  },
   onAccepted: (cb) => {
     callbacks.push(cb)
     // already accepted before the store that registered was created
