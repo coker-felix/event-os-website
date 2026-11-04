@@ -94,6 +94,10 @@ describe('serviceKindLabel', () => {
     expect(serviceKindLabel('headphones')).toBe('Headphones')
   })
 
+  it('also reads hyphens, as in the real category "event-equipment"', () => {
+    expect(serviceKindLabel('event-equipment')).toBe('Event equipment')
+  })
+
   it('returns an empty string for an empty kind', () => {
     expect(serviceKindLabel('')).toBe('')
   })

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { validateCalloutsSearch } from './search'
+import { validateCalloutsSearch, validateDirectorySearch } from './search'
 
 describe('validateCalloutsSearch', () => {
   it('trims text, drops blanks and junk pages', () => {
@@ -28,5 +28,20 @@ describe('validateCalloutsSearch', () => {
   it('round-trips a clean search', () => {
     const clean = { category: 'sound', city: 'Accra', page: 2 }
     expect(validateCalloutsSearch(clean)).toEqual(clean)
+  })
+})
+
+describe('validateDirectorySearch', () => {
+  it('trims text and drops blanks and junk pages, like the callouts search', () => {
+    expect(validateDirectorySearch({ category: ' catering ', city: ' ', page: 'abc' })).toEqual({
+      category: 'catering',
+    })
+    expect(validateDirectorySearch({ page: 1 })).toEqual({})
+    expect(validateDirectorySearch({ page: -2 })).toEqual({})
+  })
+
+  it('round-trips a clean search', () => {
+    const clean = { category: 'catering', city: 'Accra', page: 2 }
+    expect(validateDirectorySearch(clean)).toEqual(clean)
   })
 })

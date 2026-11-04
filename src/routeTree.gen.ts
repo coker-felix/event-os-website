@@ -15,7 +15,9 @@ import { Route as VenuesRouteRouteImport } from './routes/venues/route'
 import { Route as AttendeeIndexRouteImport } from './routes/_attendee/index'
 import { Route as AttendeeContactRouteImport } from './routes/_attendee/contact'
 import { Route as VendorsIndexRouteImport } from './routes/vendors/index'
+import { Route as VendorsVendorIdRouteImport } from './routes/vendors/$vendorId'
 import { Route as VendorsCalloutsRouteImport } from './routes/vendors/callouts'
+import { Route as VendorsDirectoryRouteImport } from './routes/vendors/directory'
 import { Route as VenuesIndexRouteImport } from './routes/venues/index'
 import { Route as AttendeeBlogIndexRouteImport } from './routes/_attendee/blog/index'
 import { Route as AttendeeBlogSlugRouteImport } from './routes/_attendee/blog/$slug'
@@ -54,9 +56,19 @@ const VendorsIndexRoute = VendorsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => VendorsRouteRoute,
 } as any)
+const VendorsVendorIdRoute = VendorsVendorIdRouteImport.update({
+  id: '/$vendorId',
+  path: '/$vendorId',
+  getParentRoute: () => VendorsRouteRoute,
+} as any)
 const VendorsCalloutsRoute = VendorsCalloutsRouteImport.update({
   id: '/callouts',
   path: '/callouts',
+  getParentRoute: () => VendorsRouteRoute,
+} as any)
+const VendorsDirectoryRoute = VendorsDirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
   getParentRoute: () => VendorsRouteRoute,
 } as any)
 const VenuesIndexRoute = VenuesIndexRouteImport.update({
@@ -107,7 +119,9 @@ export interface FileRoutesByFullPath {
   '/venues': typeof VenuesRouteRouteWithChildren
   '/': typeof AttendeeIndexRoute
   '/contact': typeof AttendeeContactRoute
+  '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
+  '/vendors/directory': typeof VendorsDirectoryRoute
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
   '/blog/$slug': typeof AttendeeBlogSlugRoute
@@ -120,7 +134,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/contact': typeof AttendeeContactRoute
+  '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
+  '/vendors/directory': typeof VendorsDirectoryRoute
   '/': typeof AttendeeIndexRoute
   '/vendors': typeof VendorsIndexRoute
   '/venues': typeof VenuesIndexRoute
@@ -138,7 +154,9 @@ export interface FileRoutesById {
   '/venues': typeof VenuesRouteRouteWithChildren
   '/_attendee': typeof AttendeeRouteWithChildren
   '/_attendee/contact': typeof AttendeeContactRoute
+  '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
+  '/vendors/directory': typeof VendorsDirectoryRoute
   '/_attendee/': typeof AttendeeIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
@@ -157,7 +175,9 @@ export interface FileRouteTypes {
     | '/venues'
     | '/'
     | '/contact'
+    | '/vendors/$vendorId'
     | '/vendors/callouts'
+    | '/vendors/directory'
     | '/vendors/'
     | '/venues/'
     | '/blog/$slug'
@@ -170,7 +190,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/contact'
+    | '/vendors/$vendorId'
     | '/vendors/callouts'
+    | '/vendors/directory'
     | '/'
     | '/vendors'
     | '/venues'
@@ -187,7 +209,9 @@ export interface FileRouteTypes {
     | '/venues'
     | '/_attendee'
     | '/_attendee/contact'
+    | '/vendors/$vendorId'
     | '/vendors/callouts'
+    | '/vendors/directory'
     | '/_attendee/'
     | '/vendors/'
     | '/venues/'
@@ -250,11 +274,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorsIndexRouteImport
       parentRoute: typeof VendorsRouteRoute
     }
+    '/vendors/$vendorId': {
+      id: '/vendors/$vendorId'
+      path: '/$vendorId'
+      fullPath: '/vendors/$vendorId'
+      preLoaderRoute: typeof VendorsVendorIdRouteImport
+      parentRoute: typeof VendorsRouteRoute
+    }
     '/vendors/callouts': {
       id: '/vendors/callouts'
       path: '/callouts'
       fullPath: '/vendors/callouts'
       preLoaderRoute: typeof VendorsCalloutsRouteImport
+      parentRoute: typeof VendorsRouteRoute
+    }
+    '/vendors/directory': {
+      id: '/vendors/directory'
+      path: '/directory'
+      fullPath: '/vendors/directory'
+      preLoaderRoute: typeof VendorsDirectoryRouteImport
       parentRoute: typeof VendorsRouteRoute
     }
     '/venues/': {
@@ -317,12 +355,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface VendorsRouteRouteChildren {
+  VendorsVendorIdRoute: typeof VendorsVendorIdRoute
   VendorsCalloutsRoute: typeof VendorsCalloutsRoute
+  VendorsDirectoryRoute: typeof VendorsDirectoryRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
 }
 
 const VendorsRouteRouteChildren: VendorsRouteRouteChildren = {
+  VendorsVendorIdRoute: VendorsVendorIdRoute,
   VendorsCalloutsRoute: VendorsCalloutsRoute,
+  VendorsDirectoryRoute: VendorsDirectoryRoute,
   VendorsIndexRoute: VendorsIndexRoute,
 }
 

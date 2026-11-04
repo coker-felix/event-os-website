@@ -30,9 +30,9 @@ export function closesInLabel(
   return `Closes in ${days} ${days === 1 ? 'day' : 'days'}`
 }
 
-/** "check_in_assistance" becomes "Check in assistance". */
+/** "check_in_assistance" becomes "Check in assistance"; "event-equipment" becomes "Event equipment". */
 export function serviceKindLabel(kind: string): string {
-  const spaced = kind.replace(/_/g, ' ').trim()
+  const spaced = kind.replace(/[_-]/g, ' ').trim()
   return spaced ? spaced.charAt(0).toUpperCase() + spaced.slice(1) : ''
 }
 

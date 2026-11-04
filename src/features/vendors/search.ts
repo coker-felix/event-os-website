@@ -29,3 +29,10 @@ export function validateCalloutsSearch(raw: Record<string, unknown>): CalloutsSe
   if (p) out.page = p
   return out
 }
+
+/** The directory filters the same way as callouts: category, city, page. */
+export type DirectorySearch = CalloutsSearch
+
+export function validateDirectorySearch(raw: Record<string, unknown>): DirectorySearch {
+  return validateCalloutsSearch(raw)
+}
