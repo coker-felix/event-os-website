@@ -32,6 +32,7 @@ import { usePreferences } from '#/stores/preferences'
 import type { DiscoveryValue } from '#/components/landing/discovery-bar'
 import type { PublicEvent } from '#/features/events/types'
 import type { QuickFilter } from '#/features/events/filters'
+import { TrustedBy } from '#/components/landing/trusted-by'
 import { OrganizerSection } from '#/components/landing/organizer-section'
 import { Reveal } from '#/components/motion/reveal'
 import { CTA } from '#/lib/cta'
@@ -328,6 +329,10 @@ function Landing() {
       </Reveal>
 
       <OrganizerSection />
+
+      <Reveal>
+        <TrustedBy />
+      </Reveal>
 
       <Reveal>
         <PartnerStrip />
