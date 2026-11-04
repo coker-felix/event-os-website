@@ -192,7 +192,7 @@ export interface FacetCounts {
   when: Record<'tonight' | 'weekend' | 'week', number>
 }
 
-function bump<K>(m: Map<K, number>, k: K | undefined) {
+function bump<TKey>(m: Map<TKey, number>, k: TKey | undefined) {
   if (k !== undefined) m.set(k, (m.get(k) ?? 0) + 1)
 }
 
@@ -203,20 +203,20 @@ export function facetCounts(
   names: Map<number, string>,
   now: number,
 ): FacetCounts {
-  const without = (facet: Facet) =>
+  const ignoring = (facet: Facet) =>
     events.filter((e) => passes(e, s, names, now, facet))
   const cities = new Map<string, number>()
-  without('cities').forEach((e) => bump(cities, e.city))
+  ignoring('cities').forEach((e) => bump(cities, e.city))
   const categories = new Map<number, number>()
-  without('cats').forEach((e) => bump(categories, e.categoryId))
+  ignoring('cats').forEach((e) => bump(categories, e.categoryId))
   const formats = new Map<string, number>()
-  without('formats').forEach((e) => bump(formats, e.attendanceType))
+  ignoring('formats').forEach((e) => bump(formats, e.attendanceType))
   const prices = new Map<PriceBandId, number>()
-  const priceBase = without('prices')
+  const priceBase = ignoring('prices')
   for (const b of PRICE_BANDS) {
     prices.set(b.id, priceBase.filter((e) => inBand(e, b.id)).length)
   }
-  const whenBase = without('when')
+  const whenBase = ignoring('when')
   const when = {
     tonight: whenBase.filter((e) => matchesWhen(e, s, 'tonight', now)).length,
     weekend: whenBase.filter((e) => matchesWhen(e, s, 'weekend', now)).length,
