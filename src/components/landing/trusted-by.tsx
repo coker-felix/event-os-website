@@ -49,7 +49,9 @@ function Tile({ brand }: { brand: TrustedBrand }) {
  */
 export function TrustedBy() {
   const real = visibleBrands(TRUSTED_BRANDS)
-  const brands = real.length > 0 ? real : MOCKS_ENABLED ? visibleBrands(MOCK_TRUSTED) : []
+  // The dev placeholders are our own code (inlined data: URLs), so they skip the
+  // URL check that guards the real list.
+  const brands = real.length > 0 ? real : MOCKS_ENABLED ? MOCK_TRUSTED : []
   if (brands.length === 0) return null
   return (
     <section aria-labelledby="trusted-h" className="mt-16">
