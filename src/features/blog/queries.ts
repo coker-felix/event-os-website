@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query'
-import { apiGet } from '#/lib/api'
+import { ApiError, apiGet } from '#/lib/api'
 import { MOCKS_ENABLED } from '#/lib/mocks'
-import { mockPosts } from '#/features/mocks/posts'
-import type { BlogList, BlogPost, BlogPostsResponse } from './types'
+import { mockArticle, mockPosts } from '#/features/mocks/posts'
+import type { BlogArticle, BlogList, BlogPost, BlogPostsResponse } from './types'
 
 const FEATURED_COUNT = 3
 export const BLOG_PAGE_SIZE = 12
@@ -62,3 +62,30 @@ export const postsQuery = (params: { category?: string; page: number }) => {
     retry: false,
   })
 }
+
+/**
+ * `GET /api/v1/blog/posts/{slug}`: one full post. A missing post is an
+ * `ApiError` with status 404. In dev, when the endpoint does not exist,
+ * invented articles stand in for the known mock slugs.
+ */
+export const articleQuery = (slug: string) =>
+  queryOptions({
+    queryKey: ['blog', 'article', slug],
+    queryFn: async (): Promise<BlogArticle> => {
+      try {
+        return await apiGet<BlogArticle>(
+          `/api/v1/blog/posts/${encodeURIComponent(slug)}`,
+          { timeoutMs: 4000 },
+        )
+      } catch (err) {
+        if (MOCKS_ENABLED) {
+          const mock = mockArticle(slug)
+          if (mock) return mock
+          throw new ApiError(404, 'Post not found')
+        }
+        throw err
+      }
+    },
+    staleTime: 5 * 60 * 1000,
+    retry: false,
+  })

@@ -15,3 +15,30 @@ export function splitFeatured(posts: Array<BlogPost>): {
   const [featured, ...rest] = posts
   return { featured, rest }
 }
+
+/** Paragraphs of a plain-text body: split on blank lines, trimmed, no empties. */
+export function articleParagraphs(body: string): Array<string> {
+  return body
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+}
+
+/** Up to `n` other posts: same category first, then the rest in list order. */
+export function relatedPosts(
+  posts: Array<BlogPost>,
+  current: BlogPost,
+  n = 3,
+): Array<BlogPost> {
+  const others = posts.filter((p) => p.id !== current.id)
+  const same = others.filter(
+    (p) => current.category && p.category === current.category,
+  )
+  const rest = others.filter((p) => !same.includes(p))
+  return [...same, ...rest].slice(0, n)
+}
+
+/** Post slugs are lowercase words joined by hyphens (digits allowed). */
+export function isPostSlug(slug: string): boolean {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
+}
