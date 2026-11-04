@@ -19,7 +19,7 @@ export interface EventFilters {
 const DAY_MS = 24 * 60 * 60 * 1000
 
 /** "2026-11-14" for a moment, as seen in the given time zone. */
-function dayKey(date: Date, tz?: string): string {
+export function dayKey(date: Date, tz?: string): string {
   return new Intl.DateTimeFormat('en-CA', {
     timeZone: zone(tz),
     year: 'numeric',
