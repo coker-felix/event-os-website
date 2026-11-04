@@ -19,6 +19,8 @@ import { Route as VendorsVendorIdRouteImport } from './routes/vendors/$vendorId'
 import { Route as VendorsCalloutsRouteImport } from './routes/vendors/callouts'
 import { Route as VendorsDirectoryRouteImport } from './routes/vendors/directory'
 import { Route as VenuesIndexRouteImport } from './routes/venues/index'
+import { Route as VenuesVenueIdRouteImport } from './routes/venues/$venueId'
+import { Route as VenuesDirectoryRouteImport } from './routes/venues/directory'
 import { Route as AttendeeBlogIndexRouteImport } from './routes/_attendee/blog/index'
 import { Route as AttendeeBlogSlugRouteImport } from './routes/_attendee/blog/$slug'
 import { Route as AttendeeCheckoutReturnRouteImport } from './routes/_attendee/checkout/return'
@@ -76,6 +78,16 @@ const VenuesIndexRoute = VenuesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => VenuesRouteRoute,
 } as any)
+const VenuesVenueIdRoute = VenuesVenueIdRouteImport.update({
+  id: '/$venueId',
+  path: '/$venueId',
+  getParentRoute: () => VenuesRouteRoute,
+} as any)
+const VenuesDirectoryRoute = VenuesDirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
+  getParentRoute: () => VenuesRouteRoute,
+} as any)
 const AttendeeBlogIndexRoute = AttendeeBlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -122,6 +134,8 @@ export interface FileRoutesByFullPath {
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
+  '/venues/$venueId': typeof VenuesVenueIdRoute
+  '/venues/directory': typeof VenuesDirectoryRoute
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
   '/blog/$slug': typeof AttendeeBlogSlugRoute
@@ -137,6 +151,8 @@ export interface FileRoutesByTo {
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
+  '/venues/$venueId': typeof VenuesVenueIdRoute
+  '/venues/directory': typeof VenuesDirectoryRoute
   '/': typeof AttendeeIndexRoute
   '/vendors': typeof VendorsIndexRoute
   '/venues': typeof VenuesIndexRoute
@@ -157,6 +173,8 @@ export interface FileRoutesById {
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
+  '/venues/$venueId': typeof VenuesVenueIdRoute
+  '/venues/directory': typeof VenuesDirectoryRoute
   '/_attendee/': typeof AttendeeIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
@@ -178,6 +196,8 @@ export interface FileRouteTypes {
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
+    | '/venues/$venueId'
+    | '/venues/directory'
     | '/vendors/'
     | '/venues/'
     | '/blog/$slug'
@@ -193,6 +213,8 @@ export interface FileRouteTypes {
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
+    | '/venues/$venueId'
+    | '/venues/directory'
     | '/'
     | '/vendors'
     | '/venues'
@@ -212,6 +234,8 @@ export interface FileRouteTypes {
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
+    | '/venues/$venueId'
+    | '/venues/directory'
     | '/_attendee/'
     | '/vendors/'
     | '/venues/'
@@ -302,6 +326,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VenuesIndexRouteImport
       parentRoute: typeof VenuesRouteRoute
     }
+    '/venues/$venueId': {
+      id: '/venues/$venueId'
+      path: '/$venueId'
+      fullPath: '/venues/$venueId'
+      preLoaderRoute: typeof VenuesVenueIdRouteImport
+      parentRoute: typeof VenuesRouteRoute
+    }
+    '/venues/directory': {
+      id: '/venues/directory'
+      path: '/directory'
+      fullPath: '/venues/directory'
+      preLoaderRoute: typeof VenuesDirectoryRouteImport
+      parentRoute: typeof VenuesRouteRoute
+    }
     '/_attendee/blog/': {
       id: '/_attendee/blog/'
       path: '/blog'
@@ -373,10 +411,14 @@ const VendorsRouteRouteWithChildren = VendorsRouteRoute._addFileChildren(
 )
 
 interface VenuesRouteRouteChildren {
+  VenuesVenueIdRoute: typeof VenuesVenueIdRoute
+  VenuesDirectoryRoute: typeof VenuesDirectoryRoute
   VenuesIndexRoute: typeof VenuesIndexRoute
 }
 
 const VenuesRouteRouteChildren: VenuesRouteRouteChildren = {
+  VenuesVenueIdRoute: VenuesVenueIdRoute,
+  VenuesDirectoryRoute: VenuesDirectoryRoute,
   VenuesIndexRoute: VenuesIndexRoute,
 }
 
