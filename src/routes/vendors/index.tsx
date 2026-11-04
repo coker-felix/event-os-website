@@ -6,6 +6,7 @@ import { ComingSoon } from '#/components/vendors/coming-soon'
 import { HowToStart } from '#/components/vendors/how-to-start'
 import { Scenarios } from '#/components/vendors/scenarios'
 import { VendorHero } from '#/components/vendors/vendor-hero'
+import { Testimonials } from '#/components/landing/testimonials'
 import { FaqSection, faqJsonLd } from '#/components/landing/faq-section'
 import { VENDOR_FAQS } from '#/content/vendor-faqs'
 import { HERO } from '#/content/vendor-landing'
@@ -51,6 +52,9 @@ function VendorLanding() {
       </Reveal>
       <Reveal>
         <HowToStart />
+      </Reveal>
+      <Reveal>
+        <Testimonials audience="vendors" />
       </Reveal>
       <Reveal>
         <FaqSection faqs={VENDOR_FAQS} />

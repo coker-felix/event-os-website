@@ -6,6 +6,7 @@ import {
   OrganizerPersonas,
   OrganizerPillars,
 } from '#/components/landing/organizer-section'
+import { Testimonials } from '#/components/landing/testimonials'
 import { TrustedBy } from '#/components/landing/trusted-by'
 import { Reveal } from '#/components/motion/reveal'
 import { HowToStart } from '#/components/vendors/how-to-start'
@@ -41,6 +42,9 @@ function OrganizersLanding() {
         <div id="start">
           <HowToStart steps={HOW_TO_START} />
         </div>
+      </Reveal>
+      <Reveal>
+        <Testimonials audience="organizers" />
       </Reveal>
       <Reveal>
         <FaqSection faqs={ORGANIZER_FAQS} />

@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { PRODUCTS } from './products'
 
 describe('products', () => {
-  it('has four products in switcher order, organizers last', () => {
-    expect(Object.keys(PRODUCTS)).toEqual(['attendees', 'vendors', 'venues', 'organizers'])
+  it('has four products in switcher order: attendees, organizers, vendors, venues', () => {
+    expect(Object.keys(PRODUCTS)).toEqual(['attendees', 'organizers', 'vendors', 'venues'])
   })
 
   it('gives organizers their own home, nav and sign-up action', () => {
@@ -20,5 +20,9 @@ describe('products', () => {
     const link = PRODUCTS.attendees.nav.find((n) => n.label === 'Host an event')
     expect(link?.to).toBe('/organizers')
     expect(link?.hash).toBeUndefined()
+  })
+
+  it('keeps the organizers brand short so the navbar does not wrap', () => {
+    expect(PRODUCTS.organizers.name).toBe('Event OS')
   })
 })

@@ -38,6 +38,22 @@ export const PRODUCTS: Record<ProductId, Product> = {
       { label: 'Contact', to: '/contact' },
     ],
   },
+  organizers: {
+    id: 'organizers',
+    name: 'Event OS',
+    tagline: 'Run your entire event from one dashboard',
+    home: '/organizers',
+    nav: [
+      { label: 'Features', to: '/organizers', hash: 'features' },
+      { label: 'Who it is for', to: '/organizers', hash: 'who' },
+      { label: 'How to start', to: '/organizers', hash: 'start' },
+      { label: 'FAQs', to: '/organizers', hash: 'faqs' },
+    ],
+    actions: [
+      { label: 'Sign in', path: '/login', variant: 'secondary' },
+      { label: 'Create your event', path: '/register', variant: 'primary' },
+    ],
+  },
   vendors: {
     id: 'vendors',
     name: 'Event OS for Vendors',
@@ -62,20 +78,4 @@ export const PRODUCTS: Record<ProductId, Product> = {
       { label: 'Sign in', path: '/login', variant: 'secondary' },
       { label: 'List your venue', path: '/register', variant: 'primary' },
     ],
-  },  organizers: {
-    id: 'organizers',
-    name: 'Event OS for Organizers',
-    tagline: 'Run your entire event from one dashboard',
-    home: '/organizers',
-    nav: [
-      { label: 'Features', to: '/organizers', hash: 'features' },
-      { label: 'Who it is for', to: '/organizers', hash: 'who' },
-      { label: 'How to start', to: '/organizers', hash: 'start' },
-      { label: 'FAQs', to: '/organizers', hash: 'faqs' },
-    ],
-    actions: [
-      { label: 'Sign in', path: '/login', variant: 'secondary' },
-      { label: 'Create your event', path: '/register', variant: 'primary' },
-    ],
-  },
-}
+  },}

@@ -2,12 +2,12 @@ import { Link } from '@tanstack/react-router'
 import { PRODUCTS } from '#/config/products'
 import type { ProductId } from '#/config/products'
 
-const SWITCHER_ORDER: Array<ProductId> = ['attendees', 'vendors', 'venues', 'organizers']
+const SWITCHER_ORDER: Array<ProductId> = ['attendees', 'organizers', 'vendors', 'venues']
 const SWITCHER_LABELS: Record<ProductId, string> = {
   attendees: 'Attendees',
+  organizers: 'Organizers',
   vendors: 'Vendors',
   venues: 'Venues',
-  organizers: 'Organizers',
 }
 
 /** A small segmented control for moving between the three products. */
