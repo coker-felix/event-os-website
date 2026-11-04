@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { apiGet } from '#/lib/api'
+import { withEventExtras } from './enrich'
 import type { EventCategory, PublicEvent } from './types'
 
 export const eventsQuery = queryOptions({
@@ -8,7 +9,7 @@ export const eventsQuery = queryOptions({
     const res = await apiGet<{ events?: Array<PublicEvent>; total?: number }>(
       '/api/v1/events?limit=60&offset=0',
     )
-    return res.events ?? []
+    return (res.events ?? []).map((e) => withEventExtras(e))
   },
   staleTime: 60 * 1000,
   retry: 1,

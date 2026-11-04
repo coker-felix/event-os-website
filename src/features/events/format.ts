@@ -8,7 +8,7 @@ export function toDate(ts: number | string | undefined): Date | null {
   return new Date(n < 1e12 ? n * 1000 : n)
 }
 
-function zone(tz?: string): string {
+export function zone(tz?: string): string {
   if (!tz) return 'UTC'
   try {
     new Intl.DateTimeFormat('en', { timeZone: tz })

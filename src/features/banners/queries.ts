@@ -1,5 +1,7 @@
 import { queryOptions } from '@tanstack/react-query'
 import { apiGet } from '#/lib/api'
+import { MOCKS_ENABLED } from '#/lib/mocks'
+import { mockBanners } from '#/features/mocks/banners'
 import { DEFAULT_BANNER } from './default-banner'
 import type { Banner, BannersResponse } from './types'
 
@@ -35,10 +37,16 @@ export function normaliseBanners(
 export const bannersQuery = queryOptions({
   queryKey: ['banners'],
   queryFn: async () => {
-    const res = await apiGet<BannersResponse>('/api/v1/banners', {
-      timeoutMs: BANNER_TIMEOUT_MS,
-    })
-    return normaliseBanners(res.banners)
+    try {
+      const res = await apiGet<BannersResponse>('/api/v1/banners', {
+        timeoutMs: BANNER_TIMEOUT_MS,
+      })
+      return normaliseBanners(res.banners)
+    } catch (err) {
+      // The endpoint does not exist yet: show invented banners in dev only.
+      if (MOCKS_ENABLED) return normaliseBanners(mockBanners())
+      throw err
+    }
   },
   staleTime: 5 * 60 * 1000,
   retry: false,
