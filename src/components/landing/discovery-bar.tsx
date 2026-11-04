@@ -132,7 +132,7 @@ export function DiscoveryBar({
                     : undefined,
                 })
               }
-              className={CTA.chipOff}
+              className={CTA.select}
             >
               <option value="">All categories</option>
               {categories.map((c) => (
