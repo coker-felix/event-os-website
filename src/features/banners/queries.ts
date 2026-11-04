@@ -1,6 +1,7 @@
 import { queryOptions } from '@tanstack/react-query'
 import { apiGet } from '#/lib/api'
 import { MOCKS_ENABLED } from '#/lib/mocks'
+import { isSafeHref } from '#/lib/url'
 import { mockBanners } from '#/features/mocks/banners'
 import { DEFAULT_BANNER } from './default-banner'
 import type { Banner, BannersResponse } from './types'
@@ -12,6 +13,7 @@ const HEX_COLOR = /^#[0-9a-f]{6}$/i
 
 function isUsable(b: Banner, nowSec: number): boolean {
   if (!b.id || !b.title || !b.ctaLabel || !b.href) return false
+  if (!isSafeHref(b.href)) return false
   if (b.startsAt && b.startsAt > nowSec) return false
   if (b.endsAt && b.endsAt < nowSec) return false
   return true

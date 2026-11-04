@@ -1,3 +1,4 @@
+import { safeHttpUrl } from '#/lib/url'
 import type { EventSponsor } from '#/features/tickets/types'
 
 const TIER_ORDER = [
@@ -25,8 +26,9 @@ function Logo({ s }: { s: EventSponsor }) {
   ) : (
     <span className="text-sm font-semibold">{s.name}</span>
   )
-  return s.websiteUrl ? (
-    <a href={s.websiteUrl} target="_blank" rel="noopener noreferrer">
+  const href = safeHttpUrl(s.websiteUrl)
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer">
       {body}
     </a>
   ) : (

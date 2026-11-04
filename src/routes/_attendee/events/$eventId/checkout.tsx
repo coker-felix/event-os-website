@@ -25,6 +25,7 @@ import {
 import { formatEventWhen, toDate } from '#/features/events/format'
 import { eventPageQuery } from '#/features/tickets/queries'
 import { useCarts } from '#/stores/carts'
+import { safeHttpsUrl } from '#/lib/url'
 import { useCartsHydrated } from '#/stores/use-carts-hydrated'
 import type { Answers } from '#/components/checkout/questions-section'
 import type { ContactErrors, ContactValue } from '#/components/checkout/contact-section'
@@ -278,7 +279,13 @@ function CheckoutPage() {
       )
       if (result.authorization_url) {
         // Off to Paystack; the cart stays until the payment is confirmed.
-        window.location.assign(result.authorization_url)
+        const payUrl = safeHttpsUrl(result.authorization_url)
+        if (!payUrl) {
+          setNotice(issueNotice({ kind: 'unknown' }))
+          setBusy(false)
+          return
+        }
+        window.location.assign(payUrl)
         return
       }
       clearCart(eventId)
