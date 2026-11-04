@@ -103,6 +103,8 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     margin: 0;
+    /* 100vw includes the scrollbar; clip the sliver instead of scrolling. */
+    overflow-x: clip;
   }
   h1,
   h2,
@@ -119,6 +121,13 @@
 /* Ticket stub: the card body and its stub are separated by a perforated
    tear line with a half-circle notch cut out of each side. */
 @layer components {
+  /* Break a child out of the centred page column to the full window width,
+     and up over the page's top padding so it meets the header. */
+  .full-bleed {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    margin-top: -2.5rem;
+  }
   .stub-divider {
     position: relative;
     height: 0;

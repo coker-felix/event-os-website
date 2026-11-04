@@ -6,8 +6,9 @@ export function VenueHero() {
   return (
     <section
       aria-label="Get your venue seen"
-      className="rounded-3xl bg-ink p-6 text-white sm:p-10 animate-in fade-in slide-in-from-bottom-2 duration-700"
+      className="full-bleed bg-ink text-white animate-in fade-in slide-in-from-bottom-2 duration-700"
     >
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
       <p className="text-xs font-semibold tracking-[0.18em] text-white/70 uppercase">
         {HERO.eyebrow}
       </p>
@@ -28,6 +29,7 @@ export function VenueHero() {
         >
           Browse venues
         </Link>
+      </div>
       </div>
     </section>
   )

@@ -50,10 +50,10 @@ export function HeroBanner() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative isolate overflow-hidden rounded-3xl bg-ink text-white animate-in fade-in slide-in-from-bottom-2 duration-700"
+      className="full-bleed relative isolate overflow-hidden bg-ink text-white animate-in fade-in slide-in-from-bottom-2 duration-700"
     >
       <BannerBackground banner={active} />
-      <div className="relative flex min-h-[22rem] flex-col justify-between gap-8 p-6 sm:min-h-[26rem] sm:p-10 md:flex-row md:items-end">
+      <div className="relative mx-auto flex min-h-[26rem] max-w-6xl flex-col justify-between gap-8 px-4 py-10 sm:py-14 md:flex-row md:items-end lg:min-h-[min(70vh,36rem)]">
         <div
           key={active.id}
           aria-live={paused ? 'polite' : 'off'}
@@ -126,7 +126,7 @@ function BannerBackground({ banner }: { banner: Banner }) {
         />
       )}
       {/* Keeps text readable over any image. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/35 to-ink/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 to-ink/20" />
     </div>
   )
 }
