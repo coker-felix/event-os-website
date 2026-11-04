@@ -1,14 +1,15 @@
 import { Link } from '@tanstack/react-router'
 import { Plus } from 'lucide-react'
 import { FAQS } from '#/content/faqs'
+import type { Faq } from '#/content/faqs'
 
 /** Native <details>: keyboard accessible and works without JavaScript. */
-export function FaqSection() {
+export function FaqSection({ faqs = FAQS }: { faqs?: Array<Faq> })  {
   return (
     <section id="faqs" aria-label="Frequently asked questions" className="mt-16">
       <h2 className="text-2xl font-bold">Questions, answered</h2>
       <div className="mt-4 divide-y divide-line rounded-2xl border border-line bg-card">
-        {FAQS.map((f) => (
+        {faqs.map((f) => (
           <details key={f.question} className="group px-5 py-4">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold [&::-webkit-details-marker]:hidden">
               {f.question}
@@ -34,11 +35,11 @@ export function FaqSection() {
 }
 
 /** FAQPage structured data so search engines can show the answers. */
-export function faqJsonLd(): string {
+export function faqJsonLd(faqs: Array<Faq> = FAQS): string {
   return JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQS.map((f) => ({
+    mainEntity: faqs.map((f) => ({
       '@type': 'Question',
       name: f.question,
       acceptedAnswer: { '@type': 'Answer', text: f.answer },
