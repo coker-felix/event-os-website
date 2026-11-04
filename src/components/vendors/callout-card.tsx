@@ -28,7 +28,7 @@ export function CalloutCard({ card }: { card: Card }) {
   const tint =
     event?.accentColor && HEX_COLOR.test(event.accentColor)
       ? event.accentColor
-      : '#5b3df5'
+      : '#0f766e'
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card">

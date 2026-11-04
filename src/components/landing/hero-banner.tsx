@@ -108,7 +108,7 @@ export function HeroBanner() {
 function BannerBackground({ banner }: { banner: Banner }) {
   const [failed, setFailed] = useState(false)
   useEffect(() => setFailed(false), [banner.imageUrl])
-  const tint = banner.accentColor ?? '#5b3df5'
+  const tint = banner.accentColor ?? '#0f766e'
   return (
     <div className="absolute inset-0 -z-10" aria-hidden>
       <div

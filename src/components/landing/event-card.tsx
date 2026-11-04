@@ -30,7 +30,7 @@ export function EventCard({
   const tint =
     event.accentColor && HEX_COLOR.test(event.accentColor)
       ? event.accentColor
-      : '#5b3df5'
+      : '#0f766e'
   const price = formatPrice(event.priceFromMinor, event.currency)
   const place = [event.venueName, event.city]
     .filter((x, i, a) => x && a.indexOf(x) === i)

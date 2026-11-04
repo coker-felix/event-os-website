@@ -20,7 +20,7 @@ export function EventHero({
   const tint =
     event.accentColor && HEX_COLOR.test(event.accentColor)
       ? event.accentColor
-      : '#5b3df5'
+      : '#0f766e'
 
   async function share() {
     const url = window.location.href

@@ -10,9 +10,9 @@
 :root {
   --ink: #15122e;
   --paper: #f6f5fb;
-  --violet: #5b3df5;
-  /* Violet for small text: the brand violet in light, lifted in dark. */
-  --violet-ink: #5b3df5;
+  --violet: #0f766e;
+  /* Primary for small text: the brand teal in light, lifted in dark. */
+  --violet-ink: #0f766e;
   --flame: #ff5a36;
   --line: #e2dff0;
   --mist: #6b6784;
@@ -45,7 +45,7 @@
   --ink: #1f1b49; /* dark panels, lifted so they show on the dark page */
   --line: #2c2760;
   --mist: #a9a4cf;
-  --violet-ink: #b3a8ff;
+  --violet-ink: #5eead4;
 
   --foreground: #f1effb;
   --card: #17143a;
