@@ -1,4 +1,4 @@
-import { hash } from '#/lib/mocks'
+import { uuidFromSeed } from '#/lib/mocks'
 import type { Callout, VendorEntry, VendorProfile } from './types'
 
 /**
@@ -31,12 +31,6 @@ export function mockCallouts(
     closesAt: nowSec + row.days * DAY,
     invented: true,
   }))
-}
-
-/** A stable UUID-shaped id from a seed, so mock vendors pass `isVendorId`. */
-function uuidFromSeed(seed: string): string {
-  const hex = (part: string) => hash(seed + part).toString(16).padStart(8, '0')
-  return `${hex('a')}-${hex('b').slice(0, 4)}-${hex('c').slice(0, 4)}-${hex('d').slice(0, 4)}-${hex('e')}${hex('f').slice(0, 4)}`
 }
 
 const VENDOR_ROWS: Array<Omit<VendorEntry, 'id'>> = [

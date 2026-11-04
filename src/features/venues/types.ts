@@ -47,3 +47,13 @@ export interface HeldBlock {
   fromAt: number
   toAt: number
 }
+
+/**
+ * What the availability call told us. `open` is false for an unclaimed or
+ * inactive venue (the API answers 409): nothing is bookable, and that is not
+ * an error.
+ */
+export interface VenueAvailability {
+  open: boolean
+  blocks: Array<HeldBlock>
+}

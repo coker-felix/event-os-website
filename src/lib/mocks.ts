@@ -22,3 +22,9 @@ export function hash(input: string): number {
   }
   return h >>> 0
 }
+
+/** A stable UUID-shaped id from a seed, so invented records pass UUID checks. */
+export function uuidFromSeed(seed: string): string {
+  const hex = (part: string) => hash(seed + part).toString(16).padStart(8, '0')
+  return `${hex('a')}-${hex('b').slice(0, 4)}-${hex('c').slice(0, 4)}-${hex('d').slice(0, 4)}-${hex('e')}${hex('f').slice(0, 4)}`
+}
