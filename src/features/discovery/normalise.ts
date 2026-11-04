@@ -95,3 +95,22 @@ export function normaliseReviewSummary(raw: unknown): ReviewSummary | null {
     recent,
   }
 }
+
+export interface EventMedia {
+  photos: Array<string>
+  photoCount?: number
+  videoUrl?: string
+}
+
+/** Photos and a replay for one event. Null when there is neither. */
+export function normaliseEventMedia(raw: unknown): EventMedia | null {
+  const r = rec(raw)
+  if (!r) return null
+  const photos = (Array.isArray(r.photos) ? r.photos : [])
+    .map(url)
+    .filter((p): p is string => !!p)
+    .slice(0, MAX_PHOTOS)
+  const videoUrl = url(r.videoUrl)
+  if (photos.length === 0 && !videoUrl) return null
+  return { photos, photoCount: num(r.photoCount), videoUrl }
+}

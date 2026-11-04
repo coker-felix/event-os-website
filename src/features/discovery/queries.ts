@@ -2,10 +2,12 @@ import { queryOptions } from '@tanstack/react-query'
 import { apiGet } from '#/lib/api'
 import { MOCKS_ENABLED } from '#/lib/mocks'
 import {
+  normaliseEventMedia,
   normaliseOrganizer,
   normalisePastEvent,
   normaliseReviewSummary,
 } from './normalise'
+import type { EventMedia } from './normalise'
 import type { Organizer, PastEvent, ReviewSubject, ReviewSummary } from './types'
 
 /**
@@ -104,6 +106,18 @@ export const reviewSummaryQuery = (s: ReviewSubject) =>
         throw err
       }
     },
+    staleTime: 5 * 60 * 1000,
+    retry: false,
+  })
+
+/** Photos and a replay for one event. Proposed: `GET /api/v1/events/{id}/media`. */
+export const eventMediaQuery = (eventId: string) =>
+  queryOptions({
+    queryKey: ['event-media', eventId],
+    queryFn: async (): Promise<EventMedia | null> =>
+      normaliseEventMedia(
+        await apiGet(`/api/v1/events/${eventId}/media`, { timeoutMs: 4000 }),
+      ),
     staleTime: 5 * 60 * 1000,
     retry: false,
   })

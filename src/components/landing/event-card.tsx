@@ -99,6 +99,11 @@ export function EventCard({
             {event.promoTagline}
           </p>
         )}
+        {event.organizerName && (
+          <p className="mt-1 line-clamp-1 text-xs text-mist">
+            Hosted by {event.organizerName}
+          </p>
+        )}
         {place && (
           <p className="mt-2 flex items-center gap-1.5 text-sm text-mist">
             <MapPin className="size-4 shrink-0" aria-hidden />

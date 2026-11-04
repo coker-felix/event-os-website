@@ -16,6 +16,8 @@ import { selectedLines, stepQty } from '#/features/tickets/state'
 import { eventPageQuery } from '#/features/tickets/queries'
 import { ApiError } from '#/lib/api'
 import type { PublicTicketType } from '#/features/tickets/types'
+import { EventMedia } from '#/components/organizers/event-media'
+import { HostedBy } from '#/components/organizers/hosted-by'
 import { Reveal } from '#/components/motion/reveal'
 import { CTA } from '#/lib/cta'
 
@@ -162,6 +164,11 @@ function EventDetailsPage() {
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_400px]">
         <div className="min-w-0">
+          {event.organizerName && (
+            <div className="mb-4">
+              <HostedBy id={event.organizerId} name={event.organizerName} />
+            </div>
+          )}
           <KeyFacts event={event} />
           <Reveal>
             <About text={event.description} />
@@ -169,6 +176,7 @@ function EventDetailsPage() {
           <Reveal>
             <Sponsors sponsors={page.sponsors} />
           </Reveal>
+          <EventMedia eventId={event.id} title={event.title} />
         </div>
 
         <aside

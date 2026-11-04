@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { isOrganizerId } from './ids'
 import {
+  normaliseEventMedia,
   normaliseOrganizer,
   normalisePastEvent,
   normaliseReview,
@@ -100,5 +101,18 @@ describe('normaliseReviewSummary', () => {
     expect(s?.average).toBe(5)
     expect(s?.count).toBe(40)
     expect(s?.recent.map((r) => r.id)).toEqual(['1', '3', '4'])
+  })
+})
+
+describe('normaliseEventMedia', () => {
+  it('is null when there is nothing to show', () => {
+    expect(normaliseEventMedia({})).toBeNull()
+    expect(normaliseEventMedia({ photos: ['javascript:1'], videoUrl: 'ftp://x' })).toBeNull()
+    expect(normaliseEventMedia(null)).toBeNull()
+  })
+  it('keeps safe photos and a safe video', () => {
+    const m = normaliseEventMedia({ photos: ['https://x.test/a.jpg', 'http://x.test/b.jpg'], videoUrl: 'https://x.test/v' })
+    expect(m?.photos).toEqual(['https://x.test/a.jpg'])
+    expect(m?.videoUrl).toBe('https://x.test/v')
   })
 })
