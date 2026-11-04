@@ -22,3 +22,51 @@ export interface CalloutCard {
   callout: Callout
   event?: PublicEvent
 }
+
+export interface CalloutList {
+  callouts: Array<Callout>
+  hasMore: boolean
+}
+
+/**
+ * A row of the public vendor directory. The API returns only `id`,
+ * `businessName` and `tier` today; the last four are proposed additions
+ * (backend request) and are shown only when present.
+ */
+export interface VendorEntry {
+  id: string
+  businessName: string
+  tier: VendorTier
+  category?: string
+  city?: string
+  summary?: string
+  imageUrl?: string
+}
+
+export interface VendorList {
+  vendors: Array<VendorEntry>
+  hasMore: boolean
+}
+
+export interface VendorService {
+  kind?: string
+  name: string
+  /** Minor units of `currency`. */
+  priceMinor?: number
+  currency?: string
+}
+
+/** The public store page from `GET /api/v1/vendors/{id}`. */
+export interface VendorProfile {
+  id: string
+  businessName: string
+  description?: string
+  category?: string
+  city?: string
+  country?: string
+  tier: VendorTier
+  services: Array<VendorService>
+  /** Aggregate score; only set when there is at least one rating. */
+  rating?: number
+  ratingCount?: number
+}
