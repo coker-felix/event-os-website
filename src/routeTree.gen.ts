@@ -29,6 +29,7 @@ import { Route as AttendeeBlogSlugRouteImport } from './routes/_attendee/blog/$s
 import { Route as AttendeeCheckoutReturnRouteImport } from './routes/_attendee/checkout/return'
 import { Route as AttendeeEventsIndexRouteImport } from './routes/_attendee/events/index'
 import { Route as AttendeeOrganizersOrganizerIdRouteImport } from './routes/_attendee/organizers/$organizerId'
+import { Route as AttendeeReviewTokenRouteImport } from './routes/_attendee/review.$token'
 import { Route as AttendeeTicketsHelpRouteImport } from './routes/_attendee/tickets/help'
 import { Route as AttendeeEventsEventIdIndexRouteImport } from './routes/_attendee/events/$eventId/index'
 import { Route as AttendeeEventsEventIdCheckoutRouteImport } from './routes/_attendee/events/$eventId/checkout'
@@ -133,6 +134,11 @@ const AttendeeOrganizersOrganizerIdRoute =
     path: '/organizers/$organizerId',
     getParentRoute: () => AttendeeRoute,
   } as any)
+const AttendeeReviewTokenRoute = AttendeeReviewTokenRouteImport.update({
+  id: '/review/$token',
+  path: '/review/$token',
+  getParentRoute: () => AttendeeRoute,
+} as any)
 const AttendeeTicketsHelpRoute = AttendeeTicketsHelpRouteImport.update({
   id: '/tickets/help',
   path: '/tickets/help',
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof AttendeeBlogSlugRoute
   '/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/organizers/$organizerId': typeof AttendeeOrganizersOrganizerIdRoute
+  '/review/$token': typeof AttendeeReviewTokenRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
   '/blog/': typeof AttendeeBlogIndexRoute
   '/events/': typeof AttendeeEventsIndexRoute
@@ -191,6 +198,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof AttendeeBlogSlugRoute
   '/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/organizers/$organizerId': typeof AttendeeOrganizersOrganizerIdRoute
+  '/review/$token': typeof AttendeeReviewTokenRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
   '/blog': typeof AttendeeBlogIndexRoute
   '/events': typeof AttendeeEventsIndexRoute
@@ -217,6 +225,7 @@ export interface FileRoutesById {
   '/_attendee/blog/$slug': typeof AttendeeBlogSlugRoute
   '/_attendee/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/_attendee/organizers/$organizerId': typeof AttendeeOrganizersOrganizerIdRoute
+  '/_attendee/review/$token': typeof AttendeeReviewTokenRoute
   '/_attendee/tickets/help': typeof AttendeeTicketsHelpRoute
   '/_attendee/blog/': typeof AttendeeBlogIndexRoute
   '/_attendee/events/': typeof AttendeeEventsIndexRoute
@@ -243,6 +252,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/checkout/return'
     | '/organizers/$organizerId'
+    | '/review/$token'
     | '/tickets/help'
     | '/blog/'
     | '/events/'
@@ -265,6 +275,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/checkout/return'
     | '/organizers/$organizerId'
+    | '/review/$token'
     | '/tickets/help'
     | '/blog'
     | '/events'
@@ -290,6 +301,7 @@ export interface FileRouteTypes {
     | '/_attendee/blog/$slug'
     | '/_attendee/checkout/return'
     | '/_attendee/organizers/$organizerId'
+    | '/_attendee/review/$token'
     | '/_attendee/tickets/help'
     | '/_attendee/blog/'
     | '/_attendee/events/'
@@ -445,6 +457,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AttendeeOrganizersOrganizerIdRouteImport
       parentRoute: typeof AttendeeRoute
     }
+    '/_attendee/review/$token': {
+      id: '/_attendee/review/$token'
+      path: '/review/$token'
+      fullPath: '/review/$token'
+      preLoaderRoute: typeof AttendeeReviewTokenRouteImport
+      parentRoute: typeof AttendeeRoute
+    }
     '/_attendee/tickets/help': {
       id: '/_attendee/tickets/help'
       path: '/tickets/help'
@@ -512,6 +531,7 @@ interface AttendeeRouteChildren {
   AttendeeBlogSlugRoute: typeof AttendeeBlogSlugRoute
   AttendeeCheckoutReturnRoute: typeof AttendeeCheckoutReturnRoute
   AttendeeOrganizersOrganizerIdRoute: typeof AttendeeOrganizersOrganizerIdRoute
+  AttendeeReviewTokenRoute: typeof AttendeeReviewTokenRoute
   AttendeeTicketsHelpRoute: typeof AttendeeTicketsHelpRoute
   AttendeeBlogIndexRoute: typeof AttendeeBlogIndexRoute
   AttendeeEventsIndexRoute: typeof AttendeeEventsIndexRoute
@@ -528,6 +548,7 @@ const AttendeeRouteChildren: AttendeeRouteChildren = {
   AttendeeBlogSlugRoute: AttendeeBlogSlugRoute,
   AttendeeCheckoutReturnRoute: AttendeeCheckoutReturnRoute,
   AttendeeOrganizersOrganizerIdRoute: AttendeeOrganizersOrganizerIdRoute,
+  AttendeeReviewTokenRoute: AttendeeReviewTokenRoute,
   AttendeeTicketsHelpRoute: AttendeeTicketsHelpRoute,
   AttendeeBlogIndexRoute: AttendeeBlogIndexRoute,
   AttendeeEventsIndexRoute: AttendeeEventsIndexRoute,

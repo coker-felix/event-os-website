@@ -17,6 +17,7 @@ import { eventPageQuery } from '#/features/tickets/queries'
 import { ApiError } from '#/lib/api'
 import type { PublicTicketType } from '#/features/tickets/types'
 import { EventMedia } from '#/components/organizers/event-media'
+import { ReviewsSection } from '#/components/organizers/reviews-section'
 import { HostedBy } from '#/components/organizers/hosted-by'
 import { Reveal } from '#/components/motion/reveal'
 import { CTA } from '#/lib/cta'
@@ -177,6 +178,7 @@ function EventDetailsPage() {
             <Sponsors sponsors={page.sponsors} />
           </Reveal>
           <EventMedia eventId={event.id} title={event.title} />
+          <ReviewsSection subject={{ kind: 'event', id: event.id }} />
         </div>
 
         <aside

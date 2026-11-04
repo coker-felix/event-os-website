@@ -71,6 +71,22 @@ test fails if the source uses an `event-os:` key that is not in the registry.
 - There is no analytics, advertising or tracking, and the copy says so. If that
   ever changes, the banner, Cookies page and Privacy page must change first.
 
+### Discovery: organizers, past events, reviews, follow
+
+Organizer profiles (`/organizers/<id>`), "Hosted by", past events with photos,
+reviews, "Trending organizers", "Relive it" and "For you" read a proposed API
+(backend request section 11). In dev, invented data stands in; in production
+each section stays hidden until its endpoint answers.
+
+- **Reviews** come only from verified ticket holders through a private link,
+  `/review/<token>`. The page is `noindex`.
+- **Follow** is an alerts sign-up for one organizer, plus a flag in the existing
+  `event-os:preferences` key (written only after Accept).
+- **For you** is worked out on the device from saved events and followed
+  organizers (`src/features/discovery/recommend.ts`). Nothing is sent anywhere.
+- Mock past events link to event ids that do not exist on the real API, so
+  clicking one in dev shows a 404. Real ones need completed events to be served.
+
 ### Dark mode
 
 Follows the device. The header button cycles System, Light, Dark; the choice is

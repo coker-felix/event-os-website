@@ -5,6 +5,10 @@ import { HeroBanner } from '#/components/landing/hero-banner'
 import { DiscoveryBar } from '#/components/landing/discovery-bar'
 import { EventRow } from '#/components/landing/event-row'
 import { EventCard } from '#/components/landing/event-card'
+import { ReliveRow } from '#/components/landing/relive-row'
+import { TrendingOrganizers } from '#/components/landing/trending-organizers'
+import { pastEventsQuery, trendingOrganizersQuery } from '#/features/discovery/queries'
+import { recommendFor } from '#/features/discovery/recommend'
 import { StatGrid } from '#/components/landing/stat-grid'
 import { HowItWorks } from '#/components/landing/how-it-works'
 import { PartnerStrip } from '#/components/landing/partner-strip'
@@ -65,6 +69,8 @@ export const Route = createFileRoute('/_attendee/')({
       queryClient.ensureQueryData(categoriesQuery),
       queryClient.ensureQueryData(platformStatsQuery),
       queryClient.ensureQueryData(featuredPostsQuery),
+      queryClient.ensureQueryData(trendingOrganizersQuery),
+      queryClient.ensureQueryData(pastEventsQuery({ limit: 4 })),
     ])
   },
   component: Landing,
@@ -78,10 +84,13 @@ function Landing() {
   const categories = useQuery(categoriesQuery)
   const stats = useQuery(platformStatsQuery).data
   const posts = useQuery(featuredPostsQuery).data
+  const trending = useQuery(trendingOrganizersQuery).data
+  const relive = useQuery(pastEventsQuery({ limit: 4 })).data
 
   const city = usePreferences((s) => s.city)
   const setCity = usePreferences((s) => s.setCity)
   const saved = usePreferences((s) => s.saved)
+  const following = usePreferences((s) => s.following)
 
   const discovery = useMemo<DiscoveryValue>(
     () => ({ q: search.q, quick: search.show, categoryId: search.cat }),
@@ -158,6 +167,19 @@ function Landing() {
       savedEvents: upcoming.filter((e) => saved.includes(e.id)),
     }
   }, [events.data, categories.data, city, discovery, saved])
+
+  // Worked out on this device from what was saved and followed; empty until then.
+  const forYou = useMemo(
+    () =>
+      recommendFor({
+        events: events.data ?? [],
+        saved,
+        followed: following,
+        categoryNames: view.names,
+        nowSec: Math.floor(Date.now() / 1000),
+      }),
+    [events.data, saved, following, view.names],
+  )
 
   const where = view.activeCity ? ` in ${view.activeCity}` : ''
 
@@ -242,6 +264,11 @@ function Landing() {
         </section>
       ) : (
         <>
+          {forYou.map((r) => (
+            <Reveal key={r.id}>
+              <EventRow title={r.title} events={r.events} categoryNames={view.names} />
+            </Reveal>
+          ))}
           <Reveal>
             <EventRow
               title="Saved for later"
@@ -274,6 +301,13 @@ function Landing() {
           </Reveal>
         </>
       )}
+
+      <Reveal>
+        <TrendingOrganizers organizers={trending ?? []} />
+      </Reveal>
+      <Reveal>
+        <ReliveRow events={relive ?? []} />
+      </Reveal>
 
       <Reveal className="mt-12">
         <StatGrid

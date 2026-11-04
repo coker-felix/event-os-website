@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isOrganizerId } from './ids'
+import { isOrganizerId, isReviewToken } from './ids'
 import {
   normaliseEventMedia,
   normaliseOrganizer,
@@ -114,5 +114,14 @@ describe('normaliseEventMedia', () => {
     const m = normaliseEventMedia({ photos: ['https://x.test/a.jpg', 'http://x.test/b.jpg'], videoUrl: 'https://x.test/v' })
     expect(m?.photos).toEqual(['https://x.test/a.jpg'])
     expect(m?.videoUrl).toBe('https://x.test/v')
+  })
+})
+
+describe('isReviewToken', () => {
+  it('accepts an opaque token and rejects short, odd or hostile values', () => {
+    expect(isReviewToken('abcDEF123_-abcDEF123_-')).toBe(true)
+    expect(isReviewToken('short')).toBe(false)
+    expect(isReviewToken('has spaces in it 1234567890')).toBe(false)
+    expect(isReviewToken('../../etc/passwd-aaaaaaaaaaaa')).toBe(false)
   })
 })

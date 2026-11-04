@@ -5,6 +5,7 @@ import { EventCard } from '#/components/landing/event-card'
 import { Reveal } from '#/components/motion/reveal'
 import { FollowButton } from '#/components/organizers/follow-button'
 import { OrganizerAvatar } from '#/components/organizers/organizer-avatar'
+import { ReviewsSection } from '#/components/organizers/reviews-section'
 import { PastEventCard } from '#/components/organizers/past-event-card'
 import { isOrganizerId } from '#/features/discovery/ids'
 import { organizerQuery, pastEventsQuery } from '#/features/discovery/queries'
@@ -137,6 +138,8 @@ function OrganizerPage() {
           </ul>
         </section>
       )}
+
+      <ReviewsSection subject={{ kind: 'organizer', id: organizerId }} />
 
       {upcoming.length === 0 && pastEvents.length === 0 && (
         <p className="mt-12 text-mist">
