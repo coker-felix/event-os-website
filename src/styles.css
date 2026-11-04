@@ -146,6 +146,29 @@
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+[id] {
+  scroll-margin-top: 1rem;
+}
+
+/* Scroll reveal: set by <Reveal> after mount, only below the fold. */
+[data-reveal='hidden'] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+[data-reveal='shown'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -19,6 +19,7 @@ import {
 import { categoriesQuery, eventsQuery } from '#/features/events/queries'
 import { usePreferences } from '#/stores/preferences'
 import type { EventsSearch } from '#/features/events/list-search'
+import { Reveal } from '#/components/motion/reveal'
 
 export const Route = createFileRoute('/_attendee/events/')({
   validateSearch: (raw: Record<string, unknown>) => validateEventsSearch(raw),
@@ -195,8 +196,8 @@ function EventsPage() {
                     : 'grid gap-4 sm:grid-cols-2 xl:grid-cols-3'
                 }
               >
-                {view.page.items.map((e) => (
-                  <li key={e.id}>
+                {view.page.items.map((e, i) => (
+                  <Reveal as="li" key={e.id} delayIndex={i}>
                     {listView ? (
                       <EventListRow
                         event={e}
@@ -212,7 +213,7 @@ function EventsPage() {
                         }
                       />
                     )}
-                  </li>
+                  </Reveal>
                 ))}
               </ul>
               {view.page.hasMore && (

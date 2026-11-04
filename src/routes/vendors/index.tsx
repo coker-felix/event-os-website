@@ -11,6 +11,7 @@ import { VENDOR_FAQS } from '#/content/vendor-faqs'
 import { HERO } from '#/content/vendor-landing'
 import { eventsQuery } from '#/features/events/queries'
 import { calloutsQuery } from '#/features/vendors/queries'
+import { Reveal } from '#/components/motion/reveal'
 
 export const Route = createFileRoute('/vendors/')({
   // Warm the cache on the server. A failing API must never fail the page.
@@ -36,13 +37,27 @@ function VendorLanding() {
   return (
     <div>
       <VendorHero />
-      <CalloutStrip />
-      <Scenarios />
-      <Benefits />
-      <ComingSoon />
-      <HowToStart />
-      <FaqSection faqs={VENDOR_FAQS} />
-      <ClosingCta />
+      <Reveal>
+        <CalloutStrip />
+      </Reveal>
+      <Reveal>
+        <Scenarios />
+      </Reveal>
+      <Reveal>
+        <Benefits />
+      </Reveal>
+      <Reveal>
+        <ComingSoon />
+      </Reveal>
+      <Reveal>
+        <HowToStart />
+      </Reveal>
+      <Reveal>
+        <FaqSection faqs={VENDOR_FAQS} />
+      </Reveal>
+      <Reveal>
+        <ClosingCta />
+      </Reveal>
     </div>
   )
 }

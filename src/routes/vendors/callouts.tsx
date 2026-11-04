@@ -9,6 +9,7 @@ import { calloutsQuery } from '#/features/vendors/queries'
 import { validateCalloutsSearch } from '#/features/vendors/search'
 import { useCalloutCards } from '#/features/vendors/use-callout-cards'
 import type { CalloutsSearch } from '#/features/vendors/search'
+import { Reveal } from '#/components/motion/reveal'
 
 export const Route = createFileRoute('/vendors/callouts')({
   validateSearch: (raw: Record<string, unknown>) => validateCalloutsSearch(raw),
@@ -133,10 +134,10 @@ function CalloutsPage() {
       ) : (
         <>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {cards.map((c) => (
-              <li key={c.callout.id}>
+            {cards.map((c, i) => (
+              <Reveal as="li" key={c.callout.id} delayIndex={i}>
                 <CalloutCard card={c} />
-              </li>
+              </Reveal>
             ))}
           </ul>
           {list.hasMore && (

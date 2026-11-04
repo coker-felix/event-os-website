@@ -50,7 +50,7 @@ export function HeroBanner() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative isolate overflow-hidden rounded-3xl bg-ink text-white"
+      className="relative isolate overflow-hidden rounded-3xl bg-ink text-white animate-in fade-in slide-in-from-bottom-2 duration-700"
     >
       <BannerBackground banner={active} />
       <div className="relative flex min-h-[22rem] flex-col justify-between gap-8 p-6 sm:min-h-[26rem] sm:p-10 md:flex-row md:items-end">

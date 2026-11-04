@@ -6,7 +6,7 @@ export function VendorHero() {
   return (
     <section
       aria-label="Get booked at events"
-      className="rounded-3xl bg-ink p-6 text-white sm:p-10"
+      className="rounded-3xl bg-ink p-6 text-white sm:p-10 animate-in fade-in slide-in-from-bottom-2 duration-700"
     >
       <p className="text-xs font-semibold tracking-[0.18em] text-white/70 uppercase">
         {HERO.eyebrow}

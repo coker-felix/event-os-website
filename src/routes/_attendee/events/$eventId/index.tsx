@@ -16,6 +16,7 @@ import { selectedLines, stepQty } from '#/features/tickets/state'
 import { eventPageQuery } from '#/features/tickets/queries'
 import { ApiError } from '#/lib/api'
 import type { PublicTicketType } from '#/features/tickets/types'
+import { Reveal } from '#/components/motion/reveal'
 
 export const Route = createFileRoute('/_attendee/events/$eventId/')({
   // Warm the cache on the server; a failing API must never fail the page.
@@ -161,8 +162,12 @@ function EventDetailsPage() {
       <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_400px]">
         <div className="min-w-0">
           <KeyFacts event={event} />
-          <About text={event.description} />
-          <Sponsors sponsors={page.sponsors} />
+          <Reveal>
+            <About text={event.description} />
+          </Reveal>
+          <Reveal>
+            <Sponsors sponsors={page.sponsors} />
+          </Reveal>
         </div>
 
         <aside
@@ -181,7 +186,9 @@ function EventDetailsPage() {
         </aside>
       </div>
 
-      <SimilarEvents current={event} />
+      <Reveal>
+        <SimilarEvents current={event} />
+      </Reveal>
 
       <MobileBuyBar
         page={page}

@@ -7,6 +7,7 @@ import { portalUrl } from '#/features/vendors/portal'
 import { vendorDirectoryQuery } from '#/features/vendors/queries'
 import { validateDirectorySearch } from '#/features/vendors/search'
 import type { DirectorySearch } from '#/features/vendors/search'
+import { Reveal } from '#/components/motion/reveal'
 
 export const Route = createFileRoute('/vendors/directory')({
   validateSearch: (raw: Record<string, unknown>) => validateDirectorySearch(raw),
@@ -133,10 +134,10 @@ function DirectoryPage() {
       ) : (
         <>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {vendors.map((v) => (
-              <li key={v.id}>
+            {vendors.map((v, i) => (
+              <Reveal as="li" key={v.id} delayIndex={i}>
                 <VendorCard vendor={v} />
-              </li>
+              </Reveal>
             ))}
           </ul>
           {list.data.hasMore && (

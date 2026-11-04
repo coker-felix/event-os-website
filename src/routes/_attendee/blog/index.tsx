@@ -6,6 +6,7 @@ import { FeaturedPost } from '#/components/blog/featured-post'
 import { PostCard } from '#/components/blog/post-card'
 import { postsQuery } from '#/features/blog/queries'
 import { categoriesOfPosts, splitFeatured } from '#/features/blog/utils'
+import { Reveal } from '#/components/motion/reveal'
 
 interface BlogSearch {
   category?: string
@@ -105,10 +106,10 @@ function BlogPage() {
 
           {featured ? (
             <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((p) => (
-                <li key={p.id}>
+              {rest.map((p, i) => (
+                <Reveal as="li" key={p.id} delayIndex={i}>
                   <PostCard post={p} />
-                </li>
+                </Reveal>
               ))}
             </ul>
           ) : (

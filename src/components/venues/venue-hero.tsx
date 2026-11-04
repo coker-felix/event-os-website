@@ -6,7 +6,7 @@ export function VenueHero() {
   return (
     <section
       aria-label="Get your venue seen"
-      className="rounded-3xl bg-ink p-6 text-white sm:p-10"
+      className="rounded-3xl bg-ink p-6 text-white sm:p-10 animate-in fade-in slide-in-from-bottom-2 duration-700"
     >
       <p className="text-xs font-semibold tracking-[0.18em] text-white/70 uppercase">
         {HERO.eyebrow}

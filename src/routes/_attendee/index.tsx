@@ -28,6 +28,7 @@ import { usePreferences } from '#/stores/preferences'
 import type { DiscoveryValue } from '#/components/landing/discovery-bar'
 import type { PublicEvent } from '#/features/events/types'
 import type { QuickFilter } from '#/features/events/filters'
+import { Reveal } from '#/components/motion/reveal'
 
 const MAX_CATEGORY_ROWS = 3
 const MAX_RESULTS = 24
@@ -239,33 +240,40 @@ function Landing() {
         </section>
       ) : (
         <>
-          <EventRow
-            title="Saved for later"
-            events={view.savedEvents}
-            categoryNames={view.names}
-          />
-          <EventRow
-            title={`Happening${where} this week`}
-            events={view.thisWeek}
-            categoryNames={view.names}
-          />
-          {view.categoryRows.map((r) => (
+          <Reveal>
             <EventRow
-              key={r.title}
-              title={r.title}
-              events={r.events}
+              title="Saved for later"
+              events={view.savedEvents}
               categoryNames={view.names}
             />
+          </Reveal>
+          <Reveal>
+            <EventRow
+              title={`Happening${where} this week`}
+              events={view.thisWeek}
+              categoryNames={view.names}
+            />
+          </Reveal>
+          {view.categoryRows.map((r) => (
+            <Reveal key={r.title}>
+              <EventRow
+                title={r.title}
+                events={r.events}
+                categoryNames={view.names}
+              />
+            </Reveal>
           ))}
-          <EventRow
-            title={`Coming up${where}`}
-            events={view.comingUp}
-            categoryNames={view.names}
-          />
+          <Reveal>
+            <EventRow
+              title={`Coming up${where}`}
+              events={view.comingUp}
+              categoryNames={view.names}
+            />
+          </Reveal>
         </>
       )}
 
-      <div className="mt-12">
+      <Reveal className="mt-12">
         <StatBand
           heading="Event OS in numbers"
           stats={[
@@ -274,13 +282,17 @@ function Landing() {
             { value: stats?.countries, label: 'Countries' },
           ]}
         />
-      </div>
+      </Reveal>
 
-      <HowItWorks />
+      <Reveal>
+        <HowItWorks />
+      </Reveal>
 
-      <PartnerStrip />
+      <Reveal>
+        <PartnerStrip />
+      </Reveal>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+      <Reveal className="mt-4 grid gap-4 md:grid-cols-2">
         <StatBand
           tone="dark"
           heading="Vendors on Event OS"
@@ -294,11 +306,17 @@ function Landing() {
           heading="Venues on Event OS"
           stats={[{ value: stats?.venues, label: 'Venues listed' }]}
         />
-      </div>
+      </Reveal>
 
-      <FeaturedPosts posts={posts ?? []} />
-      <AlertsSignup city={view.activeCity} />
-      <FaqSection />
+      <Reveal>
+        <FeaturedPosts posts={posts ?? []} />
+      </Reveal>
+      <Reveal>
+        <AlertsSignup city={view.activeCity} />
+      </Reveal>
+      <Reveal>
+        <FaqSection />
+      </Reveal>
     </>
   )
 }

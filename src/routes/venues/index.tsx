@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { Reveal } from '#/components/motion/reveal'
 import { FaqSection, faqJsonLd } from '#/components/landing/faq-section'
 import { ClosingCta } from '#/components/vendors/closing-cta'
 import { ComingSoon } from '#/components/vendors/coming-soon'
@@ -34,18 +35,32 @@ function VenueLanding() {
   return (
     <div>
       <VenueHero />
-      <VenueStrip />
-      <Audiences />
-      <VenueBenefits />
-      <ComingSoon items={COMING_SOON} />
-      <HowToStart steps={HOW_TO_START} />
-      <FaqSection faqs={VENUE_FAQS} />
+      <Reveal>
+        <VenueStrip />
+      </Reveal>
+      <Reveal>
+        <Audiences />
+      </Reveal>
+      <Reveal>
+        <VenueBenefits />
+      </Reveal>
+      <Reveal>
+        <ComingSoon items={COMING_SOON} />
+      </Reveal>
+      <Reveal>
+        <HowToStart steps={HOW_TO_START} />
+      </Reveal>
+      <Reveal>
+        <FaqSection faqs={VENUE_FAQS} />
+      </Reveal>
+      <Reveal>
       <ClosingCta
         heading="Ready to fill your calendar?"
         body="List your venue, get reviewed, and start receiving booking requests."
         label="List your venue"
         path="/register"
       />
+      </Reveal>
     </div>
   )
 }

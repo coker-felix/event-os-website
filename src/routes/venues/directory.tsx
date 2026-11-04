@@ -13,6 +13,7 @@ import {
   venueCountries,
 } from '#/features/venues/venues'
 import type { VenuesSearch } from '#/features/venues/search'
+import { Reveal } from '#/components/motion/reveal'
 
 export const Route = createFileRoute('/venues/directory')({
   validateSearch: (raw: Record<string, unknown>) => validateVenuesSearch(raw),
@@ -143,10 +144,10 @@ function DirectoryPage() {
       ) : (
         <>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {venues.map((v) => (
-              <li key={v.id}>
+            {venues.map((v, i) => (
+              <Reveal as="li" key={v.id} delayIndex={i}>
                 <VenueCard venue={v} />
-              </li>
+              </Reveal>
             ))}
           </ul>
           {list.data.hasMore && (
