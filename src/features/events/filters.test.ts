@@ -85,11 +85,17 @@ describe('withEventExtras', () => {
   })
 
   it('never overrides real values', () => {
-    const real = ev({ id: 'evt-1', priceFromMinor: 123, venueName: 'Real Hall', city: 'Kano', soldOut: false })
+    const real = ev({ id: 'evt-1', priceFromMinor: 123, venueName: 'Real Hall', city: 'Kano', availability: 'low' })
     const out = withEventExtras(real, true)
     expect(out.priceFromMinor).toBe(123)
     expect(out.venueName).toBe('Real Hall')
     expect(out.city).toBe('Kano')
-    expect(out.soldOut).toBe(false)
+    expect(out.availability).toBe('low')
+  })
+
+  it('always gives a mocked event an availability level', () => {
+    expect(['available', 'low', 'sold_out']).toContain(
+      withEventExtras(ev({ id: 'evt-9' }), true).availability,
+    )
   })
 })

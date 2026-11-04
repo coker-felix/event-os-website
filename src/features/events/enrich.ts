@@ -1,4 +1,5 @@
 import { MOCKS_ENABLED, hash } from '#/lib/mocks'
+import type { Availability } from './availability'
 import type { PublicEvent } from './types'
 
 const PLACES: Array<{ city: string; venues: Array<string> }> = [
@@ -26,8 +27,8 @@ export function withEventExtras(
   const h = hash(e.id)
   const place = PLACES[h % PLACES.length]
   const isOnline = e.attendanceType === 'virtual'
-  const soldOut = h % 7 === 0
-  const low = !soldOut && h % 5 === 0
+  const availability: Availability =
+    h % 7 === 0 ? 'sold_out' : h % 5 === 0 ? 'low' : 'available'
   return {
     ...e,
     priceFromMinor: e.priceFromMinor ?? PRICES[h % PRICES.length],
@@ -37,7 +38,6 @@ export function withEventExtras(
       (isOnline
         ? 'Online'
         : place.venues[(h >>> 3) % place.venues.length]),
-    soldOut: e.soldOut ?? soldOut,
-    ticketsLeft: e.ticketsLeft ?? (low ? 3 + (h % 16) : undefined),
+    availability: e.availability ?? availability,
   }
 }

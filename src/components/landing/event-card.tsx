@@ -2,13 +2,12 @@ import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { Heart, MapPin } from 'lucide-react'
 import { eventParts, toDate } from '#/features/events/format'
+import { availabilityBadge } from '#/features/events/availability'
 import { formatPrice } from '#/features/events/money'
 import { usePreferences } from '#/stores/preferences'
 import type { PublicEvent } from '#/features/events/types'
 
 const HEX_COLOR = /^#[0-9a-f]{6}$/i
-/** At or below this many tickets left, the card says so. */
-const LOW_STOCK = 20
 
 /**
  * Event as a ticket stub: poster on top, tear line, date and price on the
@@ -36,12 +35,8 @@ export function EventCard({
   const place = [event.venueName, event.city]
     .filter((x, i, a) => x && a.indexOf(x) === i)
     .join(' · ')
-  const soldOut = event.soldOut === true
-  const lowStock =
-    !soldOut &&
-    event.ticketsLeft !== undefined &&
-    event.ticketsLeft > 0 &&
-    event.ticketsLeft <= LOW_STOCK
+  const soldOut = event.availability === 'sold_out'
+  const badge = availabilityBadge(event.availability)
 
   return (
     <article className="group relative flex h-full flex-col rounded-2xl border border-line bg-card transition-shadow focus-within:ring-2 focus-within:ring-violet hover:shadow-lg">
@@ -63,14 +58,11 @@ export function EventCard({
             {categoryName}
           </span>
         )}
-        {soldOut && (
-          <span className="absolute bottom-2 left-2 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white">
-            Sold out
-          </span>
-        )}
-        {lowStock && (
-          <span className="absolute bottom-2 left-2 rounded-full bg-flame px-2.5 py-1 text-xs font-semibold text-white">
-            Only {event.ticketsLeft} left
+        {badge && (
+          <span
+            className={`absolute bottom-2 left-2 rounded-full px-2.5 py-1 text-xs font-semibold text-white ${soldOut ? 'bg-ink' : 'bg-flame'}`}
+          >
+            {badge}
           </span>
         )}
       </div>

@@ -1,3 +1,5 @@
+import type { Availability } from './availability'
+
 /**
  * Subset of the `Event` schema in docs/api/website.openapi.yaml, plus the
  * proposed list-card fields marked below (not yet returned by the backend).
@@ -22,9 +24,10 @@ export interface PublicEvent {
   priceFromMinor?: number
   venueName?: string
   city?: string
-  /** Tickets remaining across all types. Absent = plenty or unknown. */
-  ticketsLeft?: number
-  soldOut?: boolean
+  /** Coarse level decided by the backend. Absent = unknown. */
+  availability?: Availability
+  /** Unix timestamp. Used to sort by newest. */
+  createdAt?: number | string
 }
 
 export interface EventCategory {
