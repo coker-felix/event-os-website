@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { ApiError } from '#/lib/api'
 import { createAttemptTracker } from './attempt'
-import { classifyCheckoutError } from './errors'
+import { buyErrorMessage, classifyCheckoutError } from './errors'
 import { validateAnswers, validateContact } from './validation'
 import type { Question } from '#/features/tickets/types'
 
@@ -71,6 +71,28 @@ describe('classifyCheckoutError', () => {
       kind: 'unknown',
     })
     expect(classifyCheckoutError('weird')).toEqual({ kind: 'unknown' })
+  })
+})
+
+describe('buyErrorMessage', () => {
+  it('says checkout is unavailable when carts are off for the event (404)', () => {
+    expect(buyErrorMessage(new ApiError(404, 'nf', { error: 'unknown event' }))).toMatch(
+      /isn't available for this event yet/i,
+    )
+  })
+
+  it('asks to check the connection for a network problem', () => {
+    expect(buyErrorMessage(new TypeError('Failed to fetch'))).toMatch(/connection/i)
+  })
+
+  it('names a stock problem plainly', () => {
+    expect(buyErrorMessage(new ApiError(409, 'c', { error: 'insufficient inventory' }))).toMatch(
+      /insufficient inventory/i,
+    )
+  })
+
+  it('has a useful fallback', () => {
+    expect(buyErrorMessage(new ApiError(500, 'x', null))).toMatch(/try again/i)
   })
 })
 

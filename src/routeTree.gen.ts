@@ -19,6 +19,7 @@ import { Route as VendorsCalloutsRouteImport } from './routes/vendors/callouts'
 import { Route as VenuesIndexRouteImport } from './routes/venues/index'
 import { Route as AttendeeBlogIndexRouteImport } from './routes/_attendee/blog/index'
 import { Route as AttendeeBlogSlugRouteImport } from './routes/_attendee/blog/$slug'
+import { Route as AttendeeCheckoutReturnRouteImport } from './routes/_attendee/checkout/return'
 import { Route as AttendeeEventsIndexRouteImport } from './routes/_attendee/events/index'
 import { Route as AttendeeTicketsHelpRouteImport } from './routes/_attendee/tickets/help'
 import { Route as AttendeeEventsEventIdIndexRouteImport } from './routes/_attendee/events/$eventId/index'
@@ -73,6 +74,11 @@ const AttendeeBlogSlugRoute = AttendeeBlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => AttendeeRoute,
 } as any)
+const AttendeeCheckoutReturnRoute = AttendeeCheckoutReturnRouteImport.update({
+  id: '/checkout/return',
+  path: '/checkout/return',
+  getParentRoute: () => AttendeeRoute,
+} as any)
 const AttendeeEventsIndexRoute = AttendeeEventsIndexRouteImport.update({
   id: '/events/',
   path: '/events/',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
   '/blog/$slug': typeof AttendeeBlogSlugRoute
+  '/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
   '/blog/': typeof AttendeeBlogIndexRoute
   '/events/': typeof AttendeeEventsIndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/vendors': typeof VendorsIndexRoute
   '/venues': typeof VenuesIndexRoute
   '/blog/$slug': typeof AttendeeBlogSlugRoute
+  '/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
   '/blog': typeof AttendeeBlogIndexRoute
   '/events': typeof AttendeeEventsIndexRoute
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
   '/_attendee/blog/$slug': typeof AttendeeBlogSlugRoute
+  '/_attendee/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/_attendee/tickets/help': typeof AttendeeTicketsHelpRoute
   '/_attendee/blog/': typeof AttendeeBlogIndexRoute
   '/_attendee/events/': typeof AttendeeEventsIndexRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/vendors/'
     | '/venues/'
     | '/blog/$slug'
+    | '/checkout/return'
     | '/tickets/help'
     | '/blog/'
     | '/events/'
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/vendors'
     | '/venues'
     | '/blog/$slug'
+    | '/checkout/return'
     | '/tickets/help'
     | '/blog'
     | '/events'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/vendors/'
     | '/venues/'
     | '/_attendee/blog/$slug'
+    | '/_attendee/checkout/return'
     | '/_attendee/tickets/help'
     | '/_attendee/blog/'
     | '/_attendee/events/'
@@ -266,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AttendeeBlogSlugRouteImport
       parentRoute: typeof AttendeeRoute
     }
+    '/_attendee/checkout/return': {
+      id: '/_attendee/checkout/return'
+      path: '/checkout/return'
+      fullPath: '/checkout/return'
+      preLoaderRoute: typeof AttendeeCheckoutReturnRouteImport
+      parentRoute: typeof AttendeeRoute
+    }
     '/_attendee/events/': {
       id: '/_attendee/events/'
       path: '/events'
@@ -327,6 +346,7 @@ interface AttendeeRouteChildren {
   AttendeeContactRoute: typeof AttendeeContactRoute
   AttendeeIndexRoute: typeof AttendeeIndexRoute
   AttendeeBlogSlugRoute: typeof AttendeeBlogSlugRoute
+  AttendeeCheckoutReturnRoute: typeof AttendeeCheckoutReturnRoute
   AttendeeTicketsHelpRoute: typeof AttendeeTicketsHelpRoute
   AttendeeBlogIndexRoute: typeof AttendeeBlogIndexRoute
   AttendeeEventsIndexRoute: typeof AttendeeEventsIndexRoute
@@ -338,6 +358,7 @@ const AttendeeRouteChildren: AttendeeRouteChildren = {
   AttendeeContactRoute: AttendeeContactRoute,
   AttendeeIndexRoute: AttendeeIndexRoute,
   AttendeeBlogSlugRoute: AttendeeBlogSlugRoute,
+  AttendeeCheckoutReturnRoute: AttendeeCheckoutReturnRoute,
   AttendeeTicketsHelpRoute: AttendeeTicketsHelpRoute,
   AttendeeBlogIndexRoute: AttendeeBlogIndexRoute,
   AttendeeEventsIndexRoute: AttendeeEventsIndexRoute,

@@ -8,6 +8,7 @@ import { MobileBuyBar } from '#/components/event-details/mobile-buy-bar'
 import { SimilarEvents } from '#/components/event-details/similar-events'
 import { Sponsors } from '#/components/event-details/sponsors'
 import { TicketList } from '#/components/event-details/ticket-list'
+import { buyErrorMessage } from '#/features/checkout/errors'
 import { startCheckout } from '#/features/checkout/start'
 import { isEventId } from '#/features/events/ids'
 import { categoriesQuery } from '#/features/events/queries'
@@ -95,20 +96,20 @@ function EventDetailsPage() {
     )
   }
   if (pageQuery.isError) {
-    const notFound =
+    const missing =
       pageQuery.error instanceof ApiError && pageQuery.error.status === 404
     return (
       <div className="rounded-2xl border border-line bg-card p-6" role="alert">
         <h1 className="text-2xl font-bold">
-          {notFound ? "We can't find that event" : "We couldn't load this event"}
+          {missing ? "We can't find that event" : "We couldn't load this event"}
         </h1>
         <p className="mt-1 text-mist">
-          {notFound
+          {missing
             ? 'It may have been removed or the link is wrong.'
             : 'Check your connection, then try again.'}
         </p>
         <div className="mt-4 flex gap-3">
-          {!notFound && (
+          {!missing && (
             <button
               type="button"
               onClick={() => pageQuery.refetch()}
@@ -143,10 +144,8 @@ function EventDetailsPage() {
         to: '/events/$eventId/checkout',
         params: { eventId },
       })
-    } catch {
-      setError(
-        "We couldn't start your order. Check your connection and try again.",
-      )
+    } catch (err) {
+      setError(buyErrorMessage(err))
     } finally {
       setBusy(false)
     }
