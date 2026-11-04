@@ -30,6 +30,7 @@ export function SiteHeader({ product }: { product: ProductId }) {
               <Link
                 key={item.to}
                 to={item.to}
+                hash={item.hash}
                 className="inline-flex h-9 items-center rounded-sm px-2.5 font-medium whitespace-nowrap text-muted-foreground hover:text-foreground"
                 activeProps={{ className: 'text-foreground' }}
               >

@@ -32,6 +32,7 @@ export const FOOTER_COLUMNS = [
   {
     heading: 'Organizers',
     links: [
+      { label: 'How it works', to: '/', hash: 'organizers' },
       { label: 'Create an event', portal: '/register' },
       { label: 'Organizer sign in', portal: '/login' },
     ],

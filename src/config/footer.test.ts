@@ -38,9 +38,10 @@ describe('footer', () => {
     expect(to).toEqual(['/terms', '/privacy', '/cookies'])
   })
 
-  it('sends organizers to create an event and sign in, through the portal', () => {
+  it('sends organizers to how it works, then to create an event and sign in, through the portal', () => {
     const col = FOOTER_COLUMNS.find((c) => c.heading === 'Organizers')
     expect(col?.links).toEqual([
+      { label: 'How it works', to: '/', hash: 'organizers' },
       { label: 'Create an event', portal: '/register' },
       { label: 'Organizer sign in', portal: '/login' },
     ])

@@ -3,6 +3,8 @@ export type ProductId = 'attendees' | 'vendors' | 'venues'
 export interface NavItem {
   label: string
   to: string
+  /** Jump to a section on the target page. */
+  hash?: string
 }
 
 /** A button in the header that leads into the vendor portal. */
@@ -30,6 +32,7 @@ export const PRODUCTS: Record<ProductId, Product> = {
     home: '/',
     nav: [
       { label: 'Events', to: '/events' },
+      { label: 'Host an event', to: '/', hash: 'organizers' },
       { label: 'Blog', to: '/blog' },
       { label: 'Ticket help', to: '/tickets/help' },
       { label: 'Contact', to: '/contact' },
