@@ -13,6 +13,8 @@ export interface PublicEvent {
   endsAt?: number | string
   timezone?: string
   currency?: string
+  status?: 'draft' | 'published' | 'cancelled' | 'completed'
+  donationsEnabled?: boolean
   categoryId?: number
   attendanceType?: 'in_person' | 'virtual' | 'hybrid'
   heroImageUrl?: string
