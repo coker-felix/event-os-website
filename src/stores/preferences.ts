@@ -1,5 +1,8 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
+import { createGatedStorage } from '#/lib/consent'
+import { STORAGE } from '#/lib/storage-registry'
+import { canStorePreferences, useConsent } from '#/stores/consent'
 
 interface PreferencesState {
   /** Chosen city, or null for all locations. */
@@ -29,9 +32,16 @@ export const usePreferences = create<PreferencesState>()(
         })),
     }),
     {
-      name: 'event-os:preferences',
-      storage: createJSONStorage(() => localStorage),
+      name: STORAGE.preferences.key,
+      storage: createJSONStorage(() =>
+        createGatedStorage(canStorePreferences, localStorage),
+      ),
       skipHydration: true,
     },
   ),
 )
+
+// Choices made before Accept live in memory; save them once the visitor accepts.
+useConsent.getState().onAccepted(() => {
+  usePreferences.setState({})
+})

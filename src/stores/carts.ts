@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
+import { STORAGE } from '#/lib/storage-registry'
 
 export interface StoredCart {
   cartId: string
@@ -30,7 +31,7 @@ export const useCarts = create<CartsState>()(
         }),
     }),
     {
-      name: 'event-os:carts',
+      name: STORAGE.carts.key,
       storage: createJSONStorage(() => localStorage),
       skipHydration: true,
     },

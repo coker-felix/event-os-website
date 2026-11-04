@@ -7,6 +7,8 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
+import { ConsentBanner } from '#/components/consent/consent-banner'
+import { CookieSettings } from '#/components/consent/cookie-settings'
 import { PreferencesHydrator } from '#/components/preferences-hydrator'
 
 import appCss from '../styles.css?url'
@@ -50,6 +52,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <PreferencesHydrator />
         {children}
+        <ConsentBanner />
+        <CookieSettings />
         <TanStackDevtools
           config={{
             position: 'bottom-right',
