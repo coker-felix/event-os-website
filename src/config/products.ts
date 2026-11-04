@@ -54,6 +54,10 @@ export const PRODUCTS: Record<ProductId, Product> = {
     name: 'Event OS for Venues',
     tagline: 'Fill your venue with events',
     home: '/venues',
-    nav: [],
+    nav: [{ label: 'Directory', to: '/venues/directory' }],
+    actions: [
+      { label: 'Sign in', path: '/login', variant: 'secondary' },
+      { label: 'List your venue', path: '/register', variant: 'primary' },
+    ],
   },
 }
