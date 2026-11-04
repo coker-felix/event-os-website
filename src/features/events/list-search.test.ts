@@ -44,6 +44,10 @@ describe('validateEventsSearch', () => {
     expect(b).toEqual(a)
   })
 
+  it('reads a single number, which is how the router parses ?cats=2', () => {
+    expect(validateEventsSearch({ cats: 2 })).toEqual({ cats: [2] })
+  })
+
   it('keeps only known price bands, formats, sorts and views', () => {
     expect(
       validateEventsSearch({

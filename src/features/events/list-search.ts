@@ -59,7 +59,9 @@ function list(raw: unknown): Array<string> {
     ? raw.map(String)
     : typeof raw === 'string'
       ? raw.split(',')
-      : []
+      : typeof raw === 'number'
+        ? [String(raw)]
+        : []
   return items.map((s) => s.trim()).filter(Boolean)
 }
 

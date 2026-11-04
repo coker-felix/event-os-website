@@ -28,6 +28,7 @@ export function AlertsSignup({ city }: { city: string | null }) {
 
   return (
     <section
+      id="alerts"
       aria-label="New event alerts"
       className="mt-16 rounded-3xl bg-violet p-6 text-white sm:p-10"
     >

@@ -5,7 +5,7 @@ import { FAQS } from '#/content/faqs'
 /** Native <details>: keyboard accessible and works without JavaScript. */
 export function FaqSection() {
   return (
-    <section aria-label="Frequently asked questions" className="mt-16">
+    <section id="faqs" aria-label="Frequently asked questions" className="mt-16">
       <h2 className="text-2xl font-bold">Questions, answered</h2>
       <div className="mt-4 divide-y divide-line rounded-2xl border border-line bg-card">
         {FAQS.map((f) => (
