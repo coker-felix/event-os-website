@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { Button } from '#/components/ui/button'
 import {
   Dialog,
@@ -30,13 +31,13 @@ export function CookieSettings() {
           Necessary storage keeps your cart and this choice. Preferences are your
           city, saved events, theme and checkout phone and email. Declining
           deletes them. We do not track you or show ads.{' '}
-          <a
-            href="/cookies"
+          <Link
+            to="/cookies"
             onClick={closeSettings}
             className="underline underline-offset-2"
           >
             Read about cookies
-          </a>
+          </Link>
         </p>
         <div className="flex flex-col gap-2 sm:flex-row">
           <Button className="min-h-11" onClick={accept} disabled={status === 'accepted'}>

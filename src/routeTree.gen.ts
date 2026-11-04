@@ -14,6 +14,9 @@ import { Route as VendorsRouteRouteImport } from './routes/vendors/route'
 import { Route as VenuesRouteRouteImport } from './routes/venues/route'
 import { Route as AttendeeIndexRouteImport } from './routes/_attendee/index'
 import { Route as AttendeeContactRouteImport } from './routes/_attendee/contact'
+import { Route as AttendeeCookiesRouteImport } from './routes/_attendee/cookies'
+import { Route as AttendeePrivacyRouteImport } from './routes/_attendee/privacy'
+import { Route as AttendeeTermsRouteImport } from './routes/_attendee/terms'
 import { Route as VendorsIndexRouteImport } from './routes/vendors/index'
 import { Route as VendorsVendorIdRouteImport } from './routes/vendors/$vendorId'
 import { Route as VendorsCalloutsRouteImport } from './routes/vendors/callouts'
@@ -51,6 +54,21 @@ const AttendeeIndexRoute = AttendeeIndexRouteImport.update({
 const AttendeeContactRoute = AttendeeContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => AttendeeRoute,
+} as any)
+const AttendeeCookiesRoute = AttendeeCookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => AttendeeRoute,
+} as any)
+const AttendeePrivacyRoute = AttendeePrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => AttendeeRoute,
+} as any)
+const AttendeeTermsRoute = AttendeeTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => AttendeeRoute,
 } as any)
 const VendorsIndexRoute = VendorsIndexRouteImport.update({
@@ -131,6 +149,9 @@ export interface FileRoutesByFullPath {
   '/venues': typeof VenuesRouteRouteWithChildren
   '/': typeof AttendeeIndexRoute
   '/contact': typeof AttendeeContactRoute
+  '/cookies': typeof AttendeeCookiesRoute
+  '/privacy': typeof AttendeePrivacyRoute
+  '/terms': typeof AttendeeTermsRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
@@ -148,6 +169,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/contact': typeof AttendeeContactRoute
+  '/cookies': typeof AttendeeCookiesRoute
+  '/privacy': typeof AttendeePrivacyRoute
+  '/terms': typeof AttendeeTermsRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
@@ -170,6 +194,9 @@ export interface FileRoutesById {
   '/venues': typeof VenuesRouteRouteWithChildren
   '/_attendee': typeof AttendeeRouteWithChildren
   '/_attendee/contact': typeof AttendeeContactRoute
+  '/_attendee/cookies': typeof AttendeeCookiesRoute
+  '/_attendee/privacy': typeof AttendeePrivacyRoute
+  '/_attendee/terms': typeof AttendeeTermsRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
@@ -193,6 +220,9 @@ export interface FileRouteTypes {
     | '/venues'
     | '/'
     | '/contact'
+    | '/cookies'
+    | '/privacy'
+    | '/terms'
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
@@ -210,6 +240,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/contact'
+    | '/cookies'
+    | '/privacy'
+    | '/terms'
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
@@ -231,6 +264,9 @@ export interface FileRouteTypes {
     | '/venues'
     | '/_attendee'
     | '/_attendee/contact'
+    | '/_attendee/cookies'
+    | '/_attendee/privacy'
+    | '/_attendee/terms'
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
@@ -289,6 +325,27 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof AttendeeContactRouteImport
+      parentRoute: typeof AttendeeRoute
+    }
+    '/_attendee/cookies': {
+      id: '/_attendee/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof AttendeeCookiesRouteImport
+      parentRoute: typeof AttendeeRoute
+    }
+    '/_attendee/privacy': {
+      id: '/_attendee/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof AttendeePrivacyRouteImport
+      parentRoute: typeof AttendeeRoute
+    }
+    '/_attendee/terms': {
+      id: '/_attendee/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof AttendeeTermsRouteImport
       parentRoute: typeof AttendeeRoute
     }
     '/vendors/': {
@@ -428,6 +485,9 @@ const VenuesRouteRouteWithChildren = VenuesRouteRoute._addFileChildren(
 
 interface AttendeeRouteChildren {
   AttendeeContactRoute: typeof AttendeeContactRoute
+  AttendeeCookiesRoute: typeof AttendeeCookiesRoute
+  AttendeePrivacyRoute: typeof AttendeePrivacyRoute
+  AttendeeTermsRoute: typeof AttendeeTermsRoute
   AttendeeIndexRoute: typeof AttendeeIndexRoute
   AttendeeBlogSlugRoute: typeof AttendeeBlogSlugRoute
   AttendeeCheckoutReturnRoute: typeof AttendeeCheckoutReturnRoute
@@ -440,6 +500,9 @@ interface AttendeeRouteChildren {
 
 const AttendeeRouteChildren: AttendeeRouteChildren = {
   AttendeeContactRoute: AttendeeContactRoute,
+  AttendeeCookiesRoute: AttendeeCookiesRoute,
+  AttendeePrivacyRoute: AttendeePrivacyRoute,
+  AttendeeTermsRoute: AttendeeTermsRoute,
   AttendeeIndexRoute: AttendeeIndexRoute,
   AttendeeBlogSlugRoute: AttendeeBlogSlugRoute,
   AttendeeCheckoutReturnRoute: AttendeeCheckoutReturnRoute,

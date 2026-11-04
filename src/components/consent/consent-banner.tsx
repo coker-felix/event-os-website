@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { Button } from '#/components/ui/button'
 import { useConsent } from '#/stores/consent'
 
@@ -19,9 +20,9 @@ export function ConsentBanner() {
         <p className="flex-1 text-sm">
           We use browser storage to remember your choices, like your city, saved
           events, theme and checkout details. No tracking or ads.{' '}
-          <a href="/cookies" className="underline underline-offset-2">
+          <Link to="/cookies" className="underline underline-offset-2">
             Read about cookies
-          </a>
+          </Link>
         </p>
         <div className="flex gap-2">
           <Button variant="outline" className="min-h-11 flex-1 sm:flex-none" onClick={decline}>
