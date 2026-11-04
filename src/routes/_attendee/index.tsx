@@ -289,11 +289,11 @@ function Landing() {
         />
       </Reveal>
 
-      <OrganizerSection />
-
       <Reveal>
         <HowItWorks />
       </Reveal>
+
+      <OrganizerSection />
 
       <Reveal>
         <PartnerStrip />
