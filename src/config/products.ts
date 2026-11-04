@@ -5,12 +5,21 @@ export interface NavItem {
   to: string
 }
 
+/** A button in the header that leads into the vendor portal. */
+export interface HeaderAction {
+  label: string
+  /** Path inside the portal, for example "/login". */
+  path: string
+  variant: 'primary' | 'secondary'
+}
+
 export interface Product {
   id: ProductId
   name: string
   tagline: string
   home: string
   nav: Array<NavItem>
+  actions?: Array<HeaderAction>
 }
 
 export const PRODUCTS: Record<ProductId, Product> = {
@@ -31,7 +40,14 @@ export const PRODUCTS: Record<ProductId, Product> = {
     name: 'Event OS for Vendors',
     tagline: 'Get booked at great events',
     home: '/vendors',
-    nav: [{ label: 'Callouts', to: '/vendors/callouts' }],
+    nav: [
+      { label: 'Callouts', to: '/vendors/callouts' },
+      { label: 'Directory', to: '/vendors/directory' },
+    ],
+    actions: [
+      { label: 'Sign in', path: '/login', variant: 'secondary' },
+      { label: 'Create profile', path: '/register', variant: 'primary' },
+    ],
   },
   venues: {
     id: 'venues',

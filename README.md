@@ -28,6 +28,7 @@ Copy `.env.example` to `.env` if you need to change anything.
 | Variable | Default | Meaning |
 |---|---|---|
 | `VITE_API_URL` | `http://localhost:8080` | Base URL of the Event OS API gateway |
+| `VITE_VENDOR_PORTAL_URL` | `http://localhost:5173` | Where vendors sign up and sign in (the vendor portal) |
 | `VITE_ENABLE_MOCKS` | unset | Set to `true` to keep invented data in a production build |
 
 ### Invented data

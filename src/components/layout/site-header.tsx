@@ -1,10 +1,11 @@
 import { Link } from '@tanstack/react-router'
 import { PRODUCTS } from '#/config/products'
+import { portalUrl } from '#/features/vendors/portal'
 import { ProductSwitcher } from './product-switcher'
 import type { ProductId } from '#/config/products'
 
 export function SiteHeader({ product }: { product: ProductId }) {
-  const { name, home, nav } = PRODUCTS[product]
+  const { name, home, nav, actions } = PRODUCTS[product]
   return (
     <header className="border-b">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
@@ -25,7 +26,22 @@ export function SiteHeader({ product }: { product: ProductId }) {
             ))}
           </nav>
         </div>
-        <ProductSwitcher current={product} />
+        <div className="flex flex-wrap items-center gap-3">
+          {actions?.map((a) => (
+            <a
+              key={a.path}
+              href={portalUrl(a.path)}
+              className={
+                a.variant === 'primary'
+                  ? 'inline-flex h-11 items-center rounded-full bg-violet px-5 text-sm font-semibold text-white hover:opacity-90'
+                  : 'inline-flex h-11 items-center px-3 text-sm font-semibold hover:underline'
+              }
+            >
+              {a.label}
+            </a>
+          ))}
+          <ProductSwitcher current={product} />
+        </div>
       </div>
     </header>
   )
