@@ -15,9 +15,9 @@ export const PRICE_BANDS: ReadonlyArray<{
   max: number
 }> = [
   { id: 'free', label: 'Free', min: 0, max: 0 },
-  { id: 'u10', label: 'Under ₦10k', min: 1, max: 999_999 },
-  { id: '10-25', label: '₦10k to ₦25k', min: 1_000_000, max: 2_500_000 },
-  { id: 'o25', label: 'Over ₦25k', min: 2_500_001, max: Infinity },
+  { id: 'u10', label: 'Under 10k', min: 1, max: 999_999 },
+  { id: '10-25', label: '10k to 25k', min: 1_000_000, max: 2_500_000 },
+  { id: 'o25', label: 'Over 25k', min: 2_500_001, max: Infinity },
 ]
 
 export const FORMAT_LABELS: Record<EventFormat, string> = {

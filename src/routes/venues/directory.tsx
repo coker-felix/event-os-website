@@ -14,6 +14,7 @@ import {
 } from '#/features/venues/venues'
 import type { VenuesSearch } from '#/features/venues/search'
 import { Reveal } from '#/components/motion/reveal'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/venues/directory')({
   validateSearch: (raw: Record<string, unknown>) => validateVenuesSearch(raw),
@@ -107,7 +108,7 @@ function DirectoryPage() {
           <button
             type="button"
             onClick={() => void list.refetch()}
-            className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+            className={`${CTA.primary} mt-4`}
           >
             Try again
           </button>
@@ -121,7 +122,7 @@ function DirectoryPage() {
               <button
                 type="button"
                 onClick={() => setFilters({})}
-                className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+                className={`${CTA.primary} mt-4`}
               >
                 Clear filters
               </button>
@@ -134,7 +135,7 @@ function DirectoryPage() {
               </p>
               <a
                 href={portalUrl('/register')}
-                className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+                className={`${CTA.primary} mt-4`}
               >
                 List your venue
               </a>
@@ -160,7 +161,7 @@ function DirectoryPage() {
                     replace: true,
                   })
                 }
-                className="h-12 rounded-full border border-line bg-card px-8 font-semibold"
+                className={`${CTA.outline}`}
               >
                 Load more venues
               </button>

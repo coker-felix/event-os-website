@@ -2,9 +2,10 @@ import { Mail, MessageCircle, Phone } from 'lucide-react'
 import { mailtoLink, telLink, whatsappLink } from '#/features/contact/config'
 import { SUPPORT_HOURS } from '#/features/contact/hours'
 import type { SiteConfig } from '#/features/contact/config'
+import { CTA } from '#/lib/cta'
 
 const BUTTON =
-  'inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line bg-card px-5 font-semibold hover:border-foreground'
+  `${CTA.outline}`
 
 /**
  * WhatsApp, phone and email as one-tap buttons. A channel with no number or

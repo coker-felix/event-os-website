@@ -5,6 +5,7 @@ import { portalUrl } from '#/features/vendors/portal'
 import { venueDirectoryQuery } from '#/features/venues/queries'
 import { sortVenues } from '#/features/venues/venues'
 import { VenueCard } from './venue-card'
+import { CTA } from '#/lib/cta'
 
 const SHOWN = 3
 
@@ -53,7 +54,7 @@ export function VenueStrip() {
           <p className="mt-1 text-mist">List yours and be one of the first.</p>
           <a
             href={portalUrl('/register')}
-            className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+            className={`${CTA.primary} mt-4`}
           >
             List your venue
           </a>

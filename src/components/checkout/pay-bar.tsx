@@ -1,4 +1,5 @@
 import { formatPrice } from '#/features/events/money'
+import { CTA } from '#/lib/cta'
 
 /** The pay button. Shared by the pinned mobile bar and the desktop summary. */
 export function PayButton({
@@ -15,7 +16,7 @@ export function PayButton({
       type="button"
       onClick={onPay}
       disabled={busy}
-      className="h-12 w-full rounded-full bg-violet px-6 text-base font-semibold text-white disabled:opacity-60"
+      className={`${CTA.primary} w-full disabled:opacity-60`}
     >
       {busy ? 'Working…' : label}
     </button>

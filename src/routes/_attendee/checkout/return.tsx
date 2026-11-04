@@ -12,6 +12,7 @@ import { formatPrice } from '#/features/events/money'
 import { eventPageQuery } from '#/features/tickets/queries'
 import { useCarts } from '#/stores/carts'
 import type { OrderStatus, ReturnParams } from '#/features/checkout/order-status'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/_attendee/checkout/return')({
   validateSearch: (s: Record<string, unknown>): ReturnParams =>
@@ -54,9 +55,9 @@ function Panel({
 }
 
 const BTN_PRIMARY =
-  'inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white'
+  `${CTA.primary}`
 const BTN_SECONDARY =
-  'inline-flex h-12 items-center rounded-full border border-line px-6 font-semibold'
+  `${CTA.outline}`
 
 function PaidView({ status }: { status: OrderStatus }) {
   const event = useQuery({

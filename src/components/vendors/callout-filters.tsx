@@ -1,5 +1,6 @@
 import { X } from 'lucide-react'
 import { serviceKindLabel } from '#/features/vendors/callouts'
+import { CTA } from '#/lib/cta'
 
 /** Category chips (scrolling sideways on a phone) and a city menu. */
 export function CalloutFilters({
@@ -25,8 +26,8 @@ export function CalloutFilters({
           onClick={() => onChange({ category: value, city })}
           className={
             on
-              ? 'h-11 rounded-full bg-ink px-5 text-sm font-semibold text-white'
-              : 'h-11 rounded-full border border-line bg-card px-5 text-sm font-semibold hover:border-foreground'
+              ? `${CTA.chipOn}`
+              : `${CTA.chipOff}`
           }
         >
           {label}
@@ -55,7 +56,7 @@ export function CalloutFilters({
               onChange={(e) =>
                 onChange({ category, city: e.target.value || undefined })
               }
-              className="h-11 rounded-full border border-line bg-card px-4 text-sm font-semibold"
+              className={`${CTA.chipOff}`}
             >
               <option value="">All places</option>
               {cities.map((c) => (

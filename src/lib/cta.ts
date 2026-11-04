@@ -12,6 +12,15 @@ export const CTA = {
   onDark: `${BASE} h-10 px-4 bg-white text-ink hover:bg-white/90`,
   /** Outline, for the second action on a dark surface. */
   outlineOnDark: `${BASE} h-10 px-4 border border-white/40 text-white hover:border-white`,
+  /** Dark ink fill, for a main action that is not teal. */
+  ink: `${BASE} h-10 px-4 bg-ink text-white hover:bg-ink/90`,
+  /** Outline, for a second action on a light surface. */
+  outline: `${BASE} h-10 px-4 border border-line bg-card text-foreground hover:border-foreground`,
+  /** Text only, for a quiet action. */
+  ghost: `${BASE} h-10 px-3 text-violet-ink hover:underline`,
+  /** A filter chip, chosen and not chosen. */
+  chipOn: `${BASE} h-9 px-3.5 bg-ink text-white`,
+  chipOff: `${BASE} h-9 px-3.5 border border-line bg-card text-foreground hover:border-foreground`,
   /** Compact, for the navbar. */
   nav: `${BASE} h-9 px-3.5 bg-primary text-primary-foreground hover:bg-primary/90`,
   navQuiet: `${BASE} h-9 px-3 text-muted-foreground hover:text-foreground`,

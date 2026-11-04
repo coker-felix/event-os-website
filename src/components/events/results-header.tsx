@@ -37,7 +37,7 @@ export function ResultsHeader({
                 page: undefined,
               })
             }
-            className="h-11 rounded-full border border-line bg-card px-4 font-semibold"
+            className="h-11 rounded-sm border border-line bg-card px-4 font-semibold"
           >
             {(Object.keys(SORT_LABELS) as Array<EventsSort>).map((s) => (
               <option key={s} value={s}>
@@ -49,7 +49,7 @@ export function ResultsHeader({
         <div
           role="group"
           aria-label="View"
-          className="hidden h-11 overflow-hidden rounded-full border border-line bg-card sm:flex"
+          className="hidden h-11 overflow-hidden rounded-sm border border-line bg-card sm:flex"
         >
           {(['grid', 'list'] as const).map((v) => (
             <button

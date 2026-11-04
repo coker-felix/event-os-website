@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { CTA } from '#/lib/cta'
 import { Reveal } from '#/components/motion/reveal'
 import { AUDIENCES, draftNoticeVisible, filterSections } from '#/lib/legal'
 import type { Audience, LegalDoc } from '#/content/legal/types'
@@ -9,12 +10,7 @@ const OTHER_DOCS = [
   { slug: 'cookies', label: 'Cookies' },
 ] as const
 
-const chip = (on: boolean) =>
-  `inline-flex min-h-11 items-center rounded-full px-4 text-sm font-semibold ${
-    on
-      ? 'bg-ink text-white'
-      : 'border border-line bg-card hover:border-foreground'
-  }`
+const chip = (on: boolean) => (on ? CTA.chipOn : CTA.chipOff)
 
 /** One legal document, filterable by who is reading. */
 export function LegalPage({

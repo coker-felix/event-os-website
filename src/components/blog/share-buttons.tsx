@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link2, Share2 } from 'lucide-react'
+import { CTA } from '#/lib/cta'
 
 /** Share (native sheet where there is one) and Copy link. */
 export function ShareButtons({ title }: { title: string }) {
@@ -33,7 +34,7 @@ export function ShareButtons({ title }: { title: string }) {
         <button
           type="button"
           onClick={share}
-          className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-card px-5 font-semibold"
+          className={`${CTA.outline}`}
         >
           <Share2 className="size-4" aria-hidden />
           Share
@@ -42,7 +43,7 @@ export function ShareButtons({ title }: { title: string }) {
       <button
         type="button"
         onClick={copy}
-        className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-card px-5 font-semibold"
+        className={`${CTA.outline}`}
       >
         <Link2 className="size-4" aria-hidden />
         Copy link

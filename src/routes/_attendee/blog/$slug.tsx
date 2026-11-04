@@ -11,6 +11,7 @@ import { articleQuery, postsQuery } from '#/features/blog/queries'
 import { isPostSlug, relatedPosts } from '#/features/blog/utils'
 import { categoriesQuery, eventsQuery } from '#/features/events/queries'
 import { ApiError } from '#/lib/api'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/_attendee/blog/$slug')({
   // Warm the cache on the server. A missing post is a real 404; any other
@@ -62,7 +63,7 @@ function ArticleNotFound() {
       <p className="mt-1 text-mist">It may have been removed or the link is wrong.</p>
       <Link
         to="/blog"
-        className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+        className={`${CTA.primary} mt-4`}
       >
         Back to the blog
       </Link>
@@ -94,7 +95,7 @@ function ArticlePage() {
         <button
           type="button"
           onClick={() => article.refetch()}
-          className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+          className={`${CTA.primary} mt-4`}
         >
           Try again
         </button>

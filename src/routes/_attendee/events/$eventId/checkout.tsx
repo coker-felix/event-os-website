@@ -37,6 +37,7 @@ import type { IssueNotice } from '#/features/checkout/changes'
 import type { Cart } from '#/features/checkout/types'
 import type { StoredCart } from '#/stores/carts'
 import type { PublicQuestionnaire } from '#/features/tickets/types'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/_attendee/events/$eventId/checkout')({
   head: () => ({
@@ -136,7 +137,7 @@ function CheckoutPage() {
     <Link
       to="/events/$eventId"
       params={{ eventId }}
-      className="inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+      className={`${CTA.primary}`}
     >
       Pick your tickets again
     </Link>
@@ -179,7 +180,7 @@ function CheckoutPage() {
               void cartQuery.refetch()
               void pageQuery.refetch()
             }}
-            className="h-12 rounded-full bg-violet px-6 font-semibold text-white"
+            className={`${CTA.primary}`}
           >
             Try again
           </button>
@@ -201,7 +202,7 @@ function CheckoutPage() {
             <Link
               to="/checkout/return"
               search={{ order: cart.orderId }}
-              className="inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+              className={`${CTA.primary}`}
             >
               See my order
             </Link>

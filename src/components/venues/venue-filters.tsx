@@ -1,10 +1,11 @@
 import { X } from 'lucide-react'
 import { CAPACITY_STEPS } from '#/features/venues/venues'
 import type { VenuesSearch } from '#/features/venues/search'
+import { CTA } from '#/lib/cta'
 
 type Filters = Omit<VenuesSearch, 'page'>
 
-const SELECT = 'h-11 rounded-full border border-line bg-card px-4 text-sm font-semibold'
+const SELECT = `${CTA.chipOff}`
 
 /** City, country, minimum capacity and "Bookable only". Menus show only with a real choice. */
 export function VenueFilters({
@@ -83,8 +84,8 @@ export function VenueFilters({
         onClick={() => onChange({ ...value, bookable: value.bookable ? undefined : true })}
         className={
           value.bookable
-            ? 'h-11 rounded-full bg-ink px-5 text-sm font-semibold text-white'
-            : 'h-11 rounded-full border border-line bg-card px-5 text-sm font-semibold hover:border-foreground'
+            ? `${CTA.chipOn}`
+            : `${CTA.chipOff}`
         }
       >
         Bookable only

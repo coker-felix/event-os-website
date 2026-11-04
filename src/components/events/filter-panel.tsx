@@ -53,7 +53,7 @@ export function SearchBox({
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Search events, venues or categories"
-        className="h-12 w-full rounded-full border border-line bg-card pr-4 pl-12 text-base"
+        className="h-12 w-full rounded-sm border border-line bg-card pr-4 pl-12 text-base"
       />
     </label>
   )

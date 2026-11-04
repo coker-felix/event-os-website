@@ -12,6 +12,7 @@ import {
 import { FilterPanel } from './filter-panel'
 import type { EventsSearch, FacetCounts } from '#/features/events/list-search'
 import type { EventCategory } from '#/features/events/types'
+import { CTA } from '#/lib/cta'
 
 /** Mobile filters: a bottom sheet with a "Show N events" button. */
 export function FilterSheet({
@@ -36,7 +37,7 @@ export function FilterSheet({
       <SheetTrigger asChild>
         <button
           type="button"
-          className="inline-flex h-12 items-center gap-2 rounded-full border border-line bg-card px-5 font-semibold"
+          className={`${CTA.outline}`}
         >
           <SlidersHorizontal className="size-4" aria-hidden />
           Filters
@@ -72,14 +73,14 @@ export function FilterSheet({
             onClick={() =>
               onChange({ view: search.view, sort: search.sort })
             }
-            className="h-12 rounded-full px-5 font-semibold text-violet-ink"
+            className={`${CTA.ghost}`}
           >
             Clear all
           </button>
           <SheetClose asChild>
             <button
               type="button"
-              className="h-12 flex-1 rounded-full bg-violet font-semibold text-white"
+              className={`${CTA.primary} flex-1`}
             >
               Show {resultCount} {resultCount === 1 ? 'event' : 'events'}
             </button>

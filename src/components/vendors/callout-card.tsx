@@ -9,6 +9,7 @@ import {
 import { portalUrl } from '#/features/vendors/portal'
 import { formatEventWhen, toDate } from '#/features/events/format'
 import type { CalloutCard as Card } from '#/features/vendors/types'
+import { CTA } from '#/lib/cta'
 
 const HEX_COLOR = /^#[0-9a-f]{6}$/i
 
@@ -86,7 +87,7 @@ export function CalloutCard({ card }: { card: Card }) {
         <div className="mt-auto flex flex-wrap gap-3 pt-5">
           <a
             href={portalUrl('/login')}
-            className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-violet px-5 font-semibold text-white hover:opacity-90"
+            className={`${CTA.primary} flex-1`}
           >
             Sign in to apply
           </a>
@@ -94,7 +95,7 @@ export function CalloutCard({ card }: { card: Card }) {
             <Link
               to="/events/$eventId"
               params={{ eventId: event.id }}
-              className="inline-flex h-12 items-center rounded-full border border-line px-5 font-semibold hover:border-foreground"
+              className={`${CTA.outline}`}
             >
               View event
             </Link>

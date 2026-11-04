@@ -1,4 +1,5 @@
 import { useConsent } from '#/stores/consent'
+import { CTA } from '#/lib/cta'
 
 /** Says plainly whether we will remember these details, and how to undo it. */
 export function RememberNote() {
@@ -10,7 +11,7 @@ export function RememberNote() {
   if (status === 'loading') return null
 
   const button =
-    'min-h-11 rounded-full px-3 text-sm font-semibold text-violet-ink underline underline-offset-2'
+    `${CTA.ghost}`
 
   return (
     <p className="-mt-2 flex flex-wrap items-center gap-x-2 px-1 text-sm text-mist">

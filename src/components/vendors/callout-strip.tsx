@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { portalUrl } from '#/features/vendors/portal'
 import { useCalloutCards } from '#/features/vendors/use-callout-cards'
 import { CalloutCard } from './callout-card'
+import { CTA } from '#/lib/cta'
 
 const SHOWN = 3
 
@@ -51,7 +52,7 @@ export function CalloutStrip() {
           </p>
           <a
             href={portalUrl('/register')}
-            className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+            className={`${CTA.primary} mt-4`}
           >
             Create your profile
           </a>

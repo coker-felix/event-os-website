@@ -10,6 +10,7 @@ import { validateCalloutsSearch } from '#/features/vendors/search'
 import { useCalloutCards } from '#/features/vendors/use-callout-cards'
 import type { CalloutsSearch } from '#/features/vendors/search'
 import { Reveal } from '#/components/motion/reveal'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/vendors/callouts')({
   validateSearch: (raw: Record<string, unknown>) => validateCalloutsSearch(raw),
@@ -97,7 +98,7 @@ function CalloutsPage() {
           <button
             type="button"
             onClick={list.refetch}
-            className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+            className={`${CTA.primary} mt-4`}
           >
             Try again
           </button>
@@ -111,7 +112,7 @@ function CalloutsPage() {
               <button
                 type="button"
                 onClick={() => setFilters({})}
-                className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+                className={`${CTA.primary} mt-4`}
               >
                 Clear filters
               </button>
@@ -124,7 +125,7 @@ function CalloutsPage() {
               </p>
               <a
                 href={portalUrl('/register')}
-                className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+                className={`${CTA.primary} mt-4`}
               >
                 Create your profile
               </a>
@@ -150,7 +151,7 @@ function CalloutsPage() {
                     replace: true,
                   })
                 }
-                className="h-12 rounded-full border border-line bg-card px-8 font-semibold"
+                className={`${CTA.outline}`}
               >
                 Load more callouts
               </button>

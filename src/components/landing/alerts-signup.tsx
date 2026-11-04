@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { parseContact, subscribeToAlerts } from '#/features/alerts/subscribe'
+import { CTA } from '#/lib/cta'
 
 type Status = 'idle' | 'submitting' | 'done' | 'error'
 
@@ -62,13 +63,13 @@ export function AlertsSignup({ city }: { city: string | null }) {
                   aria-invalid={status === 'error'}
                   aria-describedby="alerts-msg"
                   placeholder="Email or phone number"
-                  className="h-12 w-full rounded-full bg-white px-5 text-base text-ink placeholder:text-mist"
+                  className="h-12 w-full rounded-sm bg-white px-5 text-base text-ink placeholder:text-mist"
                 />
               </label>
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="h-12 rounded-full bg-ink px-6 font-semibold text-white hover:opacity-90 disabled:opacity-60"
+                className={`${CTA.ink} disabled:opacity-60`}
               >
                 {status === 'submitting' ? 'Signing you up…' : 'Notify me'}
               </button>

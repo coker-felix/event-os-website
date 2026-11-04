@@ -1,6 +1,7 @@
 import { X } from 'lucide-react'
 import { activeFilterChips } from '#/features/events/list-search'
 import type { EventsSearch } from '#/features/events/list-search'
+import { CTA } from '#/lib/cta'
 
 /** Removable chips for every active filter, plus "Clear all". */
 export function ActiveFilters({
@@ -22,7 +23,7 @@ export function ActiveFilters({
             type="button"
             onClick={() => onChange(c.remove(search))}
             aria-label={`Remove filter: ${c.label}`}
-            className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-ink px-3 text-sm font-semibold text-white"
+            className={`${CTA.chipOn}`}
           >
             {c.label}
             <X className="size-4" aria-hidden />

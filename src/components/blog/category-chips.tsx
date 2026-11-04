@@ -1,3 +1,4 @@
+import { CTA } from '#/lib/cta'
 /** "All" plus one chip per category. Scrolls sideways on a phone. */
 export function CategoryChips({
   categories,
@@ -19,8 +20,8 @@ export function CategoryChips({
           onClick={() => onSelect(value)}
           className={
             on
-              ? 'h-11 rounded-full bg-ink px-5 text-sm font-semibold text-white'
-              : 'h-11 rounded-full border border-line bg-card px-5 text-sm font-semibold hover:border-foreground'
+              ? `${CTA.chipOn}`
+              : `${CTA.chipOff}`
           }
         >
           {label}

@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import type { IssueNotice } from '#/features/checkout/changes'
+import { CTA } from '#/lib/cta'
 
 /** Says what went wrong or what changed, and what to do next. */
 export function ChangeNotice({
@@ -31,7 +32,7 @@ export function ChangeNotice({
           <button
             type="button"
             onClick={onAcknowledge}
-            className="h-12 rounded-full bg-ink px-6 font-semibold text-white"
+            className={`${CTA.ink}`}
           >
             Got it
           </button>
@@ -40,7 +41,7 @@ export function ChangeNotice({
           <button
             type="button"
             onClick={onRetry}
-            className="h-12 rounded-full bg-ink px-6 font-semibold text-white"
+            className={`${CTA.ink}`}
           >
             Try again
           </button>
@@ -48,7 +49,7 @@ export function ChangeNotice({
         {notice.contactLink && (
           <Link
             to="/contact"
-            className="inline-flex h-12 items-center rounded-full border border-line bg-card px-6 font-semibold"
+            className={`${CTA.outline}`}
           >
             Contact us
           </Link>

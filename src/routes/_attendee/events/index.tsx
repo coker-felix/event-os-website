@@ -20,6 +20,7 @@ import { categoriesQuery, eventsQuery } from '#/features/events/queries'
 import { usePreferences } from '#/stores/preferences'
 import type { EventsSearch } from '#/features/events/list-search'
 import { Reveal } from '#/components/motion/reveal'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/_attendee/events/')({
   validateSearch: (raw: Record<string, unknown>) => validateEventsSearch(raw),
@@ -150,7 +151,7 @@ function EventsPage() {
               <button
                 type="button"
                 onClick={() => events.refetch()}
-                className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+                className={`${CTA.primary} mt-4`}
               >
                 Try again
               </button>
@@ -168,14 +169,14 @@ function EventsPage() {
                 <button
                   type="button"
                   onClick={() => onChange({ view: search.view })}
-                  className="h-12 rounded-full bg-violet px-6 font-semibold text-white"
+                  className={`${CTA.primary}`}
                 >
                   Clear all filters
                 </button>
                 <Link
                   to="/"
                   hash="alerts"
-                  className="inline-flex h-12 items-center rounded-full border border-line px-6 font-semibold"
+                  className={`${CTA.outline}`}
                 >
                   Notify me
                 </Link>
@@ -223,7 +224,7 @@ function EventsPage() {
                     onClick={() =>
                       onChange({ ...search, page: (search.page ?? 1) + 1 })
                     }
-                    className="h-12 rounded-full border border-line bg-card px-8 font-semibold"
+                    className={`${CTA.outline}`}
                   >
                     Load more events
                   </button>

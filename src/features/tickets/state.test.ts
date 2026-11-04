@@ -121,7 +121,7 @@ describe('volumeHint', () => {
     expect(volumeHint(t, 3, 'NGN')).toBeNull()
   })
   it('says what the buyer saves once a tier applies', () => {
-    expect(volumeHint(t, 4, 'NGN')).toBe('Buying 4 saves you 10%: -₦3,200')
+    expect(volumeHint(t, 4, 'NGN')).toBe('Buying 4 saves you 10%: -3,200')
   })
   it('is null when the tier is not cheaper', () => {
     const same = tt({ volumeTiers: [{ minQty: 2, unitPriceMinor: 800_000 }] })

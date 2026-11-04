@@ -4,9 +4,10 @@ import { formatPrice } from '#/features/events/money'
 import { eventSaleState, ticketStatus } from '#/features/tickets/state'
 import { TicketList } from './ticket-list'
 import type { PublicEventPage, PublicTicketType } from '#/features/tickets/types'
+import { CTA } from '#/lib/cta'
 
 /**
- * Phone layout: a bar pinned to the bottom ("From ₦8,000 · Get tickets")
+ * Phone layout: a bar pinned to the bottom ("From 8,000 · Get tickets")
  * that opens a sheet with the same ticket list as the desktop panel.
  */
 export function MobileBuyBar({
@@ -50,7 +51,7 @@ export function MobileBuyBar({
           <SheetTrigger asChild>
             <button
               type="button"
-              className="h-12 rounded-full bg-violet px-8 font-semibold text-white"
+              className={`${CTA.primary}`}
             >
               {state === 'free' ? 'RSVP' : 'Get tickets'}
             </button>

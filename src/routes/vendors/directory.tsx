@@ -8,6 +8,7 @@ import { vendorDirectoryQuery } from '#/features/vendors/queries'
 import { validateDirectorySearch } from '#/features/vendors/search'
 import type { DirectorySearch } from '#/features/vendors/search'
 import { Reveal } from '#/components/motion/reveal'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/vendors/directory')({
   validateSearch: (raw: Record<string, unknown>) => validateDirectorySearch(raw),
@@ -97,7 +98,7 @@ function DirectoryPage() {
           <button
             type="button"
             onClick={() => void list.refetch()}
-            className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+            className={`${CTA.primary} mt-4`}
           >
             Try again
           </button>
@@ -111,7 +112,7 @@ function DirectoryPage() {
               <button
                 type="button"
                 onClick={() => setFilters({})}
-                className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+                className={`${CTA.primary} mt-4`}
               >
                 Clear filters
               </button>
@@ -124,7 +125,7 @@ function DirectoryPage() {
               </p>
               <a
                 href={portalUrl('/register')}
-                className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+                className={`${CTA.primary} mt-4`}
               >
                 Create your profile
               </a>
@@ -150,7 +151,7 @@ function DirectoryPage() {
                     replace: true,
                   })
                 }
-                className="h-12 rounded-full border border-line bg-card px-8 font-semibold"
+                className={`${CTA.outline}`}
               >
                 Load more vendors
               </button>

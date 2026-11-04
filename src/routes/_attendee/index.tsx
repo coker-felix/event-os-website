@@ -29,6 +29,7 @@ import type { DiscoveryValue } from '#/components/landing/discovery-bar'
 import type { PublicEvent } from '#/features/events/types'
 import type { QuickFilter } from '#/features/events/filters'
 import { Reveal } from '#/components/motion/reveal'
+import { CTA } from '#/lib/cta'
 
 const MAX_CATEGORY_ROWS = 3
 const MAX_RESULTS = 24
@@ -186,7 +187,7 @@ function Landing() {
           <button
             type="button"
             onClick={() => events.refetch()}
-            className="mt-4 rounded-full bg-violet px-5 py-2 font-semibold text-white hover:opacity-90"
+            className={`${CTA.primary} mt-4`}
           >
             Try again
           </button>
@@ -207,7 +208,7 @@ function Landing() {
           <button
             type="button"
             onClick={() => setCity(null)}
-            className="mt-3 rounded-full bg-violet px-5 py-2 font-semibold text-white hover:opacity-90"
+            className={`${CTA.primary} mt-3`}
           >
             Show all locations
           </button>

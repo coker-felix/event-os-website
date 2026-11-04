@@ -8,6 +8,7 @@ import { isVendorId } from '#/features/vendors/ids'
 import { portalUrl } from '#/features/vendors/portal'
 import { vendorQuery } from '#/features/vendors/queries'
 import { ApiError } from '#/lib/api'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/vendors/$vendorId')({
   // Warm the cache on the server. A malformed id or a missing vendor is a real
@@ -56,7 +57,7 @@ function VendorNotFound() {
       </p>
       <Link
         to="/vendors/directory"
-        className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+        className={`${CTA.primary} mt-4`}
       >
         Back to the directory
       </Link>
@@ -86,7 +87,7 @@ function VendorPage() {
         <button
           type="button"
           onClick={() => void vendor.refetch()}
-          className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+          className={`${CTA.primary} mt-4`}
         >
           Try again
         </button>
@@ -144,7 +145,7 @@ function VendorPage() {
         </p>
         <a
           href={portalUrl('/login')}
-          className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+          className={`${CTA.primary} mt-4`}
         >
           Sign in to book
         </a>

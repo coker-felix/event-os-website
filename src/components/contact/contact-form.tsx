@@ -7,6 +7,7 @@ import {
   validateContactForm,
 } from '#/features/contact/form'
 import type { ContactTopic } from '#/features/contact/form'
+import { CTA } from '#/lib/cta'
 
 type Status = 'idle' | 'submitting' | 'sent' | 'error'
 type Errors = Partial<Record<'topic' | 'name' | 'contact' | 'message', string>>
@@ -73,7 +74,7 @@ export function ContactForm({
         </p>
         <Link
           to="/events"
-          className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+          className={`${CTA.primary} mt-4`}
         >
           Back to events
         </Link>
@@ -179,7 +180,7 @@ export function ContactForm({
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="h-12 w-full rounded-full bg-violet text-base font-semibold text-white disabled:opacity-60 sm:w-auto sm:px-8"
+          className={`${CTA.primary} w-full disabled:opacity-60 sm:w-auto`}
         >
           {status === 'submitting' ? 'Sending…' : 'Send message'}
         </button>

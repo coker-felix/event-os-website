@@ -7,6 +7,7 @@ import { PostCard } from '#/components/blog/post-card'
 import { postsQuery } from '#/features/blog/queries'
 import { categoriesOfPosts, splitFeatured } from '#/features/blog/utils'
 import { Reveal } from '#/components/motion/reveal'
+import { CTA } from '#/lib/cta'
 
 interface BlogSearch {
   category?: string
@@ -83,7 +84,7 @@ function BlogPage() {
           <button
             type="button"
             onClick={() => list.refetch()}
-            className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+            className={`${CTA.primary} mt-4`}
           >
             Try again
           </button>
@@ -128,7 +129,7 @@ function BlogPage() {
                     replace: true,
                   })
                 }
-                className="h-12 rounded-full border border-line bg-card px-8 font-semibold"
+                className={`${CTA.outline}`}
               >
                 Load more posts
               </button>

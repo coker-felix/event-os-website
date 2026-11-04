@@ -17,6 +17,7 @@ import { eventPageQuery } from '#/features/tickets/queries'
 import { ApiError } from '#/lib/api'
 import type { PublicTicketType } from '#/features/tickets/types'
 import { Reveal } from '#/components/motion/reveal'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/_attendee/events/$eventId/')({
   // Warm the cache on the server; a failing API must never fail the page.
@@ -66,7 +67,7 @@ function EventNotFound() {
       </p>
       <Link
         to="/events"
-        className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+        className={`${CTA.primary} mt-4`}
       >
         Browse all events
       </Link>
@@ -114,14 +115,14 @@ function EventDetailsPage() {
             <button
               type="button"
               onClick={() => pageQuery.refetch()}
-              className="h-12 rounded-full bg-violet px-6 font-semibold text-white"
+              className={`${CTA.primary}`}
             >
               Try again
             </button>
           )}
           <Link
             to="/events"
-            className="inline-flex h-12 items-center rounded-full border border-line px-6 font-semibold"
+            className={`${CTA.outline}`}
           >
             Browse all events
           </Link>

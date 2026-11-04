@@ -10,6 +10,7 @@ import { TicketCard } from './ticket-card'
 import { WaitlistForm } from './waitlist-form'
 import type { TicketVariant } from './ticket-card'
 import type { PublicEventPage, PublicTicketType } from '#/features/tickets/types'
+import { CTA } from '#/lib/cta'
 
 function whenOnSale(t: PublicTicketType): string {
   if (!t.saleStartAt) return ''
@@ -145,7 +146,7 @@ export function TicketList({
             type="button"
             onClick={onBuy}
             disabled={lines.length === 0 || busy}
-            className="mt-3 h-12 w-full rounded-full bg-violet text-base font-semibold text-white disabled:opacity-50"
+            className={`${CTA.primary} mt-3 w-full disabled:opacity-50`}
           >
             {busy
               ? 'Starting your order…'

@@ -4,6 +4,7 @@ import { MapPin, Search, Ticket, X } from 'lucide-react'
 import { QUICK_FILTERS } from '#/features/events/filters'
 import type { QuickFilter } from '#/features/events/filters'
 import type { EventCategory } from '#/features/events/types'
+import { CTA } from '#/lib/cta'
 
 export interface DiscoveryValue {
   q?: string
@@ -12,7 +13,7 @@ export interface DiscoveryValue {
 }
 
 const SELECT_CLASS =
-  'h-11 rounded-full border border-line bg-card px-4 text-sm font-medium'
+  `${CTA.chipOff}`
 
 /**
  * Search, quick filters, category and city. Filters live in the URL (via
@@ -72,7 +73,7 @@ export function DiscoveryBar({
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Search events, venues or categories"
-            className="h-11 w-full rounded-full border border-line bg-card pr-4 pl-12 text-base"
+            className="h-11 w-full rounded-sm border border-line bg-card pr-4 pl-12 text-base"
           />
         </label>
         {cities.length > 0 && (
@@ -111,8 +112,8 @@ export function DiscoveryBar({
               }
               className={
                 on
-                  ? 'h-9 rounded-full bg-ink px-4 text-sm font-semibold text-white'
-                  : 'h-9 rounded-full border border-line bg-card px-4 text-sm font-semibold hover:border-foreground'
+                  ? `${CTA.chipOn}`
+                  : `${CTA.chipOff}`
               }
             >
               {f.label}
@@ -132,7 +133,7 @@ export function DiscoveryBar({
                     : undefined,
                 })
               }
-              className="h-9 rounded-full border border-line bg-card px-4 text-sm font-semibold"
+              className={`${CTA.chipOff}`}
             >
               <option value="">All categories</option>
               {categories.map((c) => (
@@ -150,7 +151,7 @@ export function DiscoveryBar({
               setText('')
               onChange({})
             }}
-            className="inline-flex h-9 items-center gap-1 rounded-full px-3 text-sm font-semibold text-violet-ink hover:underline"
+            className={`${CTA.ghost}`}
           >
             <X className="size-4" aria-hidden />
             Clear filters

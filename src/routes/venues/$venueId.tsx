@@ -11,6 +11,7 @@ import { venueAvailabilityQuery, venueQuery } from '#/features/venues/queries'
 import { safeSocialLinks } from '#/features/venues/venues'
 import { ApiError } from '#/lib/api'
 import { safeHttpUrl } from '#/lib/url'
+import { CTA } from '#/lib/cta'
 
 export const Route = createFileRoute('/venues/$venueId')({
   // Warm the cache on the server. A malformed id or a missing venue is a real
@@ -65,7 +66,7 @@ function VenueNotFound() {
       </p>
       <Link
         to="/venues/directory"
-        className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+        className={`${CTA.primary} mt-4`}
       >
         Back to the directory
       </Link>
@@ -101,7 +102,7 @@ function VenuePage() {
         <button
           type="button"
           onClick={() => void venue.refetch()}
-          className="mt-4 h-12 rounded-full bg-violet px-6 font-semibold text-white"
+          className={`${CTA.primary} mt-4`}
         >
           Try again
         </button>
@@ -183,7 +184,7 @@ function VenuePage() {
                   href={website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-card px-5 font-semibold hover:border-foreground"
+                  className={`${CTA.outline}`}
                 >
                   <Globe className="size-4" aria-hidden />
                   Website
@@ -196,7 +197,7 @@ function VenuePage() {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center rounded-full border border-line bg-card px-5 font-semibold capitalize hover:border-foreground"
+                  className={`${CTA.outline} capitalize`}
                 >
                   {s.platform}
                 </a>
@@ -225,7 +226,7 @@ function VenuePage() {
             </p>
             <a
               href={portalUrl('/login')}
-              className="mt-4 inline-flex h-12 items-center rounded-full bg-violet px-6 font-semibold text-white"
+              className={`${CTA.primary} mt-4`}
             >
               Sign in to request a booking
             </a>
