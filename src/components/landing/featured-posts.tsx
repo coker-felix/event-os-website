@@ -10,7 +10,7 @@ export function FeaturedPosts({ posts }: { posts: Array<BlogPost> }) {
         <h2 className="text-2xl font-bold">From the blog</h2>
         <Link
           to="/blog"
-          className="text-sm font-semibold text-violet hover:underline"
+          className="text-sm font-semibold text-violet-ink hover:underline"
         >
           All posts
         </Link>

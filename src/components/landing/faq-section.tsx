@@ -14,7 +14,7 @@ export function FaqSection({ faqs = FAQS }: { faqs?: Array<Faq> })  {
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold [&::-webkit-details-marker]:hidden">
               {f.question}
               <Plus
-                className="size-5 shrink-0 text-violet transition-transform group-open:rotate-45"
+                className="size-5 shrink-0 text-violet-ink transition-transform group-open:rotate-45"
                 aria-hidden
               />
             </summary>
@@ -22,7 +22,7 @@ export function FaqSection({ faqs = FAQS }: { faqs?: Array<Faq> })  {
             {f.link && (
               <Link
                 to={f.link.to}
-                className="mt-2 inline-block text-sm font-semibold text-violet hover:underline"
+                className="mt-2 inline-block text-sm font-semibold text-violet-ink hover:underline"
               >
                 {f.link.label}
               </Link>

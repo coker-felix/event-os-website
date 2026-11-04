@@ -232,7 +232,7 @@ export function FilterPanel({
             <button
               type="button"
               onClick={() => setShowAllCats((v) => !v)}
-              className="min-h-11 text-sm font-semibold text-violet hover:underline"
+              className="min-h-11 text-sm font-semibold text-violet-ink hover:underline"
             >
               {showAllCats ? 'Show fewer' : `Show all ${visibleCats.length}`}
             </button>

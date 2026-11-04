@@ -4,7 +4,7 @@ import { SUPPORT_HOURS } from '#/features/contact/hours'
 import type { SiteConfig } from '#/features/contact/config'
 
 const BUTTON =
-  'inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line bg-card px-5 font-semibold hover:border-ink'
+  'inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line bg-card px-5 font-semibold hover:border-foreground'
 
 /**
  * WhatsApp, phone and email as one-tap buttons. A channel with no number or
@@ -32,19 +32,19 @@ export function ReachUs({
         <div className="mt-3 flex flex-wrap gap-3">
           {whatsapp && (
             <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={BUTTON}>
-              <MessageCircle className="size-4 text-violet" aria-hidden />
+              <MessageCircle className="size-4 text-violet-ink" aria-hidden />
               WhatsApp
             </a>
           )}
           {phone && (
             <a href={phone} className={BUTTON}>
-              <Phone className="size-4 text-violet" aria-hidden />
+              <Phone className="size-4 text-violet-ink" aria-hidden />
               Call
             </a>
           )}
           {email && (
             <a href={email} className={BUTTON}>
-              <Mail className="size-4 text-violet" aria-hidden />
+              <Mail className="size-4 text-violet-ink" aria-hidden />
               Email
             </a>
           )}
@@ -60,7 +60,7 @@ export function ReachUs({
       {status && (
         <p
           role="status"
-          className={`mt-1 text-sm font-semibold ${status.open ? 'text-violet' : ''}`}
+          className={`mt-1 text-sm font-semibold ${status.open ? 'text-violet-ink' : ''}`}
         >
           {status.label}
         </p>

@@ -28,7 +28,7 @@ export function VenueStrip() {
         {venues.length > 0 && (
           <Link
             to="/venues/directory"
-            className="text-sm font-semibold text-violet hover:underline"
+            className="text-sm font-semibold text-violet-ink hover:underline"
           >
             See the directory
           </Link>
@@ -42,7 +42,7 @@ export function VenueStrip() {
       ) : isError ? (
         <p className="mt-4 text-mist" role="status">
           We couldn't load venues just now.{' '}
-          <Link to="/venues/directory" className="font-semibold text-violet hover:underline">
+          <Link to="/venues/directory" className="font-semibold text-violet-ink hover:underline">
             Try the directory
           </Link>
           .

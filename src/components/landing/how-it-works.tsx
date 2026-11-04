@@ -36,11 +36,11 @@ export function HowItWorks() {
         ))}
       </ol>
       <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mist">
-        <ShieldCheck className="size-5 text-violet" aria-hidden />
+        <ShieldCheck className="size-5 text-violet-ink" aria-hidden />
         Payments are handled securely through Paystack.
         <Link
           to="/tickets/help"
-          className="font-semibold text-violet hover:underline"
+          className="font-semibold text-violet-ink hover:underline"
         >
           Lost a ticket? Find it here.
         </Link>

@@ -112,7 +112,7 @@ export function DiscoveryBar({
               className={
                 on
                   ? 'h-9 rounded-full bg-ink px-4 text-sm font-semibold text-white'
-                  : 'h-9 rounded-full border border-line bg-card px-4 text-sm font-semibold hover:border-ink'
+                  : 'h-9 rounded-full border border-line bg-card px-4 text-sm font-semibold hover:border-foreground'
               }
             >
               {f.label}
@@ -150,7 +150,7 @@ export function DiscoveryBar({
               setText('')
               onChange({})
             }}
-            className="inline-flex h-9 items-center gap-1 rounded-full px-3 text-sm font-semibold text-violet hover:underline"
+            className="inline-flex h-9 items-center gap-1 rounded-full px-3 text-sm font-semibold text-violet-ink hover:underline"
           >
             <X className="size-4" aria-hidden />
             Clear filters
@@ -158,7 +158,7 @@ export function DiscoveryBar({
         )}
         <Link
           to="/tickets/help"
-          className="ml-auto inline-flex h-9 items-center gap-1.5 text-sm font-semibold text-violet hover:underline"
+          className="ml-auto inline-flex h-9 items-center gap-1.5 text-sm font-semibold text-violet-ink hover:underline"
         >
           <Ticket className="size-4" aria-hidden />
           Already booked? Find my tickets

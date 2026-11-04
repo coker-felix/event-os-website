@@ -24,7 +24,7 @@ export function CalloutStrip() {
         {cards.length > 0 && (
           <Link
             to="/vendors/callouts"
-            className="text-sm font-semibold text-violet hover:underline"
+            className="text-sm font-semibold text-violet-ink hover:underline"
           >
             See all callouts
           </Link>
@@ -38,7 +38,7 @@ export function CalloutStrip() {
       ) : isError ? (
         <p className="mt-4 text-mist" role="status">
           We couldn't load callouts just now.{' '}
-          <Link to="/vendors/callouts" className="font-semibold text-violet hover:underline">
+          <Link to="/vendors/callouts" className="font-semibold text-violet-ink hover:underline">
             Try the callouts page
           </Link>
           .

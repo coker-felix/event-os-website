@@ -80,7 +80,7 @@ export function EventListRow({
             {price === 'Free' ? 'Free' : `From ${price}`}
           </div>
         )}
-        <div className="font-semibold text-violet">
+        <div className="font-semibold text-violet-ink">
           {soldOut ? 'Join waitlist' : 'Get tickets'}
         </div>
       </div>

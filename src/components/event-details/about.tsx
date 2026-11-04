@@ -20,7 +20,7 @@ export function About({ text }: { text?: string }) {
           type="button"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="mt-1 min-h-11 text-sm font-semibold text-violet hover:underline"
+          className="mt-1 min-h-11 text-sm font-semibold text-violet-ink hover:underline"
         >
           {open ? 'Show less' : 'Read more'}
         </button>

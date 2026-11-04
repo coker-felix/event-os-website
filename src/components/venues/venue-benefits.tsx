@@ -18,7 +18,7 @@ export function VenueBenefits() {
           const Icon = ICONS[b.id]
           return (
             <li key={b.id} className="flex gap-4 rounded-2xl border border-line bg-card p-5">
-              <Icon className="size-7 shrink-0 text-violet" aria-hidden />
+              <Icon className="size-7 shrink-0 text-violet-ink" aria-hidden />
               <div>
                 <h3 className="text-lg font-bold">{b.title}</h3>
                 <p className="mt-1 text-mist">{b.body}</p>

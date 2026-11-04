@@ -33,7 +33,7 @@ export function Summary({
           </li>
         ))}
         {discount > 0 && (
-          <li className="flex justify-between gap-3 text-violet">
+          <li className="flex justify-between gap-3 text-violet-ink">
             <span>Volume discount</span>
             <span>-{formatPrice(discount, cart.currency)}</span>
           </li>

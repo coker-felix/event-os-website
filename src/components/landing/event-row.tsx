@@ -20,7 +20,7 @@ export function EventRow({
         <h2 className="text-2xl font-bold">{title}</h2>
         <Link
           to="/events"
-          className="text-sm font-semibold text-violet hover:underline"
+          className="text-sm font-semibold text-violet-ink hover:underline"
         >
           See all events
         </Link>

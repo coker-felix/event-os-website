@@ -36,7 +36,7 @@ export function VenueCard({ venue }: { venue: VenueEntry }) {
           <BookableChip claimed={venue.claimed} />
         </div>
         {venue.category && (
-          <p className="mt-1 text-xs font-semibold tracking-[0.14em] text-violet uppercase">
+          <p className="mt-1 text-xs font-semibold tracking-[0.14em] text-violet-ink uppercase">
             {serviceKindLabel(venue.category)}
           </p>
         )}

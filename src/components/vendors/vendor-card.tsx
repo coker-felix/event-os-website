@@ -35,7 +35,7 @@ export function VendorCard({ vendor }: { vendor: VendorEntry }) {
           <TierBadge tier={vendor.tier} />
         </div>
         {vendor.category && (
-          <p className="mt-1 text-xs font-semibold tracking-[0.14em] text-violet uppercase">
+          <p className="mt-1 text-xs font-semibold tracking-[0.14em] text-violet-ink uppercase">
             {serviceKindLabel(vendor.category)}
           </p>
         )}

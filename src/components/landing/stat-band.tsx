@@ -32,7 +32,7 @@ export function StatBand({
       aria-label={heading}
       className={
         dark
-          ? 'rounded-2xl border border-ink/10 bg-secondary p-6'
+          ? 'rounded-2xl border border-foreground/10 bg-secondary p-6'
           : 'rounded-2xl border border-line bg-card p-6'
       }
     >

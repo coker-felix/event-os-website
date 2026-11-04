@@ -66,7 +66,7 @@ function PaidView({ status }: { status: OrderStatus }) {
   const links = event.data ? calendarLinks(event.data.event) : null
   return (
     <Panel
-      icon={<CheckCircle2 className="size-8 text-violet" aria-hidden />}
+      icon={<CheckCircle2 className="size-8 text-violet-ink" aria-hidden />}
       title="You're going!"
     >
       <div className="rounded-2xl border border-line">
@@ -230,7 +230,7 @@ function ReturnPage() {
     nextPollDelay(Math.max(0, checks - 1)) === null
   return (
     <Panel
-      icon={<Clock className="size-8 text-violet" aria-hidden />}
+      icon={<Clock className="size-8 text-violet-ink" aria-hidden />}
       title="Confirming your payment…"
     >
       <p className="text-mist" role="status">

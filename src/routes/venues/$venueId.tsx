@@ -183,7 +183,7 @@ function VenuePage() {
                   href={website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-card px-5 font-semibold hover:border-ink"
+                  className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-card px-5 font-semibold hover:border-foreground"
                 >
                   <Globe className="size-4" aria-hidden />
                   Website
@@ -196,7 +196,7 @@ function VenuePage() {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center rounded-full border border-line bg-card px-5 font-semibold capitalize hover:border-ink"
+                  className="inline-flex h-11 items-center rounded-full border border-line bg-card px-5 font-semibold capitalize hover:border-foreground"
                 >
                   {s.platform}
                 </a>

@@ -29,12 +29,12 @@ export function KeyFacts({ event }: { event: PublicEvent }) {
             </span>
             {links && (
               <span className="flex items-center gap-1.5 text-sm">
-                <CalendarPlus className="size-4 text-violet" aria-hidden />
+                <CalendarPlus className="size-4 text-violet-ink" aria-hidden />
                 <a
                   href={links.google}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-violet hover:underline"
+                  className="font-semibold text-violet-ink hover:underline"
                 >
                   Google Calendar
                 </a>
@@ -42,7 +42,7 @@ export function KeyFacts({ event }: { event: PublicEvent }) {
                 <a
                   href={links.ics}
                   download={`${event.title}.ics`}
-                  className="font-semibold text-violet hover:underline"
+                  className="font-semibold text-violet-ink hover:underline"
                 >
                   Download .ics
                 </a>
@@ -60,7 +60,7 @@ export function KeyFacts({ event }: { event: PublicEvent }) {
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-violet hover:underline"
+              className="text-sm font-semibold text-violet-ink hover:underline"
             >
               Map
             </a>

@@ -20,7 +20,7 @@ export function CategoryChips({
           className={
             on
               ? 'h-11 rounded-full bg-ink px-5 text-sm font-semibold text-white'
-              : 'h-11 rounded-full border border-line bg-card px-5 text-sm font-semibold hover:border-ink'
+              : 'h-11 rounded-full border border-line bg-card px-5 text-sm font-semibold hover:border-foreground'
           }
         >
           {label}

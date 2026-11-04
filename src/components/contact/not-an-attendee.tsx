@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 
-const LINK = 'inline-flex min-h-11 items-center font-semibold text-violet hover:underline'
+const LINK = 'inline-flex min-h-11 items-center font-semibold text-violet-ink hover:underline'
 
 /** Pointers for people who are here as a vendor, venue or organizer. */
 export function NotAnAttendee({ onOrganizer }: { onOrganizer: () => void }) {

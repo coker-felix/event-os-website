@@ -9,6 +9,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import { ConsentBanner } from '#/components/consent/consent-banner'
 import { CookieSettings } from '#/components/consent/cookie-settings'
+import { themeScript } from '#/lib/theme'
 import { PreferencesHydrator } from '#/components/preferences-hydrator'
 
 import appCss from '../styles.css?url'
@@ -45,8 +46,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript() }} />
         <HeadContent />
       </head>
       <body>

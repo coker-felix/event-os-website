@@ -84,7 +84,7 @@ export function VenueFilters({
         className={
           value.bookable
             ? 'h-11 rounded-full bg-ink px-5 text-sm font-semibold text-white'
-            : 'h-11 rounded-full border border-line bg-card px-5 text-sm font-semibold hover:border-ink'
+            : 'h-11 rounded-full border border-line bg-card px-5 text-sm font-semibold hover:border-foreground'
         }
       >
         Bookable only
@@ -93,7 +93,7 @@ export function VenueFilters({
         <button
           type="button"
           onClick={() => onChange({})}
-          className="inline-flex h-11 items-center gap-1 px-3 text-sm font-semibold text-violet hover:underline"
+          className="inline-flex h-11 items-center gap-1 px-3 text-sm font-semibold text-violet-ink hover:underline"
         >
           <X className="size-4" aria-hidden />
           Clear filters

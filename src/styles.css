@@ -5,34 +5,54 @@
 
 @import 'tw-animate-css';
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --ink: #15122e;
   --paper: #f6f5fb;
   --violet: #5b3df5;
+  /* Violet for small text: the brand violet in light, lifted in dark. */
+  --violet-ink: #5b3df5;
   --flame: #ff5a36;
   --line: #e2dff0;
   --mist: #6b6784;
 
   --background: var(--paper);
-  --foreground: var(--ink);
+  --foreground: #15122e;
   --card: #ffffff;
-  --card-foreground: var(--ink);
+  --card-foreground: var(--foreground);
   --popover: #ffffff;
-  --popover-foreground: var(--ink);
+  --popover-foreground: var(--foreground);
   --primary: var(--violet);
   --primary-foreground: #ffffff;
   --secondary: #ecebf7;
-  --secondary-foreground: var(--ink);
+  --secondary-foreground: var(--foreground);
   --muted: #ecebf7;
   --muted-foreground: var(--mist);
   --accent: #ecebf7;
-  --accent-foreground: var(--ink);
+  --accent-foreground: var(--foreground);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
   --border: var(--line);
   --input: var(--line);
   --ring: var(--violet);
   --radius: 0.75rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --paper: #0d0b1f;
+  --ink: #1f1b49; /* dark panels, lifted so they show on the dark page */
+  --line: #2c2760;
+  --mist: #a9a4cf;
+  --violet-ink: #b3a8ff;
+
+  --foreground: #f1effb;
+  --card: #17143a;
+  --popover: #17143a;
+  --secondary: #221e4d;
+  --muted: #221e4d;
+  --accent: #221e4d;
 }
 
 @theme inline {
@@ -42,6 +62,7 @@
   --color-ink: var(--ink);
   --color-paper: var(--paper);
   --color-violet: var(--violet);
+  --color-violet-ink: var(--violet-ink);
   --color-flame: var(--flame);
   --color-mist: var(--mist);
   --color-line: var(--line);
@@ -90,7 +111,7 @@
     letter-spacing: -0.02em;
   }
   :focus-visible {
-    outline: 2px solid var(--violet);
+    outline: 2px solid var(--violet-ink);
     outline-offset: 2px;
   }
 }

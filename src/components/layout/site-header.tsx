@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { PRODUCTS } from '#/config/products'
 import { portalUrl } from '#/features/vendors/portal'
 import { ProductSwitcher } from './product-switcher'
+import { ThemeToggle } from './theme-toggle'
 import type { ProductId } from '#/config/products'
 
 export function SiteHeader({ product }: { product: ProductId }) {
@@ -40,6 +41,7 @@ export function SiteHeader({ product }: { product: ProductId }) {
               {a.label}
             </a>
           ))}
+          <ThemeToggle />
           <ProductSwitcher current={product} />
         </div>
       </div>

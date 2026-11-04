@@ -119,7 +119,7 @@ function ArticlePage() {
           Blog
         </Link>
         {post.category && (
-          <p className="mt-4 text-xs font-semibold tracking-[0.14em] text-violet uppercase">
+          <p className="mt-4 text-xs font-semibold tracking-[0.14em] text-violet-ink uppercase">
             {post.category}
           </p>
         )}

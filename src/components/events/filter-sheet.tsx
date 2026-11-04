@@ -72,7 +72,7 @@ export function FilterSheet({
             onClick={() =>
               onChange({ view: search.view, sort: search.sort })
             }
-            className="h-12 rounded-full px-5 font-semibold text-violet"
+            className="h-12 rounded-full px-5 font-semibold text-violet-ink"
           >
             Clear all
           </button>

@@ -48,7 +48,7 @@ function DetailsControl({
           aria-expanded={open}
           aria-label={label}
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-violet"
+          className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-violet-ink"
         >
           <Info className="size-4" aria-hidden />
           Details
@@ -63,7 +63,7 @@ function DetailsControl({
         <button
           type="button"
           aria-label={label}
-          className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-violet hover:underline"
+          className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-violet-ink hover:underline"
         >
           <Info className="size-4" aria-hidden />
           Details
@@ -83,7 +83,7 @@ function DetailsControl({
 }
 
 const STEP_BUTTON =
-  'grid size-11 place-items-center rounded-full border border-line bg-card text-ink disabled:opacity-40'
+  'grid size-11 place-items-center rounded-full border border-line bg-card text-foreground disabled:opacity-40'
 
 /** One buyable ticket type: name, price, description, stepper, details. */
 export function TicketCard({

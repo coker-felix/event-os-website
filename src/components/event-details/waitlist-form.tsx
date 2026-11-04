@@ -30,7 +30,7 @@ export function WaitlistForm({
       <button
         type="button"
         onClick={() => setStatus('open')}
-        className="mt-2 min-h-11 text-sm font-semibold text-violet hover:underline"
+        className="mt-2 min-h-11 text-sm font-semibold text-violet-ink hover:underline"
       >
         Join waitlist
       </button>

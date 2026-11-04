@@ -43,7 +43,7 @@ export function PostCard({ post }: { post: BlogPost }) {
       </div>
       <div className="flex flex-1 flex-col p-5">
         {post.category && (
-          <p className="text-xs font-semibold tracking-[0.14em] text-violet uppercase">
+          <p className="text-xs font-semibold tracking-[0.14em] text-violet-ink uppercase">
             {post.category}
           </p>
         )}

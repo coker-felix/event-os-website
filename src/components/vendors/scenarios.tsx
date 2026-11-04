@@ -8,7 +8,7 @@ export function Scenarios() {
         {SCENARIOS.map((s) => (
           <li key={s.id} className="flex flex-col rounded-2xl border border-line bg-card p-5">
             <h3 className="text-lg font-bold">{s.who}</h3>
-            <p className="mt-2 text-lg font-semibold text-violet">“{s.situation}”</p>
+            <p className="mt-2 text-lg font-semibold text-violet-ink">“{s.situation}”</p>
             <p className="mt-2 text-mist">{s.today}</p>
             {s.soon && (
               <p className="mt-auto pt-4">

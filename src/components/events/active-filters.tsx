@@ -33,7 +33,7 @@ export function ActiveFilters({
         <button
           type="button"
           onClick={() => onChange({ view: search.view, sort: search.sort })}
-          className="min-h-9 px-2 text-sm font-semibold text-violet hover:underline"
+          className="min-h-9 px-2 text-sm font-semibold text-violet-ink hover:underline"
         >
           Clear all
         </button>

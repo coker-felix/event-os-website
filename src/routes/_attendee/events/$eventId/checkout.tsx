@@ -350,7 +350,7 @@ function CheckoutPage() {
             <Link
               to="/events/$eventId"
               params={{ eventId }}
-              className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-violet hover:underline"
+              className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-violet-ink hover:underline"
             >
               Edit tickets
             </Link>

@@ -8,7 +8,7 @@ export function Audiences() {
         {AUDIENCES.map((a) => (
           <li key={a.id} className="rounded-2xl border border-line bg-card p-5">
             <h3 className="text-lg font-bold">{a.who}</h3>
-            <p className="mt-2 text-lg font-semibold text-violet">“{a.situation}”</p>
+            <p className="mt-2 text-lg font-semibold text-violet-ink">“{a.situation}”</p>
             <p className="mt-2 text-mist">{a.today}</p>
           </li>
         ))}

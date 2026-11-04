@@ -47,7 +47,7 @@ export function CalloutCard({ card }: { card: Card }) {
         )}
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-semibold tracking-[0.14em] text-violet uppercase">
+        <p className="text-xs font-semibold tracking-[0.14em] text-violet-ink uppercase">
           {serviceKindLabel(callout.category)}
         </p>
         <h3 className="mt-1 line-clamp-2 text-lg leading-snug font-bold">
@@ -94,7 +94,7 @@ export function CalloutCard({ card }: { card: Card }) {
             <Link
               to="/events/$eventId"
               params={{ eventId: event.id }}
-              className="inline-flex h-12 items-center rounded-full border border-line px-5 font-semibold hover:border-ink"
+              className="inline-flex h-12 items-center rounded-full border border-line px-5 font-semibold hover:border-foreground"
             >
               View event
             </Link>

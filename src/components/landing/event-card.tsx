@@ -129,7 +129,7 @@ export function EventCard({
         </div>
         <div className="ml-auto text-right text-sm">
           {price && <div className="font-bold">{price === 'Free' ? 'Free' : `From ${price}`}</div>}
-          <div className="font-semibold text-violet group-hover:underline">
+          <div className="font-semibold text-violet-ink group-hover:underline">
             {soldOut ? 'Join waitlist' : 'Get tickets'}
           </div>
         </div>
