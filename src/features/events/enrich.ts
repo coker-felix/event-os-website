@@ -1,3 +1,4 @@
+import { mockOrganizerFor } from '#/features/mocks/discovery'
 import { MOCKS_ENABLED, hash } from '#/lib/mocks'
 import type { Availability } from './availability'
 import type { PublicEvent } from './types'
@@ -27,6 +28,7 @@ export function withEventExtras(
   const h = hash(e.id)
   const place = PLACES[h % PLACES.length]
   const isOnline = e.attendanceType === 'virtual'
+  const host = mockOrganizerFor(e.id)
   const availability: Availability =
     h % 7 === 0 ? 'sold_out' : h % 5 === 0 ? 'low' : 'available'
   return {
@@ -39,5 +41,7 @@ export function withEventExtras(
         ? 'Online'
         : place.venues[(h >>> 3) % place.venues.length]),
     availability: e.availability ?? availability,
+    organizerId: e.organizerId ?? host.id,
+    organizerName: e.organizerName ?? host.name,
   }
 }

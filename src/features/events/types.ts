@@ -28,6 +28,9 @@ export interface PublicEvent {
   city?: string
   /** Coarse level decided by the backend. Absent = unknown. */
   availability?: Availability
+  /** Who hosts the event. Proposed: not returned by the backend yet. */
+  organizerId?: string
+  organizerName?: string
   /** Unix timestamp. Used to sort by newest. */
   createdAt?: number | string
 }
