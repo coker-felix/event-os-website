@@ -21,6 +21,8 @@ export const CTA = {
   /** A filter chip, chosen and not chosen. */
   chipOn: `${BASE} h-9 px-3.5 bg-ink text-white`,
   chipOff: `${BASE} h-9 px-3.5 border border-line bg-card text-foreground hover:border-foreground`,
+  /** A native select next to the chips: same height and radius, form-control text. */
+  select: 'h-9 rounded-sm border border-line bg-card px-3 font-ui text-sm font-medium text-foreground',
   /** Compact, for the navbar. */
   nav: `${BASE} h-9 px-3.5 bg-primary text-primary-foreground hover:bg-primary/90`,
   navQuiet: `${BASE} h-9 px-3 text-muted-foreground hover:text-foreground`,

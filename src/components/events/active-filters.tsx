@@ -23,7 +23,7 @@ export function ActiveFilters({
             type="button"
             onClick={() => onChange(c.remove(search))}
             aria-label={`Remove filter: ${c.label}`}
-            className={`${CTA.chipOn}`}
+            className={CTA.chipOn}
           >
             {c.label}
             <X className="size-4" aria-hidden />

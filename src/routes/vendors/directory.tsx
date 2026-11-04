@@ -151,7 +151,7 @@ function DirectoryPage() {
                     replace: true,
                   })
                 }
-                className={`${CTA.outline}`}
+                className={CTA.outline}
               >
                 Load more vendors
               </button>

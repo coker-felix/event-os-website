@@ -137,7 +137,7 @@ function CheckoutPage() {
     <Link
       to="/events/$eventId"
       params={{ eventId }}
-      className={`${CTA.primary}`}
+      className={CTA.primary}
     >
       Pick your tickets again
     </Link>
@@ -180,7 +180,7 @@ function CheckoutPage() {
               void cartQuery.refetch()
               void pageQuery.refetch()
             }}
-            className={`${CTA.primary}`}
+            className={CTA.primary}
           >
             Try again
           </button>
@@ -202,7 +202,7 @@ function CheckoutPage() {
             <Link
               to="/checkout/return"
               search={{ order: cart.orderId }}
-              className={`${CTA.primary}`}
+              className={CTA.primary}
             >
               See my order
             </Link>

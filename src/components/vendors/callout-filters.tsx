@@ -56,7 +56,7 @@ export function CalloutFilters({
               onChange={(e) =>
                 onChange({ category, city: e.target.value || undefined })
               }
-              className={`${CTA.chipOff}`}
+              className={CTA.chipOff}
             >
               <option value="">All places</option>
               {cities.map((c) => (

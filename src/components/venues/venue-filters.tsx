@@ -5,7 +5,7 @@ import { CTA } from '#/lib/cta'
 
 type Filters = Omit<VenuesSearch, 'page'>
 
-const SELECT = `${CTA.chipOff}`
+const SELECT = CTA.select
 
 /** City, country, minimum capacity and "Bookable only". Menus show only with a real choice. */
 export function VenueFilters({

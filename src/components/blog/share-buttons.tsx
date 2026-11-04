@@ -34,7 +34,7 @@ export function ShareButtons({ title }: { title: string }) {
         <button
           type="button"
           onClick={share}
-          className={`${CTA.outline}`}
+          className={CTA.outline}
         >
           <Share2 className="size-4" aria-hidden />
           Share
@@ -43,7 +43,7 @@ export function ShareButtons({ title }: { title: string }) {
       <button
         type="button"
         onClick={copy}
-        className={`${CTA.outline}`}
+        className={CTA.outline}
       >
         <Link2 className="size-4" aria-hidden />
         Copy link

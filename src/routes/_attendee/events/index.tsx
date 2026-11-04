@@ -169,14 +169,14 @@ function EventsPage() {
                 <button
                   type="button"
                   onClick={() => onChange({ view: search.view })}
-                  className={`${CTA.primary}`}
+                  className={CTA.primary}
                 >
                   Clear all filters
                 </button>
                 <Link
                   to="/"
                   hash="alerts"
-                  className={`${CTA.outline}`}
+                  className={CTA.outline}
                 >
                   Notify me
                 </Link>
@@ -224,7 +224,7 @@ function EventsPage() {
                     onClick={() =>
                       onChange({ ...search, page: (search.page ?? 1) + 1 })
                     }
-                    className={`${CTA.outline}`}
+                    className={CTA.outline}
                   >
                     Load more events
                   </button>

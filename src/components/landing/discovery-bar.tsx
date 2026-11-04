@@ -12,8 +12,7 @@ export interface DiscoveryValue {
   categoryId?: number
 }
 
-const SELECT_CLASS =
-  `${CTA.chipOff}`
+const SELECT_CLASS = CTA.select
 
 /**
  * Search, quick filters, category and city. Filters live in the URL (via
@@ -133,7 +132,7 @@ export function DiscoveryBar({
                     : undefined,
                 })
               }
-              className={`${CTA.chipOff}`}
+              className={CTA.chipOff}
             >
               <option value="">All categories</option>
               {categories.map((c) => (
@@ -151,7 +150,7 @@ export function DiscoveryBar({
               setText('')
               onChange({})
             }}
-            className={`${CTA.ghost}`}
+            className={CTA.ghost}
           >
             <X className="size-4" aria-hidden />
             Clear filters

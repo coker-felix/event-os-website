@@ -51,7 +51,7 @@ export function MobileBuyBar({
           <SheetTrigger asChild>
             <button
               type="button"
-              className={`${CTA.primary}`}
+              className={CTA.primary}
             >
               {state === 'free' ? 'RSVP' : 'Get tickets'}
             </button>

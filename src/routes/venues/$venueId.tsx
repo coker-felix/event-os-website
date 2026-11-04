@@ -184,7 +184,7 @@ function VenuePage() {
                   href={website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${CTA.outline}`}
+                  className={CTA.outline}
                 >
                   <Globe className="size-4" aria-hidden />
                   Website

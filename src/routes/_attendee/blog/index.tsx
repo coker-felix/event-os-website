@@ -129,7 +129,7 @@ function BlogPage() {
                     replace: true,
                   })
                 }
-                className={`${CTA.outline}`}
+                className={CTA.outline}
               >
                 Load more posts
               </button>

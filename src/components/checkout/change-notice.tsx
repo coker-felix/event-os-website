@@ -32,7 +32,7 @@ export function ChangeNotice({
           <button
             type="button"
             onClick={onAcknowledge}
-            className={`${CTA.ink}`}
+            className={CTA.ink}
           >
             Got it
           </button>
@@ -41,7 +41,7 @@ export function ChangeNotice({
           <button
             type="button"
             onClick={onRetry}
-            className={`${CTA.ink}`}
+            className={CTA.ink}
           >
             Try again
           </button>
@@ -49,7 +49,7 @@ export function ChangeNotice({
         {notice.contactLink && (
           <Link
             to="/contact"
-            className={`${CTA.outline}`}
+            className={CTA.outline}
           >
             Contact us
           </Link>

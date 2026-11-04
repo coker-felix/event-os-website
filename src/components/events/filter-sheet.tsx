@@ -37,7 +37,7 @@ export function FilterSheet({
       <SheetTrigger asChild>
         <button
           type="button"
-          className={`${CTA.outline}`}
+          className={CTA.outline}
         >
           <SlidersHorizontal className="size-4" aria-hidden />
           Filters
@@ -73,7 +73,7 @@ export function FilterSheet({
             onClick={() =>
               onChange({ view: search.view, sort: search.sort })
             }
-            className={`${CTA.ghost}`}
+            className={CTA.ghost}
           >
             Clear all
           </button>

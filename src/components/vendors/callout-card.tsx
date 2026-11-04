@@ -95,7 +95,7 @@ export function CalloutCard({ card }: { card: Card }) {
             <Link
               to="/events/$eventId"
               params={{ eventId: event.id }}
-              className={`${CTA.outline}`}
+              className={CTA.outline}
             >
               View event
             </Link>

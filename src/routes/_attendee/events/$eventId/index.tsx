@@ -115,14 +115,14 @@ function EventDetailsPage() {
             <button
               type="button"
               onClick={() => pageQuery.refetch()}
-              className={`${CTA.primary}`}
+              className={CTA.primary}
             >
               Try again
             </button>
           )}
           <Link
             to="/events"
-            className={`${CTA.outline}`}
+            className={CTA.outline}
           >
             Browse all events
           </Link>
