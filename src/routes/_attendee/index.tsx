@@ -5,7 +5,7 @@ import { HeroBanner } from '#/components/landing/hero-banner'
 import { DiscoveryBar } from '#/components/landing/discovery-bar'
 import { EventRow } from '#/components/landing/event-row'
 import { EventCard } from '#/components/landing/event-card'
-import { StatBand } from '#/components/landing/stat-band'
+import { StatGrid } from '#/components/landing/stat-grid'
 import { HowItWorks } from '#/components/landing/how-it-works'
 import { PartnerStrip } from '#/components/landing/partner-strip'
 import { FeaturedPosts } from '#/components/landing/featured-posts'
@@ -276,12 +276,15 @@ function Landing() {
       )}
 
       <Reveal className="mt-12">
-        <StatBand
+        <StatGrid
           heading="Event OS in numbers"
           stats={[
-            { value: stats?.events, label: 'Events to explore' },
-            { value: stats?.categories, label: 'Kinds of events' },
-            { value: stats?.countries, label: 'Countries' },
+            { value: stats?.events, label: 'Events to explore', group: 'Events', to: '/events' },
+            { value: stats?.categories, label: 'Kinds of events', group: 'Events' },
+            { value: stats?.countries, label: 'Countries', group: 'Events' },
+            { value: stats?.vendors, label: 'Vendors listed', group: 'Vendors', to: '/vendors/directory' },
+            { value: stats?.callouts, label: 'Open callouts', group: 'Vendors', to: '/vendors/callouts' },
+            { value: stats?.venues, label: 'Venues listed', group: 'Venues', to: '/venues/directory' },
           ]}
         />
       </Reveal>
@@ -294,22 +297,6 @@ function Landing() {
 
       <Reveal>
         <PartnerStrip />
-      </Reveal>
-
-      <Reveal className="mt-4 grid gap-4 md:grid-cols-2">
-        <StatBand
-          tone="dark"
-          heading="Vendors on Event OS"
-          stats={[
-            { value: stats?.vendors, label: 'Vendors listed' },
-            { value: stats?.callouts, label: 'Open callouts' },
-          ]}
-        />
-        <StatBand
-          tone="dark"
-          heading="Venues on Event OS"
-          stats={[{ value: stats?.venues, label: 'Venues listed' }]}
-        />
       </Reveal>
 
       <Reveal>

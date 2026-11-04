@@ -30,7 +30,7 @@ export function OrganizerSection() {
       </div>
 
       <Reveal>
-        <ul className="mt-12 grid gap-4 md:grid-cols-3">
+        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {PILLARS.map((p) => (
             <li key={p.id} className="rounded-2xl border border-line bg-card p-6">
               <h3 className="text-lg font-bold">{p.title}</h3>
@@ -154,6 +154,7 @@ function DashboardIllustration() {
             ['Vendors', chip('Booked')],
             ['Venue', chip('Reserved')],
             ['Budget', <span key="b" className="block h-2 w-12 rounded-sm bg-primary/40" />],
+            ['Promotion', chip('Featured')],
           ].map(([label, mark]) => (
             <div key={label as string} className="flex items-center justify-between gap-2 text-[11px]">
               <span className="font-medium">{label}</span>

@@ -35,8 +35,12 @@ describe('organizer section copy', () => {
     expect(allCopy().filter((c) => /sign up|register/i.test(c))).toEqual([])
   })
 
-  it('has three pillars: sell and scan, book and coordinate, manage and budget', () => {
-    expect(PILLARS.map((p) => p.id)).toEqual(['sell', 'book', 'manage'])
+  it('has four pillars: sell, book, manage and promote', () => {
+    expect(PILLARS.map((p) => p.id)).toEqual(['sell', 'book', 'manage', 'promote'])
+  })
+
+  it('every persona mentions promoting the event', () => {
+    for (const p of PERSONAS) expect(p.points.join(' ')).toMatch(/promot|advert|featured|alerts/i)
   })
 
   it('has three personas in order, each with at least three points', () => {
