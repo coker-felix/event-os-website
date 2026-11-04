@@ -35,8 +35,8 @@ export const STORAGE = {
     key: 'event-os:preferences',
     kind: 'localStorage',
     category: 'preferences',
-    holds: 'Your chosen city and the events you saved',
-    when: 'After you accept, when you pick a city or save an event',
+    holds: 'Your chosen city, the events you saved and the organizers you follow',
+    when: 'After you accept, when you pick a city, save an event or follow an organizer',
     duration: 'Until you decline, withdraw or clear site data',
   },
   theme: {

@@ -9,8 +9,11 @@ interface PreferencesState {
   city: string | null
   /** Saved event ids. Local only until sign-in can sync them to the API. */
   saved: Array<string>
+  /** Organizer ids followed on this device. */
+  following: Array<string>
   setCity: (city: string | null) => void
   toggleSaved: (eventId: string) => void
+  toggleFollow: (organizerId: string) => void
 }
 
 /**
@@ -23,7 +26,14 @@ export const usePreferences = create<PreferencesState>()(
     (set) => ({
       city: null,
       saved: [],
+      following: [],
       setCity: (city) => set({ city }),
+      toggleFollow: (organizerId) =>
+        set((s) => ({
+          following: s.following.includes(organizerId)
+            ? s.following.filter((id) => id !== organizerId)
+            : [...s.following, organizerId],
+        })),
       toggleSaved: (eventId) =>
         set((s) => ({
           saved: s.saved.includes(eventId)
