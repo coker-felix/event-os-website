@@ -12,7 +12,7 @@ const ROTATE_MS = 6000
 const KICKER: Record<Banner['type'], string> = {
   event: 'Featured event',
   editorial: "Editor's pick",
-  platform: 'Event OS',
+  platform: "What's on",
 }
 
 /**
@@ -109,13 +109,12 @@ export function HeroBanner() {
 function BannerBackground({ banner }: { banner: Banner }) {
   const [failed, setFailed] = useState(false)
   useEffect(() => setFailed(false), [banner.imageUrl])
-  const tint = banner.accentColor ?? '#0f766e'
   return (
     <div className="absolute inset-0 -z-10" aria-hidden>
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(900px 480px at 85% 0%, ${tint}, transparent 65%), radial-gradient(700px 400px at 0% 100%, #ff5a3655, transparent 60%)`,
+          background: 'linear-gradient(120deg, #172a26 0%, #1b4036 62%, #176b5b 100%)',
         }}
       />
       {banner.imageUrl && !failed && (
@@ -127,7 +126,7 @@ function BannerBackground({ banner }: { banner: Banner }) {
         />
       )}
       {/* Keeps text readable over any image. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 to-ink/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/55 to-ink/25" />
     </div>
   )
 }
@@ -137,7 +136,7 @@ function DateStub({ banner }: { banner: Banner }) {
   if (!date) return null
   const p = eventParts(date, banner.eventTimezone)
   return (
-    <div className="rounded-2xl bg-flame px-5 py-3 text-center text-white shadow-lg">
+    <div className="rounded-sm bg-flame px-5 py-3 text-center text-ink shadow-lg">
       <div className="text-xs font-bold uppercase tracking-widest">
         {p.weekday} · {p.month}
       </div>

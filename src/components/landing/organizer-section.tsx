@@ -12,7 +12,7 @@ export function OrganizerHero() {
       aria-label="Run your entire event"
       className="full-bleed animate-in bg-ink text-white duration-700 fade-in slide-in-from-bottom-2"
     >
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2">
+      <div className="mx-auto grid min-h-[26rem] max-w-6xl items-center gap-10 px-4 py-10 sm:py-14 lg:min-h-[min(70vh,36rem)] lg:grid-cols-2">
         <div>
           <p className="text-xs font-semibold tracking-[0.18em] text-white/70 uppercase">
             {HERO.eyebrow}
@@ -42,7 +42,7 @@ export function OrganizerPillars() {
       <h2 className="text-2xl font-bold">Everything in one place</h2>
       <ul className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {PILLARS.map((p) => (
-          <li key={p.id} className="rounded-2xl border border-line bg-card p-6">
+          <li key={p.id} className="lift-card rounded-2xl border border-line bg-card p-6">
             <h3 className="text-lg font-bold">{p.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-mist">{p.body}</p>
           </li>

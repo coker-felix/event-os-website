@@ -30,7 +30,7 @@ export function EventCard({
   const tint =
     event.accentColor && HEX_COLOR.test(event.accentColor)
       ? event.accentColor
-      : '#0f766e'
+      : '#176b5b'
   const price = formatPrice(event.priceFromMinor, event.currency)
   const place = [event.venueName, event.city]
     .filter((x, i, a) => x && a.indexOf(x) === i)
@@ -42,7 +42,7 @@ export function EventCard({
     <article className="group relative flex h-full flex-col rounded-2xl border border-line bg-card transition-shadow focus-within:ring-2 focus-within:ring-violet hover:shadow-lg">
       <div
         className="relative m-2 aspect-[4/3] overflow-hidden rounded-xl"
-        style={{ background: `linear-gradient(135deg, ${tint}, #15122e)` }}
+        style={{ background: `linear-gradient(135deg, ${tint}, #172a26)` }}
       >
         {event.heroImageUrl && !imageFailed && (
           <img
@@ -50,7 +50,7 @@ export function EventCard({
             alt=""
             loading="lazy"
             onError={() => setImageFailed(true)}
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="lift-media size-full object-cover"
           />
         )}
         {categoryName && (
@@ -60,7 +60,7 @@ export function EventCard({
         )}
         {badge && (
           <span
-            className={`absolute bottom-2 left-2 rounded-full px-2.5 py-1 text-xs font-semibold text-white ${soldOut ? 'bg-ink' : 'bg-flame'}`}
+            className={`absolute bottom-2 left-2 rounded-full px-2.5 py-1 text-xs font-semibold ${soldOut ? 'bg-ink text-white' : 'bg-flame text-ink'}`}
           >
             {badge}
           </span>
@@ -116,7 +116,7 @@ export function EventCard({
 
       <div className="flex items-center gap-3 px-4 py-3">
         {parts && (
-          <div className="flex size-12 shrink-0 flex-col items-center justify-center rounded-lg bg-flame text-white">
+          <div className="flex size-12 shrink-0 flex-col items-center justify-center rounded-sm bg-flame text-ink">
             <span className="text-[0.65rem] leading-none font-bold tracking-wider uppercase">
               {parts.month}
             </span>

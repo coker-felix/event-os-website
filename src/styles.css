@@ -1,6 +1,5 @@
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/figtree';
-@import '@fontsource-variable/inter';
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
@@ -9,60 +8,77 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --ink: #15122e;
-  --paper: #f6f5fb;
-  --violet: #0f766e;
-  /* Primary for small text: the brand teal in light, lifted in dark. */
-  --violet-ink: #0f766e;
-  --flame: #ff5a36;
-  --line: #e2dff0;
-  --mist: #6b6784;
+  --ink: #172a26;
+  --paper: #f6f7f3;
+  --rail: #176b5b;
+  --rail-ink: #125548;
+  --marigold: #e8b34b;
+  --line: #dce4df;
+  --mist: #62716d;
+  --success: #247a52;
+  --warning: #a96512;
+  --error: #b83d36;
+  --info: #286b83;
+
+  /* Compatibility aliases used by existing utility classes. */
+  --violet: var(--rail);
+  --violet-ink: var(--rail-ink);
+  --flame: var(--marigold);
 
   --background: var(--paper);
-  --foreground: #15122e;
+  --foreground: var(--ink);
   --card: #ffffff;
   --card-foreground: var(--foreground);
   --popover: #ffffff;
   --popover-foreground: var(--foreground);
   --primary: var(--violet);
   --primary-foreground: #ffffff;
-  --secondary: #ecebf7;
+  --secondary: #eaf0ec;
   --secondary-foreground: var(--foreground);
-  --muted: #ecebf7;
+  --muted: #eaf0ec;
   --muted-foreground: var(--mist);
-  --accent: #ecebf7;
+  --accent: #eaf0ec;
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
   --border: var(--line);
   --input: var(--line);
-  --ring: var(--violet);
-  --radius: 0.75rem;
+  --ring: var(--rail);
+  --radius: 0.625rem;
 }
 
 .dark {
   color-scheme: dark;
-  --paper: #0d0b1f;
-  --ink: #1f1b49; /* dark panels, lifted so they show on the dark page */
-  --line: #2c2760;
-  --mist: #a9a4cf;
-  --violet-ink: #5eead4;
+  --paper: #111b18;
+  --ink: #1c2b26;
+  --rail: #56b39b;
+  --rail-ink: #83d0ba;
+  --marigold: #efc76e;
+  --line: #30413a;
+  --mist: #a7b5ae;
 
-  --foreground: #f1effb;
-  --card: #17143a;
-  --popover: #17143a;
-  --secondary: #221e4d;
-  --muted: #221e4d;
-  --accent: #221e4d;
+  --foreground: #edf3ef;
+  --card: #1b2823;
+  --popover: #1b2823;
+  --secondary: #26352e;
+  --muted: #26352e;
+  --accent: #26352e;
 }
 
 @theme inline {
   --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-ui: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui,
     sans-serif;
   --color-ink: var(--ink);
   --color-paper: var(--paper);
+  --color-rail: var(--rail);
+  --color-rail-ink: var(--rail-ink);
+  --color-marigold: var(--marigold);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
   --color-violet: var(--violet);
   --color-violet-ink: var(--violet-ink);
   --color-flame: var(--flame);
@@ -108,6 +124,17 @@
     /* 100vw includes the scrollbar; clip the sliver instead of scrolling. */
     overflow-x: clip;
   }
+  ::selection {
+    color: #ffffff;
+    background: var(--rail);
+  }
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
   h1,
   h2,
   h3 {
@@ -123,6 +150,49 @@
 /* Ticket stub: the card body and its stub are separated by a perforated
    tear line with a half-circle notch cut out of each side. */
 @layer components {
+  .lift-card {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+  .lift-media {
+    transition: transform 220ms ease-out;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .lift-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--rail) 32%, var(--line));
+      box-shadow: 0 8px 20px rgb(23 42 38 / 9%);
+    }
+    .lift-card:focus-visible {
+      border-color: color-mix(in srgb, var(--rail) 32%, var(--line));
+      box-shadow: 0 8px 20px rgb(23 42 38 / 9%);
+    }
+    .group:hover .motion-arrow {
+      transform: translateX(4px);
+    }
+    .group:hover .lift-media {
+      transform: scale(1.025);
+    }
+  }
+  .motion-arrow {
+    display: inline-block;
+    transition: transform 180ms ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lift-card:hover,
+    .lift-card:focus-visible {
+      transform: none;
+    }
+    .motion-arrow {
+      transform: none !important;
+    }
+    .lift-media {
+      transform: none !important;
+    }
+  }
+
   /* Break a child out of the centred page column to the full window width,
      and up over the page's top padding so it meets the header. */
   .full-bleed {

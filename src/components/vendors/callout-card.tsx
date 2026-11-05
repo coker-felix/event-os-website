@@ -29,13 +29,13 @@ export function CalloutCard({ card }: { card: Card }) {
   const tint =
     event?.accentColor && HEX_COLOR.test(event.accentColor)
       ? event.accentColor
-      : '#0f766e'
+      : '#176b5b'
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card">
       <div
         className="aspect-[16/9]"
-        style={{ background: `linear-gradient(135deg, ${tint}, #15122e)` }}
+        style={{ background: `linear-gradient(135deg, ${tint}, #172a26)` }}
       >
         {event?.heroImageUrl && !imageFailed && (
           <img

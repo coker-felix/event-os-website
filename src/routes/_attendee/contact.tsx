@@ -16,7 +16,7 @@ export const Route = createFileRoute('/_attendee/contact')({
   },
   head: () => ({
     meta: [
-      { title: 'Contact us | Event OS' },
+      { title: 'Contact us | EventRail' },
       {
         name: 'description',
         content:
@@ -46,28 +46,36 @@ function ContactPage() {
 
   function chooseOrganizer() {
     setTopic('organizer')
-    formRef.current?.scrollIntoView({ behavior: 'smooth' })
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 'auto'
+      : 'smooth'
+    formRef.current?.scrollIntoView({ behavior })
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Contact us</h1>
-      <p className="mt-1 text-mist">We usually reply within one working day.</p>
+    <div className="mx-auto max-w-5xl">
+      <header className="mb-8 border-b border-line pb-7 sm:mb-10 sm:pb-9">
+        <p className="text-xs font-semibold tracking-[0.16em] text-violet-ink uppercase">
+          EventRail support
+        </p>
+        <h1 className="mt-2 max-w-2xl text-4xl leading-[1.04] font-extrabold sm:text-5xl">
+          Let’s get this sorted.
+        </h1>
+        <p className="mt-3 max-w-xl text-lg text-mist">
+          Tell us what happened. We usually reply within one working day.
+        </p>
+      </header>
 
-      <div className="mt-6">
-        <QuickAnswers />
+      <div className="grid items-start gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:gap-7">
+        <aside className="space-y-5">
+          <ReachUs config={config.data} status={status} variant="dark" />
+          <NotAnAttendee onOrganizer={chooseOrganizer} />
+        </aside>
+        <ContactForm topic={topic} onTopicChange={setTopic} formRef={formRef} />
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <div className="order-2 lg:order-none lg:row-span-2">
-          <ContactForm topic={topic} onTopicChange={setTopic} formRef={formRef} />
-        </div>
-        <div className="order-1 lg:order-none">
-          <ReachUs config={config.data} status={status} />
-        </div>
-        <div className="order-3 lg:order-none">
-          <NotAnAttendee onOrganizer={chooseOrganizer} />
-        </div>
+      <div className="mt-10 border-t border-line pt-7 sm:mt-12 sm:pt-9">
+        <QuickAnswers />
       </div>
     </div>
   )

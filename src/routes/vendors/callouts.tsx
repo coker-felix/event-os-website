@@ -25,7 +25,7 @@ export const Route = createFileRoute('/vendors/callouts')({
   },
   head: () => ({
     meta: [
-      { title: 'Open callouts | Event OS for Vendors' },
+      { title: 'Open callouts | EventRail for Vendors' },
       {
         name: 'description',
         content:

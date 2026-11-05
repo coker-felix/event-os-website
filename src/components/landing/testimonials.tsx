@@ -11,7 +11,7 @@ const HEADING: Record<TestimonialAudience, string> = {
 }
 
 /**
- * Quotes from people who work with Event OS. The list is static
+ * Quotes from people who work with EventRail. The list is static
  * (`src/content/testimonials.ts`); with none for this audience the section is
  * hidden. In dev, invented placeholders stand in so the design can be seen.
  */

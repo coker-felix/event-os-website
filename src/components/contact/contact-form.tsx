@@ -12,7 +12,7 @@ import { CTA } from '#/lib/cta'
 type Status = 'idle' | 'submitting' | 'sent' | 'error'
 type Errors = Partial<Record<'topic' | 'name' | 'contact' | 'message', string>>
 
-const FIELD = 'mt-1 w-full rounded-xl border border-line bg-card px-4 text-base'
+const FIELD = 'mt-1 w-full rounded-md border border-line bg-background px-4 text-base transition-colors focus:border-primary'
 
 export function ContactForm({
   topic,
@@ -59,7 +59,7 @@ export function ContactForm({
       <section
         ref={formRef}
         aria-label="Message sent"
-        className="rounded-2xl border border-line bg-card p-5"
+        className="rounded-2xl border border-line bg-card p-5 sm:p-7"
       >
         <h2 className="text-lg font-bold">Message sent</h2>
         <p className="mt-2" role="status">
@@ -94,9 +94,11 @@ export function ContactForm({
     <section
       ref={formRef}
       aria-label="Send us a message"
-      className="rounded-2xl border border-line bg-card p-5"
+      className="rounded-2xl border border-line bg-card p-5 sm:p-7"
     >
-      <h2 className="text-lg font-bold">Send us a message</h2>
+      <p className="text-xs font-semibold tracking-[0.14em] text-violet-ink uppercase">Message support</p>
+      <h2 className="mt-1 text-2xl font-bold">Send us a message</h2>
+      <p className="mt-1 text-sm text-mist">A few details help us get you to the right person.</p>
       <form onSubmit={onSubmit} noValidate className="mt-4 space-y-4">
         <label className="block text-sm font-semibold">
           I'm contacting about

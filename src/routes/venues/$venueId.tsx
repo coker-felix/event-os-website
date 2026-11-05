@@ -42,8 +42,8 @@ export const Route = createFileRoute('/venues/$venueId')({
     meta: [
       {
         title: loaderData
-          ? `${loaderData.name} | Event OS for Venues`
-          : 'Venue | Event OS for Venues',
+          ? `${loaderData.name} | EventRail for Venues`
+          : 'Venue | EventRail for Venues',
       },
       ...(loaderData
         ? [

@@ -12,7 +12,7 @@ export function mockBanners(nowSec = Math.floor(Date.now() / 1000)): Array<Banne
       href: '/events',
       eventStartsAt: nowSec + 2 * 86400 + 19 * 3600,
       eventTimezone: 'Africa/Lagos',
-      accentColor: '#ff5a36',
+      accentColor: '#e8b34b',
     },
     {
       id: 'mock-editorial',

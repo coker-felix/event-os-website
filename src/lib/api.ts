@@ -37,7 +37,7 @@ async function readBody(res: Response): Promise<unknown> {
   }
 }
 
-/** Call the Event OS API. Resolves with the parsed body, or `null` for an empty one. */
+/** Call the EventRail API. Resolves with the parsed body, or `null` for an empty one. */
 export async function apiRequest<T = null>(
   method: Method,
   path: string,
@@ -60,12 +60,12 @@ export async function apiRequest<T = null>(
   return (await readBody(res)) as T
 }
 
-/** GET a JSON resource from the Event OS API. */
+/** GET a JSON resource from the EventRail API. */
 export function apiGet<T>(path: string, opts: ApiFetchOptions = {}): Promise<T> {
   return apiRequest<T>('GET', path, opts)
 }
 
-/** POST a JSON body to the Event OS API. */
+/** POST a JSON body to the EventRail API. */
 export function apiPost<T = null>(
   path: string,
   body: unknown,

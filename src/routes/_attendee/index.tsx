@@ -35,6 +35,7 @@ import type { QuickFilter } from '#/features/events/filters'
 import { OrganizersTeaser } from '#/components/landing/organizers-teaser'
 import { Reveal } from '#/components/motion/reveal'
 import { CTA } from '#/lib/cta'
+import { ProductShowcase } from '#/components/landing/product-showcase'
 
 const MAX_CATEGORY_ROWS = 3
 const MAX_RESULTS = 24
@@ -54,7 +55,7 @@ export const Route = createFileRoute('/_attendee/')({
   },
   head: () => ({
     meta: [
-      { title: "See what's on near you | Event OS" },
+      { title: "See what's on near you | EventRail" },
       {
         name: 'description',
         content: 'Browse upcoming events and get your tickets in a few taps.',
@@ -308,10 +309,13 @@ function Landing() {
       <Reveal>
         <ReliveRow events={relive ?? []} />
       </Reveal>
+      <Reveal>
+        <ProductShowcase product="attendees" />
+      </Reveal>
 
       <Reveal className="mt-12">
         <StatGrid
-          heading="Event OS in numbers"
+          heading="EventRail in numbers"
           stats={[
             { value: stats?.events, label: 'Events to explore', group: 'Events', to: '/events' },
             { value: stats?.categories, label: 'Kinds of events', group: 'Events' },

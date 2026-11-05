@@ -13,6 +13,7 @@ import { HERO } from '#/content/vendor-landing'
 import { eventsQuery } from '#/features/events/queries'
 import { calloutsQuery } from '#/features/vendors/queries'
 import { Reveal } from '#/components/motion/reveal'
+import { ProductShowcase } from '#/components/landing/product-showcase'
 
 export const Route = createFileRoute('/vendors/')({
   // Warm the cache on the server. A failing API must never fail the page.
@@ -24,7 +25,7 @@ export const Route = createFileRoute('/vendors/')({
   },
   head: () => ({
     meta: [
-      { title: `${HERO.headline} | Event OS for Vendors` },
+      { title: `${HERO.headline} | EventRail for Vendors` },
       { name: 'description', content: HERO.subline },
     ],
     scripts: [
@@ -46,6 +47,9 @@ function VendorLanding() {
       </Reveal>
       <Reveal>
         <Benefits />
+      </Reveal>
+      <Reveal>
+        <ProductShowcase product="vendors" />
       </Reveal>
       <Reveal>
         <ComingSoon />

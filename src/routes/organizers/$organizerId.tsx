@@ -33,7 +33,7 @@ export const Route = createFileRoute('/organizers/$organizerId')({
   notFoundComponent: OrganizerNotFound,
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.name} | Event OS` : 'Organizer | Event OS' },
+      { title: loaderData ? `${loaderData.name} | EventRail` : 'Organizer | EventRail' },
       ...(loaderData
         ? [
             { name: 'description', content: loaderData.description },

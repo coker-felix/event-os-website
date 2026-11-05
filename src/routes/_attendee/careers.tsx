@@ -9,8 +9,8 @@ import { CTA } from '#/lib/cta'
 export const Route = createFileRoute('/_attendee/careers')({
   head: () => ({
     meta: [
-      { title: 'Careers | Event OS' },
-      { name: 'description', content: 'Open roles at Event OS.' },
+      { title: 'Careers | EventRail' },
+      { name: 'description', content: 'Open roles at EventRail.' },
     ],
   }),
   component: CareersPage,

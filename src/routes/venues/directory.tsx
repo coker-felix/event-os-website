@@ -28,7 +28,7 @@ export const Route = createFileRoute('/venues/directory')({
   },
   head: () => ({
     meta: [
-      { title: 'Venue directory | Event OS for Venues' },
+      { title: 'Venue directory | EventRail for Venues' },
       {
         name: 'description',
         content:

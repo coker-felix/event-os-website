@@ -11,7 +11,7 @@ export function CompanyNav() {
   return (
     <nav aria-label="Company" className="mb-8 flex flex-wrap gap-1 border-b border-line pb-3">
       <Link to="/about" activeOptions={{ exact: true }} className={LINK} activeProps={{ className: 'text-foreground bg-secondary' }}>
-        About
+        About Us
       </Link>
       {hasTeam && (
         <Link to="/about/team" className={LINK} activeProps={{ className: 'text-foreground bg-secondary' }}>

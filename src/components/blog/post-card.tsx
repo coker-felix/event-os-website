@@ -28,7 +28,7 @@ export function PostCard({ post }: { post: BlogPost }) {
     <Link
       to="/blog/$slug"
       params={{ slug: post.slug }}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card transition-shadow hover:shadow-lg focus-visible:shadow-lg"
+      className="lift-card group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card focus-visible:shadow-lg"
     >
       <div className="aspect-[16/9] overflow-hidden bg-gradient-to-br from-violet to-ink">
         {post.coverImageUrl && !imageFailed && (
@@ -37,7 +37,7 @@ export function PostCard({ post }: { post: BlogPost }) {
             alt=""
             loading="lazy"
             onError={() => setImageFailed(true)}
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="lift-media size-full object-cover"
           />
         )}
       </div>

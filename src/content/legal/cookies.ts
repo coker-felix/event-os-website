@@ -22,7 +22,7 @@ export const COOKIES: LegalDoc = {
   slug: 'cookies',
   title: 'Cookies and browser storage',
   intro:
-    'This page lists everything Event OS keeps in your browser. There is no tracking and no advertising: nothing here follows you across sites or builds a profile of you.',
+    'This page lists everything EventRail keeps in your browser. There is no tracking and no advertising: nothing here follows you across sites or builds a profile of you.',
   sections: [
     section('necessary', 'all', 'Necessary', [
       'These keep the site working and need no consent.',

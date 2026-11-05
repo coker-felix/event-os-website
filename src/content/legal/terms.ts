@@ -8,14 +8,14 @@ export const TERMS: LegalDoc = {
   slug: 'terms',
   title: 'Terms of use',
   intro:
-    'These terms explain how you may use Event OS to find events, buy tickets, offer services, list venues and run events. They are written for four groups: attendees, vendors, event organizers and venue owners. Pick yours, or read all of it.',
+    'These terms explain how you may use EventRail to find events, buy tickets, offer services, list venues and run events. They are written for four groups: attendees, vendors, event organizers and venue owners. Pick yours, or read all of it.',
   sections: [
     {
       id: 'who-we-are',
       audience: 'all',
       heading: 'Who we are',
       body: [
-        'Event OS is run by [To confirm: company name and registered address].',
+        'EventRail is run by [To confirm: company name and registered address].',
         'By using the site you agree to these terms. If you do not agree, please do not use it.',
       ],
     },
@@ -50,7 +50,7 @@ export const TERMS: LegalDoc = {
       audience: 'attendees',
       heading: 'Refunds and cancellations',
       body: [
-        '[To confirm: refund and cancellation rules, and who decides them: the organizer or Event OS]',
+        '[To confirm: refund and cancellation rules, and who decides them: the organizer or EventRail]',
         'If you have a problem with an order, use the contact page and tell us the order and the contact details you used.',
       ],
     },
@@ -126,7 +126,7 @@ export const TERMS: LegalDoc = {
       heading: 'Our responsibility',
       body: [
         '[To confirm: liability wording, to be written by your lawyer]',
-        'Events, vendors and venues are run by the people who list them, not by Event OS.',
+        'Events, vendors and venues are run by the people who list them, not by EventRail.',
       ],
     },
     {

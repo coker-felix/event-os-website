@@ -13,13 +13,55 @@ export const COMPANY: {
  * superlatives and claims the site cannot back up.
  */
 export const ABOUT = {
-  eyebrow: 'About Event OS',
-  headline: 'Everything events run on, in one place',
+  eyebrow: 'About EventRail',
+  headline: 'Events run on people.',
+  headlineContinuation: 'EventRail connects the work.',
   intro:
-    'Event OS helps people find events worth going to, and helps the people who run them.',
+    'EventRail brings event discovery, ticketing and operations into one system—from the first ticket sale to the work of opening the doors.',
   why: [
-    'Running an event means juggling tickets, venues, vendors and promotion across separate tools. We put them in one place, so organizers spend less time coordinating and more time on the night.',
-    'Vendors and venues are verified before they are paid, and every ticket can be checked at the gate. People who just want something to do this weekend get one place to look.',
+    'Event work gets split across ticketing, venue bookings, vendors and promotion. EventRail brings those jobs into one system so organizers can see the pieces around an event together.',
+    'Attendees can discover events and buy tickets. Vendors and venues have routes to get found and booked. Organizers can manage the work before event day.',
+  ],
+  channels: [
+    'Web',
+    'USSD',
+    'WhatsApp',
+    'Telegram',
+    'API',
+    'Mobile',
+    'White-label portals',
+  ],
+  journey: [
+    {
+      stage: 'Discover',
+      body: 'Attendees find an event and choose a ticket.',
+    },
+    {
+      stage: 'Coordinate',
+      body: 'Organizers bring tickets, venues and vendors into the plan.',
+    },
+    {
+      stage: 'Reach',
+      body: 'Share the event through the channels your audience already uses.',
+    },
+    {
+      stage: 'Welcome',
+      body: 'Bring the ticket and the event day together at the door.',
+    },
+  ],
+  principles: [
+    {
+      title: 'One event, shared context',
+      body: 'Ticketing, venue work and vendor coordination belong to the same event, not separate tabs and spreadsheets.',
+    },
+    {
+      title: 'Reach people where they are',
+      body: 'Web, mobile, USSD, messaging, API and white-label portals give events more than one way to reach people.',
+    },
+    {
+      title: 'Make every handoff clearer',
+      body: 'The people planning, promoting and attending an event need useful information at the moment they need it.',
+    },
   ],
   products: [
     {
@@ -46,13 +88,16 @@ export const ABOUT = {
 }
 
 /**
- * The people behind Event OS. Add real team members here; the Team page and
+ * The people behind EventRail. Add real team members here; the Team page and
  * its footer link appear when there is at least one. Only list people who have
  * agreed to be shown.
  *
  *   { name: 'Ama Mensah', role: 'Co-founder', bio: 'One or two sentences.', photo: '/team/ama.jpg', link: 'https://www.linkedin.com/in/…' },
  */
-export const TEAM: Array<TeamMember> = []
+export const TEAM: Array<TeamMember> = [
+  { name: 'Felix Coker', role: 'Co-founder' },
+  { name: 'Bright Dzotor', role: 'Co-founder' },
+]
 
 /**
  * Open roles. The Careers page and its footer link appear when there is at

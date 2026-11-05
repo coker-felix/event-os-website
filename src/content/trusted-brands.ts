@@ -1,7 +1,7 @@
 import type { TrustedBrand } from '#/features/trusted/visible'
 
 /**
- * Brands, organizers and sponsors Event OS has worked with. Add real ones here;
+ * Brands, organizers and sponsors EventRail has worked with. Add real ones here;
  * the "Trusted by" section on the landing page shows them and stays hidden
  * while this list is empty. Only list partners who have agreed to be shown.
  *

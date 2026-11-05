@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowLeft, TicketCheck } from 'lucide-react'
@@ -9,11 +9,11 @@ import { ApiError, apiPost } from '#/lib/api'
 export const Route = createFileRoute('/_attendee/tickets/help')({
   head: () => ({
     meta: [
-      { title: 'Ticket Self Help | Event OS' },
+      { title: 'Ticket Self Help | EventRail' },
       {
         name: 'description',
         content:
-          'Find tickets using the email address or phone number from checkout.',
+          'Learn where to find tickets bought online, through USSD or messaging, then securely look them up if needed.',
       },
     ],
   }),
@@ -33,6 +33,49 @@ type TicketList = { tickets: Ticket[] }
 const FIELD =
   'mt-1 block h-11 w-full rounded-sm border border-line bg-card px-3 text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
 const LABEL = 'text-sm font-medium'
+const CHANNEL_GUIDES = [
+  {
+    id: 'website',
+    title: 'Website',
+    note: 'Bought on EventRail or an event website',
+    steps: [
+      'Check the payment confirmation page first; it may link directly to your tickets.',
+      'Look in the email or SMS inbox for the contact you entered at checkout.',
+      'Search for the event name or “EventRail”, and check spam or promotions folders too.',
+    ],
+  },
+  {
+    id: 'ussd',
+    title: 'USSD',
+    note: 'Bought from a phone menu',
+    steps: [
+      'Check the final USSD confirmation and SMS messages on the phone you used to pay.',
+      'If the message points to a ticket retrieval option, return to the same USSD service and follow it.',
+      'Keep the payment reference or order ID from the confirmation nearby.',
+    ],
+  },
+  {
+    id: 'messaging',
+    title: 'WhatsApp or Telegram',
+    note: 'Bought in a messaging conversation',
+    steps: [
+      'Open the same account or phone number you used during purchase.',
+      'Search the conversation for the event name, “ticket” or “order”. Check the purchase confirmation for a ticket or secure link.',
+      'If you bought through an organizer’s chat, check that conversation as well.',
+    ],
+  },
+  {
+    id: 'partner',
+    title: 'Partner or box office',
+    note: 'Bought from an organizer, agent or venue',
+    steps: [
+      'Check the receipt, confirmation message or email from the seller.',
+      'Contact that seller with your order ID if the receipt does not include a ticket.',
+      'Use the same phone number or email you gave them when purchasing.',
+    ],
+  },
+] as const
+type ChannelGuideId = (typeof CHANNEL_GUIDES)[number]['id']
 
 function TicketCard({ ticket }: { ticket: Ticket }) {
   const event = useQuery({
@@ -73,6 +116,8 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
 }
 
 function TicketHelpPage() {
+  const [activeChannel, setActiveChannel] = useState<ChannelGuideId>('website')
+  const channelTabRefs = useRef<Array<HTMLButtonElement | null>>([])
   const [method, setMethod] = useState<ContactMethod>('email')
   const [contact, setContact] = useState('')
   const [code, setCode] = useState('')
@@ -81,6 +126,25 @@ function TicketHelpPage() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
+  const selectedGuide =
+    CHANNEL_GUIDES.find((guide) => guide.id === activeChannel) ?? CHANNEL_GUIDES[0]
+
+  function onChannelTabKeyDown(
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    let nextIndex: number | undefined
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % CHANNEL_GUIDES.length
+    if (event.key === 'ArrowLeft') {
+      nextIndex = (index - 1 + CHANNEL_GUIDES.length) % CHANNEL_GUIDES.length
+    }
+    if (event.key === 'Home') nextIndex = 0
+    if (event.key === 'End') nextIndex = CHANNEL_GUIDES.length - 1
+    if (nextIndex === undefined) return
+    event.preventDefault()
+    setActiveChannel(CHANNEL_GUIDES[nextIndex].id)
+    channelTabRefs.current[nextIndex]?.focus()
+  }
 
   const credentials = () =>
     method === 'email'
@@ -159,14 +223,89 @@ function TicketHelpPage() {
   }
 
   return (
-    <main className="mx-auto max-w-3xl">
-      <div className="mx-auto max-w-xl rounded-3xl border border-line bg-card p-6 sm:p-8">
+    <main className="mx-auto max-w-4xl">
+      <header className="mb-7 max-w-2xl">
+        <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
+          Ticket help desk
+        </p>
+        <h1 className="mt-2 text-3xl leading-tight font-bold tracking-tight sm:text-4xl">
+          Find tickets from the channel you used.
+        </h1>
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+          Start with the place you bought them. Most tickets are sent to the same
+          phone number or email you shared during checkout.
+        </p>
+      </header>
+
+      <section aria-labelledby="ticket-channel-guide" className="mb-8">
+        <h2 id="ticket-channel-guide" className="text-xl font-bold">
+          Where to look
+        </h2>
+        <div
+          role="tablist"
+          aria-label="Choose where you bought your tickets"
+          className="mt-4 flex gap-2 overflow-x-auto pb-2"
+        >
+          {CHANNEL_GUIDES.map((guide, index) => (
+            <button
+              key={guide.id}
+              ref={(element) => {
+                channelTabRefs.current[index] = element
+              }}
+              id={`ticket-channel-tab-${guide.id}`}
+              type="button"
+              role="tab"
+              aria-selected={activeChannel === guide.id}
+              aria-controls="ticket-channel-panel"
+              tabIndex={activeChannel === guide.id ? 0 : -1}
+              onClick={() => setActiveChannel(guide.id)}
+              onKeyDown={(event) => onChannelTabKeyDown(event, index)}
+              className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${activeChannel === guide.id ? 'bg-primary text-primary-foreground' : 'border border-line bg-card text-muted-foreground hover:text-foreground'}`}
+            >
+              {guide.title}
+            </button>
+          ))}
+        </div>
+        <div
+          id="ticket-channel-panel"
+          role="tabpanel"
+          aria-labelledby={`ticket-channel-tab-${selectedGuide.id}`}
+          tabIndex={0}
+          className="rounded-2xl border border-line bg-card p-5 sm:p-6"
+        >
+          <h3 className="text-lg font-bold">{selectedGuide.title}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {selectedGuide.note}
+          </p>
+          <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-foreground">
+            {selectedGuide.steps.map((item) => (
+              <li key={item} className="flex gap-2.5">
+                <span
+                  aria-hidden
+                  className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Still can’t find your ticket? Use the secure lookup below. We’ll verify
+          your phone number or email before showing any tickets.
+        </p>
+      </section>
+
+      <div
+        id="ticket-lookup"
+        className="mx-auto max-w-xl rounded-3xl border border-line bg-card p-6 sm:p-8"
+      >
         <div className="flex items-center gap-3">
           <TicketCheck className="size-8 text-primary" aria-hidden />
           <div>
-            <h1 className="text-2xl font-bold">Find your tickets</h1>
+            <h2 className="text-2xl font-bold">Secure ticket lookup</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              We’ll send a one-time code to confirm it’s you.
+              We’ll send a one-time code to confirm it’s you, then show tickets
+              linked to that contact.
             </p>
           </div>
         </div>

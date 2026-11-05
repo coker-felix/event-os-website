@@ -26,11 +26,11 @@ export const Route = createFileRoute('/vendors/directory')({
   },
   head: () => ({
     meta: [
-      { title: 'Vendor directory | Event OS for Vendors' },
+      { title: 'Vendor directory | EventRail for Vendors' },
       {
         name: 'description',
         content:
-          'Browse vendors on Event OS: caterers, sound, staging and more. Verified and partnered vendors are marked.',
+          'Browse vendors on EventRail: caterers, sound, staging and more. Verified and partnered vendors are marked.',
       },
     ],
   }),
@@ -74,7 +74,7 @@ function DirectoryPage() {
     <div>
       <h1 className="text-3xl font-bold">Vendor directory</h1>
       <p className="mt-1 max-w-2xl text-mist">
-        Vendors on Event OS. Verified and partnered vendors are marked.
+        Vendors on EventRail. Verified and partnered vendors are marked.
       </p>
 
       <div className="mt-6">

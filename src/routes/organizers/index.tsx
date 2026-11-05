@@ -9,13 +9,14 @@ import {
 import { Testimonials } from '#/components/landing/testimonials'
 import { TrustedBy } from '#/components/landing/trusted-by'
 import { Reveal } from '#/components/motion/reveal'
+import { ProductShowcase } from '#/components/landing/product-showcase'
 import { HowToStart } from '#/components/vendors/how-to-start'
 import { HERO, HOW_TO_START, ORGANIZER_FAQS } from '#/content/organizer-landing'
 
 export const Route = createFileRoute('/organizers/')({
   head: () => ({
     meta: [
-      { title: `${HERO.headline} | Event OS for Organizers` },
+      { title: `${HERO.headline} | EventRail for Organizers` },
       { name: 'description', content: HERO.subline },
     ],
     scripts: [
@@ -37,6 +38,9 @@ function OrganizersLanding() {
       </Reveal>
       <Reveal>
         <OrganizerPersonas />
+      </Reveal>
+      <Reveal>
+        <ProductShowcase product="organizers" />
       </Reveal>
       <Reveal>
         <div id="start">

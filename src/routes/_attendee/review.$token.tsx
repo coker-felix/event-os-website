@@ -20,13 +20,13 @@ export const Route = createFileRoute('/_attendee/review/$token')({
         Use the link in the message we sent after the event.
       </p>
       <Link to="/" className={`${CTA.primary} mt-4`}>
-        Back to Event OS
+        Back to EventRail
       </Link>
     </div>
   ),
   head: () => ({
     meta: [
-      { title: 'Leave a review | Event OS' },
+      { title: 'Leave a review | EventRail' },
       // A private link: keep it out of search results.
       { name: 'robots', content: 'noindex' },
     ],

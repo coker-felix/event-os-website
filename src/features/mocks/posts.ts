@@ -17,7 +17,7 @@ export function mockPosts(nowSec = Math.floor(Date.now() / 1000)): Array<BlogPos
     title,
     excerpt,
     category,
-    author: 'Event OS team',
+    author: 'EventRail team',
     publishedAt: nowSec - daysAgo * day,
     readMinutes,
   })
@@ -28,7 +28,7 @@ export function mockPosts(nowSec = Math.floor(Date.now() / 1000)): Array<BlogPos
     post(4, 'what-to-bring-to-an-outdoor-event', 'What to bring to an outdoor event', 'A short list that saves a long walk back to the car.', 'Guides', 26, 3),
     post(5, 'pricing-your-stall-at-a-festival', 'Pricing your stall at a festival', 'How to price for a crowd that is there to browse, not shop.', 'Vendors', 33, 7),
     post(6, 'making-your-venue-easy-to-find', 'Making your venue easy to find', 'Photos, directions and details organizers look for first.', 'Venues', 41, 4),
-    post(7, 'what-is-new-this-month', "What's new on Event OS this month", 'Filters, saved events and a faster checkout.', 'News', 48, 2),
+    post(7, 'what-is-new-this-month', "What's new on EventRail this month", 'Filters, saved events and a faster checkout.', 'News', 48, 2),
     post(8, 'getting-your-money-back-when-plans-change', 'When plans change: refunds and transfers', 'How refunds work and who to ask.', 'Guides', 55, 5),
     post(9, 'a-year-of-events-in-numbers', 'A year of events, in numbers', 'What people went to, and when they booked.', 'News', 62, 6),
   ]

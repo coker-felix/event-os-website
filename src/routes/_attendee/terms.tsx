@@ -7,8 +7,8 @@ export const Route = createFileRoute('/_attendee/terms')({
   validateSearch: validateLegalSearch,
   head: () => ({
     meta: [
-      { title: 'Terms of use | Event OS' },
-      { name: 'description', content: 'The rules for attendees, vendors, event organizers and venue owners using Event OS.' },
+      { title: 'Terms of use | EventRail' },
+      { name: 'description', content: 'The rules for attendees, vendors, event organizers and venue owners using EventRail.' },
     ],
   }),
   component: Page,

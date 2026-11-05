@@ -7,8 +7,8 @@ export const Route = createFileRoute('/_attendee/cookies')({
   validateSearch: validateLegalSearch,
   head: () => ({
     meta: [
-      { title: 'Cookies and browser storage | Event OS' },
-      { name: 'description', content: 'Everything Event OS keeps in your browser, why, and how to remove it.' },
+      { title: 'Cookies and browser storage | EventRail' },
+      { name: 'description', content: 'Everything EventRail keeps in your browser, why, and how to remove it.' },
     ],
   }),
   component: Page,

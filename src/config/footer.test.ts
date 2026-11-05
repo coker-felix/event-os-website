@@ -68,10 +68,10 @@ describe('footer', () => {
     ])
   })
 
-  it('has a Company column with About, Team, Careers and Contact', () => {
+  it('has a Company column with About Us, Team, Careers and Contact', () => {
     const col = FOOTER_COLUMNS.find((c) => c.heading === 'Company')
     expect(col?.links).toEqual([
-      { label: 'About us', to: '/about' },
+      { label: 'About Us', to: '/about' },
       { label: 'Our team', to: '/about/team', when: 'team' },
       { label: 'Careers', to: '/careers', when: 'careers' },
       { label: 'Contact us', to: '/contact' },

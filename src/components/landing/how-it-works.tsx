@@ -25,7 +25,7 @@ export function HowItWorks() {
         {STEPS.map((s, i) => (
           <li
             key={s.title}
-            className="rounded-2xl border border-line bg-card p-5"
+            className="lift-card rounded-2xl border border-line bg-card p-5"
           >
             <span className="grid size-8 place-items-center rounded-full bg-violet text-sm font-bold text-white">
               {i + 1}

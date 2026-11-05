@@ -33,8 +33,8 @@ export const Route = createFileRoute('/vendors/$vendorId')({
     meta: [
       {
         title: loaderData
-          ? `${loaderData.name} | Event OS for Vendors`
-          : 'Vendor | Event OS for Vendors',
+          ? `${loaderData.name} | EventRail for Vendors`
+          : 'Vendor | EventRail for Vendors',
       },
       ...(loaderData
         ? [

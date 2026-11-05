@@ -42,7 +42,7 @@ import { CTA } from '#/lib/cta'
 export const Route = createFileRoute('/_attendee/events/$eventId/checkout')({
   head: () => ({
     meta: [
-      { title: 'Checkout | Event OS' },
+      { title: 'Checkout | EventRail' },
       { name: 'robots', content: 'noindex' },
     ],
   }),

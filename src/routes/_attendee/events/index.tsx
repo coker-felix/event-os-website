@@ -26,7 +26,7 @@ export const Route = createFileRoute('/_attendee/events/')({
   validateSearch: (raw: Record<string, unknown>) => validateEventsSearch(raw),
   head: () => ({
     meta: [
-      { title: 'All events | Event OS' },
+      { title: 'All events | EventRail' },
       {
         name: 'description',
         content:

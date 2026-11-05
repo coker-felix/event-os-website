@@ -21,7 +21,7 @@ export function EventListRow({
   const tint =
     event.accentColor && HEX_COLOR.test(event.accentColor)
       ? event.accentColor
-      : '#0f766e'
+      : '#176b5b'
   const price = formatPrice(event.priceFromMinor, event.currency)
   const place = [event.venueName, event.city]
     .filter((x, i, a) => x && a.indexOf(x) === i)
@@ -32,7 +32,7 @@ export function EventListRow({
   return (
     <article className="relative flex items-center gap-4 rounded-2xl border border-line bg-card p-3 transition-shadow focus-within:ring-2 focus-within:ring-violet hover:shadow-md">
       {parts && (
-        <div className="flex size-14 shrink-0 flex-col items-center justify-center rounded-xl bg-flame text-white">
+        <div className="flex size-14 shrink-0 flex-col items-center justify-center rounded-sm bg-flame text-ink">
           <span className="text-[0.65rem] leading-none font-bold tracking-wider uppercase">
             {parts.month}
           </span>
@@ -43,7 +43,7 @@ export function EventListRow({
       )}
       <div
         className="hidden size-16 shrink-0 overflow-hidden rounded-lg sm:block"
-        style={{ background: `linear-gradient(135deg, ${tint}, #15122e)` }}
+        style={{ background: `linear-gradient(135deg, ${tint}, #172a26)` }}
       >
         {event.heroImageUrl && !imageFailed && (
           <img

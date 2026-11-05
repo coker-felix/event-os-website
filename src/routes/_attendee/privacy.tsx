@@ -7,8 +7,8 @@ export const Route = createFileRoute('/_attendee/privacy')({
   validateSearch: validateLegalSearch,
   head: () => ({
     meta: [
-      { title: 'Privacy policy | Event OS' },
-      { name: 'description', content: 'What Event OS collects, why, and your choices. No tracking or advertising.' },
+      { title: 'Privacy policy | EventRail' },
+      { name: 'description', content: 'What EventRail collects, why, and your choices. No tracking or advertising.' },
     ],
   }),
   component: Page,

@@ -27,7 +27,7 @@ export const Route = createFileRoute('/_attendee/checkout/return')({
   },
   head: () => ({
     meta: [
-      { title: 'Your payment | Event OS' },
+      { title: 'Your payment | EventRail' },
       { name: 'robots', content: 'noindex' },
     ],
   }),

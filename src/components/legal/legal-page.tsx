@@ -35,7 +35,7 @@ export function LegalPage({
           className="mt-4 rounded-xl border border-flame/40 bg-secondary p-4 text-sm"
         >
           <strong>Draft, pending legal review.</strong> This page is written
-          from what Event OS does today. Parts marked "To confirm" are still
+          from what EventRail does today. Parts marked "To confirm" are still
           being decided and are not final.
         </p>
       )}

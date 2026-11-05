@@ -1,6 +1,6 @@
-# Event OS website
+# EventRail website
 
-The attendee-facing website for Event OS: find events, get tickets, read the
+The attendee-facing website for EventRail: find events, get tickets, read the
 blog, get support, and reach the vendor and venue products. Server-rendered
 with TanStack Start (Router, Query), React 19, Tailwind v4, shadcn and zustand.
 

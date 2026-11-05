@@ -35,7 +35,7 @@ export function calendarLinks(
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Event OS//Website//EN',
+    'PRODID:-//EventRail//Website//EN',
     'BEGIN:VEVENT',
     `UID:${event.id}@event-os`,
     `DTSTAMP:${stamp(new Date())}`,

@@ -36,11 +36,11 @@ export const Route = createFileRoute('/_attendee/blog/')({
   },
   head: () => ({
     meta: [
-      { title: 'Blog | Event OS' },
+      { title: 'Blog | EventRail' },
       {
         name: 'description',
         content:
-          'Guides for attendees, tips for vendors and venues, and news from Event OS.',
+          'Guides for attendees, tips for vendors and venues, and news from EventRail.',
       },
     ],
   }),

@@ -11,7 +11,7 @@ const ORGS: Array<{ name: string; city: string; bio: string }> = [
   { name: 'Common Ground', city: 'Abuja', bio: 'Talks, workshops and meetups for people who make things.' },
 ]
 
-const TINTS = ['#0f766e', '#ff5a36', '#1d4ed8', '#7c3aed', '#b45309', '#be185d']
+const TINTS = ['#176b5b', '#e8b34b', '#b83d36', '#286b83', '#a96512', '#247a52']
 const NOW = () => Math.floor(Date.now() / 1000)
 
 export function mockOrganizers(): Array<Organizer> {

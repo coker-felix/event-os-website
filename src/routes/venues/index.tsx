@@ -11,6 +11,7 @@ import { VenueStrip } from '#/components/venues/venue-strip'
 import { VENUE_FAQS } from '#/content/venue-faqs'
 import { COMING_SOON, HERO, HOW_TO_START } from '#/content/venue-landing'
 import { venueDirectoryQuery } from '#/features/venues/queries'
+import { ProductShowcase } from '#/components/landing/product-showcase'
 
 export const Route = createFileRoute('/venues/')({
   // Warm the cache on the server. A failing API must never fail the page.
@@ -21,7 +22,7 @@ export const Route = createFileRoute('/venues/')({
   },
   head: () => ({
     meta: [
-      { title: `${HERO.headline} | Event OS for Venues` },
+      { title: `${HERO.headline} | EventRail for Venues` },
       { name: 'description', content: HERO.subline },
     ],
     scripts: [
@@ -43,6 +44,9 @@ function VenueLanding() {
       </Reveal>
       <Reveal>
         <VenueBenefits />
+      </Reveal>
+      <Reveal>
+        <ProductShowcase product="venues" />
       </Reveal>
       <Reveal>
         <ComingSoon items={COMING_SOON} />

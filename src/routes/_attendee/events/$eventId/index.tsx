@@ -45,7 +45,7 @@ export const Route = createFileRoute('/_attendee/events/$eventId/')({
   notFoundComponent: EventNotFound,
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.title} | Event OS` : 'Event | Event OS' },
+      { title: loaderData ? `${loaderData.title} | EventRail` : 'Event | EventRail' },
       ...(loaderData
         ? [
             { name: 'description', content: loaderData.description },

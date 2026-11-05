@@ -27,7 +27,7 @@ export interface Product {
 export const PRODUCTS: Record<ProductId, Product> = {
   attendees: {
     id: 'attendees',
-    name: 'Event OS',
+    name: 'EventRail',
     tagline: 'Find events and get tickets',
     home: '/',
     nav: [
@@ -35,12 +35,13 @@ export const PRODUCTS: Record<ProductId, Product> = {
       { label: 'Host an event', to: '/organizers' },
       { label: 'Blog', to: '/blog' },
       { label: 'Ticket help', to: '/tickets/help' },
+      { label: 'About Us', to: '/about' },
       { label: 'Contact', to: '/contact' },
     ],
   },
   organizers: {
     id: 'organizers',
-    name: 'Event OS',
+    name: 'EventRail',
     tagline: 'Run your entire event from one dashboard',
     home: '/organizers',
     nav: [
@@ -56,7 +57,7 @@ export const PRODUCTS: Record<ProductId, Product> = {
   },
   vendors: {
     id: 'vendors',
-    name: 'Event OS for Vendors',
+    name: 'EventRail',
     tagline: 'Get booked at great events',
     home: '/vendors',
     nav: [
@@ -70,7 +71,7 @@ export const PRODUCTS: Record<ProductId, Product> = {
   },
   venues: {
     id: 'venues',
-    name: 'Event OS for Venues',
+    name: 'EventRail',
     tagline: 'Fill your venue with events',
     home: '/venues',
     nav: [{ label: 'Directory', to: '/venues/directory' }],

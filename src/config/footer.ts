@@ -40,7 +40,7 @@ export const FOOTER_COLUMNS = [
   {
     heading: 'Company',
     links: [
-      { label: 'About us', to: '/about' },
+      { label: 'About Us', to: '/about' },
       // Shown only when there is a team or open roles to list.
       { label: 'Our team', to: '/about/team', when: 'team' },
       { label: 'Careers', to: '/careers', when: 'careers' },

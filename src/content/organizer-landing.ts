@@ -39,12 +39,12 @@ export const PILLARS: Array<Pillar> = [
   {
     id: 'promote',
     title: 'Promote and advertise',
-    body: 'A branded event page, featured placement on the Event OS homepage and in discovery, and alerts to people who follow your city and category.',
+    body: 'A branded event page, featured placement on the EventRail homepage and in discovery, and alerts to people who follow your city and category.',
   },
 ]
 
 export interface Persona {
-  id: 'promoters' | 'corporate' | 'community'
+  id: 'weddings' | 'corporate' | 'promoters' | 'community'
   label: string
   headline: string
   points: Array<string>
@@ -52,19 +52,19 @@ export interface Persona {
 
 export const PERSONAS: Array<Persona> = [
   {
-    id: 'promoters',
-    label: 'Promoters and clubs',
-    headline: 'Fill the room and know who sent them',
+    id: 'weddings',
+    label: 'Weddings',
+    headline: 'Bring every detail of the day together',
     points: [
-      'Sell tickets and manage guest lists, including complimentary guests.',
-      'Give each promoter their own link and track the sales they bring in.',
-      'Track promoter commissions without a spreadsheet.',
-      'Promote the night with featured placement and alerts to people in your city.',
+      'Keep guest lists and RSVPs together for the ceremony and reception.',
+      'Coordinate your venue and vendors from one dashboard.',
+      'Share one event page with guests for the details they need.',
+      'Check guests in at the door with a phone, even without signal.',
     ],
   },
   {
     id: 'corporate',
-    label: 'Corporate planners',
+    label: 'Corporate Planners',
     headline: 'Keep the budget and the suppliers in order',
     points: [
       'Manage your budget against what you have booked and invoiced.',
@@ -74,8 +74,19 @@ export const PERSONAS: Array<Persona> = [
     ],
   },
   {
+    id: 'promoters',
+    label: 'Promoters & Clubs',
+    headline: 'Fill the room and know who sent them',
+    points: [
+      'Sell tickets and manage guest lists, including complimentary guests.',
+      'Give each promoter their own link and track the sales they bring in.',
+      'Track promoter commissions without a spreadsheet.',
+      'Promote the night with featured placement and alerts to people in your city.',
+    ],
+  },
+  {
     id: 'community',
-    label: 'Community and free events',
+    label: 'Community and Free Events',
     headline: 'Keep it simple, keep it free',
     points: [
       'Free RSVPs, with going, maybe and can’t go.',
@@ -128,7 +139,7 @@ export const ORGANIZER_FAQS: Array<Faq> = [
   },
   {
     question: 'Can you help me promote my event?',
-    answer: 'Yes. Your event gets a branded page, and you can request featured placement on the Event OS homepage and send alerts to people who follow your city and category.',
+    answer: 'Yes. Your event gets a branded page, and you can request featured placement on the EventRail homepage and send alerts to people who follow your city and category.',
   },
 ]
 
@@ -137,7 +148,7 @@ export const TEASER = {
   eyebrow: 'Hosting an event?',
   heading: 'Run your entire event from one dashboard',
   body: 'Sell tickets, book vendors and venues, and promote your event, all in one place.',
-  cta: 'Explore Event OS for organizers',
+  cta: 'Explore EventRail for organizers',
 }
 
 export const CLOSING = {

@@ -39,7 +39,7 @@ export const Route = createFileRoute('/_attendee/blog/$slug')({
   notFoundComponent: ArticleNotFound,
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.title} | Event OS` : 'Blog | Event OS' },
+      { title: loaderData ? `${loaderData.title} | EventRail` : 'Blog | EventRail' },
       ...(loaderData
         ? [
             { name: 'description', content: loaderData.description },

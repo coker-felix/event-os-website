@@ -5,14 +5,14 @@ export const PRIVACY: LegalDoc = {
   slug: 'privacy',
   title: 'Privacy policy',
   intro:
-    'This policy explains what Event OS collects, why, and what you can do about it. It is written for attendees, vendors, event organizers and venue owners. We do not run analytics, tracking or advertising on this site.',
+    'This policy explains what EventRail collects, why, and what you can do about it. It is written for attendees, vendors, event organizers and venue owners. We do not run analytics, tracking or advertising on this site.',
   sections: [
     {
       id: 'who-we-are',
       audience: 'all',
       heading: 'Who is responsible',
       body: [
-        'Event OS is run by [To confirm: company name and registered address].',
+        'EventRail is run by [To confirm: company name and registered address].',
         'Privacy questions: use the contact page or write to [To confirm: privacy contact email].',
       ],
     },

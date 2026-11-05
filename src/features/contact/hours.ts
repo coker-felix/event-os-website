@@ -12,7 +12,7 @@ export const SUPPORT_HOURS: SupportHours = {
   days: [1, 2, 3, 4, 5],
   open: '09:00',
   close: '18:00',
-  timeZone: 'Africa/Lagos',
+  timeZone: 'Africa/Accra',
 }
 
 const DAY_NAMES = [

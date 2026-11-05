@@ -20,7 +20,7 @@ export function EventHero({
   const tint =
     event.accentColor && HEX_COLOR.test(event.accentColor)
       ? event.accentColor
-      : '#0f766e'
+      : '#176b5b'
 
   async function share() {
     const url = window.location.href
@@ -40,7 +40,7 @@ export function EventHero({
   return (
     <div
       className="relative aspect-[16/9] max-h-[420px] w-full overflow-hidden rounded-3xl sm:aspect-[21/9]"
-      style={{ background: `linear-gradient(135deg, ${tint}, #15122e)` }}
+      style={{ background: `linear-gradient(135deg, ${tint}, #172a26)` }}
     >
       {event.heroImageUrl && !imageFailed && (
         <img

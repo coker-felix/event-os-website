@@ -23,6 +23,6 @@ describe('products', () => {
   })
 
   it('keeps the organizers brand short so the navbar does not wrap', () => {
-    expect(PRODUCTS.organizers.name).toBe('Event OS')
+    expect(PRODUCTS.organizers.name).toBe('EventRail')
   })
 })
