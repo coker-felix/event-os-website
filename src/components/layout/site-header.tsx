@@ -33,7 +33,7 @@ export function SiteHeader({ product }: { product: ProductId }) {
                 hash={item.hash}
                 activeOptions={{ includeHash: true }}
                 className="inline-flex h-9 items-center rounded-sm px-2.5 font-medium whitespace-nowrap text-muted-foreground hover:text-foreground"
-                activeProps={{ className: 'text-foreground' }}
+                activeProps={{ className: 'bg-primary/10 text-foreground' }}
               >
                 {item.label}
               </Link>
