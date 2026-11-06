@@ -21,6 +21,7 @@ import { Route as AttendeePrivacyRouteImport } from './routes/_attendee/privacy'
 import { Route as AttendeeTermsRouteImport } from './routes/_attendee/terms'
 import { Route as OrganizersIndexRouteImport } from './routes/organizers/index'
 import { Route as OrganizersOrganizerIdRouteImport } from './routes/organizers/$organizerId'
+import { Route as RsvpTokenRouteImport } from './routes/rsvp.$token'
 import { Route as VendorsIndexRouteImport } from './routes/vendors/index'
 import { Route as VendorsVendorIdRouteImport } from './routes/vendors/$vendorId'
 import { Route as VendorsCalloutsRouteImport } from './routes/vendors/callouts'
@@ -97,6 +98,11 @@ const OrganizersOrganizerIdRoute = OrganizersOrganizerIdRouteImport.update({
   id: '/$organizerId',
   path: '/$organizerId',
   getParentRoute: () => OrganizersRouteRoute,
+} as any)
+const RsvpTokenRoute = RsvpTokenRouteImport.update({
+  id: '/rsvp/$token',
+  path: '/rsvp/$token',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const VendorsIndexRoute = VendorsIndexRouteImport.update({
   id: '/',
@@ -197,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof AttendeePrivacyRoute
   '/terms': typeof AttendeeTermsRoute
   '/organizers/$organizerId': typeof OrganizersOrganizerIdRoute
+  '/rsvp/$token': typeof RsvpTokenRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
@@ -223,6 +230,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof AttendeePrivacyRoute
   '/terms': typeof AttendeeTermsRoute
   '/organizers/$organizerId': typeof OrganizersOrganizerIdRoute
+  '/rsvp/$token': typeof RsvpTokenRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
@@ -255,6 +263,7 @@ export interface FileRoutesById {
   '/_attendee/privacy': typeof AttendeePrivacyRoute
   '/_attendee/terms': typeof AttendeeTermsRoute
   '/organizers/$organizerId': typeof OrganizersOrganizerIdRoute
+  '/rsvp/$token': typeof RsvpTokenRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
   '/vendors/callouts': typeof VendorsCalloutsRoute
   '/vendors/directory': typeof VendorsDirectoryRoute
@@ -288,6 +297,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/organizers/$organizerId'
+    | '/rsvp/$token'
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
@@ -314,6 +324,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/organizers/$organizerId'
+    | '/rsvp/$token'
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
@@ -345,6 +356,7 @@ export interface FileRouteTypes {
     | '/_attendee/privacy'
     | '/_attendee/terms'
     | '/organizers/$organizerId'
+    | '/rsvp/$token'
     | '/vendors/$vendorId'
     | '/vendors/callouts'
     | '/vendors/directory'
@@ -371,6 +383,7 @@ export interface RootRouteChildren {
   VendorsRouteRoute: typeof VendorsRouteRouteWithChildren
   VenuesRouteRoute: typeof VenuesRouteRouteWithChildren
   AttendeeRoute: typeof AttendeeRouteWithChildren
+  RsvpTokenRoute: typeof RsvpTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -458,6 +471,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/organizers/$organizerId'
       preLoaderRoute: typeof OrganizersOrganizerIdRouteImport
       parentRoute: typeof OrganizersRouteRoute
+    }
+    '/rsvp/$token': {
+      id: '/rsvp/$token'
+      path: '/rsvp/$token'
+      fullPath: '/rsvp/$token'
+      preLoaderRoute: typeof RsvpTokenRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/vendors/': {
       id: '/vendors/'
@@ -676,6 +696,7 @@ const rootRouteChildren: RootRouteChildren = {
   VendorsRouteRoute: VendorsRouteRouteWithChildren,
   VenuesRouteRoute: VenuesRouteRouteWithChildren,
   AttendeeRoute: AttendeeRouteWithChildren,
+  RsvpTokenRoute: RsvpTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
