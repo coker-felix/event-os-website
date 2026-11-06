@@ -28,5 +28,6 @@ describe('public guest invitation API contract', () => {
     expect(fetchMock.mock.calls[0][0]).toBe('http://localhost:8080/api/v1/guest-invitations/abc/respond')
     expect(fetchMock.mock.calls[0][1].body).toBe('{"response":"going","partySize":3}')
     expect(fetchMock.mock.calls[1][0]).toBe('http://localhost:8080/api/v1/guest-invitations/abc/opt-out')
+    expect(fetchMock.mock.calls[1][1].body).toBeUndefined()
   })
 })

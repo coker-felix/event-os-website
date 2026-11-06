@@ -1,4 +1,4 @@
-import { ApiError, apiGet, apiPost } from '#/lib/api'
+import { ApiError, apiGet, apiPost, apiRequest } from '#/lib/api'
 
 export type InvitationStatus = 'invited' | 'going' | 'declined' | 'expired' | 'opted_out'
 
@@ -22,7 +22,7 @@ export const respondToInvitation = (
 ) => apiPost<Invitation>(`${path(token)}/respond`, { response, partySize })
 
 export const optOutOfInvitation = (token: string) =>
-  apiPost<{ ok: true }>(`${path(token)}/opt-out`, {})
+  apiRequest<{ ok: true }>('POST', `${path(token)}/opt-out`)
 
 export function invitationErrorMessage(error: unknown): string {
   if (error instanceof ApiError && error.body && typeof error.body === 'object') {
