@@ -1,4 +1,5 @@
-export type ProductId = 'attendees' | 'vendors' | 'venues' | 'organizers' | 'community'
+export type ProductId =
+  'attendees' | 'vendors' | 'venues' | 'organizers' | 'community'
 
 export interface NavItem {
   label: string
@@ -47,7 +48,6 @@ export const PRODUCTS: Record<ProductId, Product> = {
     nav: [
       { label: 'Features', to: '/organizers', hash: 'features' },
       { label: 'Who it is for', to: '/organizers', hash: 'who' },
-      { label: 'How to start', to: '/organizers', hash: 'start' },
       { label: 'FAQs', to: '/organizers', hash: 'faqs' },
     ],
     actions: [
@@ -90,8 +90,16 @@ export const PRODUCTS: Record<ProductId, Product> = {
       { label: 'People', to: '/community/people' },
     ],
     actions: [
-      { label: 'Sign in', path: '/login?redirect=%2Fcommunity', variant: 'secondary' },
-      { label: 'Join', path: '/register?redirect=%2Fcommunity%2Fprofile', variant: 'primary' },
+      {
+        label: 'Sign in',
+        path: '/login?redirect=%2Fcommunity',
+        variant: 'secondary',
+      },
+      {
+        label: 'Join',
+        path: '/register?redirect=%2Fcommunity%2Fprofile',
+        variant: 'primary',
+      },
     ],
   },
 }

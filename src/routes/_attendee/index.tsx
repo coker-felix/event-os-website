@@ -337,9 +337,6 @@ function Landing() {
       <Reveal>
         <ProductShowcase product="attendees" />
       </Reveal>
-      <Reveal>
-        <PlatformPillars />
-      </Reveal>
 
       <Reveal className="mt-12">
         <StatGrid

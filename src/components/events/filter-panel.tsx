@@ -29,10 +29,12 @@ export function SearchBox({
   value,
   onCommit,
   className = '',
+  placeholder = 'Search events, venues or categories',
 }: {
   value: string
   onCommit: (q: string | undefined) => void
   className?: string
+  placeholder?: string
 }) {
   const [text, setText] = useState(value)
   useEffect(() => setText(value), [value])
@@ -52,7 +54,7 @@ export function SearchBox({
         type="search"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Search events, venues or categories"
+        placeholder={placeholder}
         className="h-12 w-full rounded-sm border border-line bg-card pr-4 pl-12 text-base"
       />
     </label>
@@ -158,7 +160,9 @@ export function FilterPanel({
           type="radio"
           name="when"
           checked={!search.when}
-          onChange={() => set({ when: undefined, from: undefined, to: undefined })}
+          onChange={() =>
+            set({ when: undefined, from: undefined, to: undefined })
+          }
           label="Any time"
         />
         {whenOptions.map((w) => (
@@ -220,7 +224,9 @@ export function FilterPanel({
       <Group title="Ways to support">
         <Option
           checked={!!search.donations}
-          onChange={() => set({ donations: search.donations ? undefined : true })}
+          onChange={() =>
+            set({ donations: search.donations ? undefined : true })
+          }
           label="Donations welcome"
           count={counts.donations}
         />

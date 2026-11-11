@@ -3,18 +3,17 @@ import { FaqSection, faqJsonLd } from '#/components/landing/faq-section'
 import {
   OrganizerClosing,
   OrganizerHero,
+  OrganizerJourney,
   OrganizerPartnerships,
   OrganizerPartnerServices,
   OrganizerPersonas,
-  OrganizerPillars,
+  OrganizerReliability,
+  OrganizerSecurity,
 } from '#/components/landing/organizer-section'
-import { Testimonials } from '#/components/landing/testimonials'
 import { TrustedBy } from '#/components/landing/trusted-by'
 import { Reveal } from '#/components/motion/reveal'
-import { ProductShowcase } from '#/components/landing/product-showcase'
 import { UpcomingFeature } from '#/components/landing/upcoming-feature'
-import { HowToStart } from '#/components/vendors/how-to-start'
-import { HERO, HOW_TO_START, ORGANIZER_FAQS } from '#/content/organizer-landing'
+import { HERO, ORGANIZER_FAQS } from '#/content/organizer-landing'
 
 export const Route = createFileRoute('/organizers/')({
   head: () => ({
@@ -37,7 +36,13 @@ function OrganizersLanding() {
         <TrustedBy />
       </Reveal>
       <Reveal>
-        <OrganizerPillars />
+        <OrganizerJourney />
+      </Reveal>
+      <Reveal>
+        <OrganizerReliability />
+      </Reveal>
+      <Reveal>
+        <OrganizerSecurity />
       </Reveal>
       <Reveal>
         <OrganizerPartnerships />
@@ -50,17 +55,6 @@ function OrganizersLanding() {
       </Reveal>
       <Reveal>
         <UpcomingFeature audience="organizers" />
-      </Reveal>
-      <Reveal>
-        <ProductShowcase product="organizers" />
-      </Reveal>
-      <Reveal>
-        <div id="start">
-          <HowToStart steps={HOW_TO_START} />
-        </div>
-      </Reveal>
-      <Reveal>
-        <Testimonials audience="organizers" />
       </Reveal>
       <Reveal>
         <FaqSection faqs={ORGANIZER_FAQS} />

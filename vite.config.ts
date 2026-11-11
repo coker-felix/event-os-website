@@ -15,6 +15,7 @@ const config = defineConfig(({ mode }) => {
   return {
     resolve: { tsconfigPaths: true },
     define: { __MOCKS_ENABLED__: JSON.stringify(mocks) },
+    server: { allowedHosts: ['clouds-planet-coaching-statistics.trycloudflare.com'] },
     plugins: [devtools(), tailwindcss(), tanstackStart(), viteReact()],
   }
 })

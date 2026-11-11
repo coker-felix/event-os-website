@@ -26,12 +26,6 @@ export function PlatformPillars() {
   return (
     <section aria-labelledby="platform-pillars-title" className="mt-16">
       <div className="max-w-2xl">
-        <h2
-          id="platform-pillars-title"
-          className="text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
-        >
-          Event OS
-        </h2>
         <p className="mt-3 text-base leading-relaxed text-mist">
           The connected operating system for the event industry
         </p>
