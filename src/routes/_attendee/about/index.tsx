@@ -35,7 +35,7 @@ function AboutPage() {
             </p>
             <h1 className="mt-4 text-5xl leading-[0.98] font-extrabold tracking-[-0.035em] sm:text-6xl lg:text-7xl">
               {ABOUT.headline}
-              <span className="mt-2 block text-[#E8B34B]">
+              <span className="mt-2 block text-[#F7F3EB]">
                 {ABOUT.headlineContinuation}
               </span>
             </h1>
@@ -44,7 +44,7 @@ function AboutPage() {
             </p>
             <a
               href="#ecosystem"
-              className="mt-7 inline-flex min-h-11 items-center gap-2 font-semibold text-white hover:text-[#E8B34B]"
+              className="mt-7 inline-flex min-h-11 items-center gap-2 font-semibold text-white hover:text-[#F7F3EB]"
             >
               See who EventRail brings together
               <ArrowUpRight className="size-4" aria-hidden />
@@ -62,7 +62,7 @@ function AboutPage() {
                 </h2>
               </div>
               <span
-                className="mt-1 size-2 shrink-0 rounded-full bg-[#E8B34B]"
+                className="mt-1 size-2 shrink-0 rounded-full bg-[#F7F3EB]"
                 aria-hidden
               />
             </div>
@@ -72,7 +72,7 @@ function AboutPage() {
                   key={step.stage}
                   className="grid grid-cols-[2rem_1fr] gap-3 border-b border-white/10 py-4 last:border-0"
                 >
-                  <span className="pt-0.5 font-display text-sm font-bold tabular-nums text-[#E8B34B]">
+                  <span className="pt-0.5 font-display text-sm font-bold tabular-nums text-[#F7F3EB]">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div>

@@ -114,7 +114,7 @@ function BannerBackground({ banner }: { banner: Banner }) {
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(120deg, #172a26 0%, #1b4036 62%, #176b5b 100%)',
+          background: 'linear-gradient(120deg, #0C0E0C 0%, #1D4A35 62%, #2D6448 100%)',
         }}
       />
       {banner.imageUrl && !failed && (

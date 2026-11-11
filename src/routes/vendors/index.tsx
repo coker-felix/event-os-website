@@ -14,6 +14,7 @@ import { eventsQuery } from '#/features/events/queries'
 import { calloutsQuery } from '#/features/vendors/queries'
 import { Reveal } from '#/components/motion/reveal'
 import { ProductShowcase } from '#/components/landing/product-showcase'
+import { PlatformPillars } from '#/components/landing/platform-pillars'
 
 export const Route = createFileRoute('/vendors/')({
   // Warm the cache on the server. A failing API must never fail the page.
@@ -39,6 +40,9 @@ function VendorLanding() {
   return (
     <div>
       <VendorHero />
+      <Reveal>
+        <PlatformPillars />
+      </Reveal>
       <Reveal>
         <CalloutStrip />
       </Reveal>

@@ -1,5 +1,4 @@
-@import '@fontsource-variable/bricolage-grotesque';
-@import '@fontsource-variable/figtree';
+@import '@fontsource-variable/inter';
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
@@ -8,11 +7,11 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --ink: #172a26;
-  --paper: #f6f7f3;
-  --rail: #176b5b;
-  --rail-ink: #125548;
-  --marigold: #e8b34b;
+  --ink: #1d4a35;
+  --paper: #f7f3eb;
+  --rail: #1d4a35;
+  --rail-ink: #1d4a35;
+  --marigold: #f7f3eb;
   --line: #dce4df;
   --mist: #62716d;
   --success: #247a52;
@@ -27,17 +26,17 @@
 
   --background: var(--paper);
   --foreground: var(--ink);
-  --card: #ffffff;
+  --card: #fffdf9;
   --card-foreground: var(--foreground);
-  --popover: #ffffff;
+  --popover: #fffdf9;
   --popover-foreground: var(--foreground);
   --primary: var(--violet);
   --primary-foreground: #ffffff;
-  --secondary: #eaf0ec;
+  --secondary: #eee8dc;
   --secondary-foreground: var(--foreground);
-  --muted: #eaf0ec;
+  --muted: #eee8dc;
   --muted-foreground: var(--mist);
-  --accent: #eaf0ec;
+  --accent: #eee8dc;
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
@@ -49,27 +48,26 @@
 
 .dark {
   color-scheme: dark;
-  --paper: #111b18;
-  --ink: #1c2b26;
-  --rail: #56b39b;
-  --rail-ink: #83d0ba;
-  --marigold: #efc76e;
-  --line: #30413a;
-  --mist: #a7b5ae;
+  --paper: #0c0e0c;
+  --ink: #080a09;
+  --rail: #1d4a35;
+  --rail-ink: #eee5d4;
+  --marigold: #f7f3eb;
+  --line: #30352f;
+  --mist: #bdb6a8;
 
-  --foreground: #edf3ef;
-  --card: #1b2823;
-  --popover: #1b2823;
-  --secondary: #26352e;
-  --muted: #26352e;
-  --accent: #26352e;
+  --foreground: #f7f3eb;
+  --card: #171a17;
+  --popover: #171a17;
+  --secondary: #242824;
+  --muted: #242824;
+  --accent: #242824;
 }
 
 @theme inline {
-  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-ui: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui,
-    sans-serif;
+  --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
   --color-ink: var(--ink);
   --color-paper: var(--paper);
   --color-rail: var(--rail);

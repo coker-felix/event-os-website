@@ -14,6 +14,7 @@ import { COMING_SOON, HERO, HOW_TO_START } from '#/content/venue-landing'
 import { venueDirectoryQuery } from '#/features/venues/queries'
 import { ProductShowcase } from '#/components/landing/product-showcase'
 import { Testimonials } from '#/components/landing/testimonials'
+import { PlatformPillars } from '#/components/landing/platform-pillars'
 
 export const Route = createFileRoute('/venues/')({
   // Warm the cache on the server. A failing API must never fail the page.
@@ -38,6 +39,9 @@ function VenueLanding() {
   return (
     <div>
       <VenueHero />
+      <Reveal>
+        <PlatformPillars />
+      </Reveal>
       <Reveal>
         <VenueStrip />
       </Reveal>

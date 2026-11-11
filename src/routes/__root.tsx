@@ -32,7 +32,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
       {
         name: 'theme-color',
-        content: '#176B5B',
+        content: '#1D4A35',
       },
       {
         title: 'EventRail',
