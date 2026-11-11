@@ -27,6 +27,8 @@ export interface Blueprint {
   creditedOrgId?: string
   currentVersion?: number
   forkCount?: number
+  taskCount: number
+  authorName: string
   status?: string
 }
 

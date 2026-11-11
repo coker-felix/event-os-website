@@ -2,8 +2,8 @@ import { uuidFromSeed } from '#/lib/mocks'
 import type { Blueprint, BlueprintDetail, Profile, Skill } from './types'
 
 const BLUEPRINTS: Array<Blueprint> = [
-  { id: uuidFromSeed('community-blueprint-1'), kind: 'playbook', title: 'Accra garden wedding', summary: 'A practical plan for a relaxed outdoor wedding.', tags: ['wedding', 'outdoor'], authorUserId: uuidFromSeed('community-person-1'), authorLabel: 'Ama Owusu', currentVersion: 1, forkCount: 14 },
-  { id: uuidFromSeed('community-blueprint-2'), kind: 'playbook', title: 'Community product launch', summary: 'A simple launch plan built around a live event.', tags: ['launch', 'community'], authorUserId: uuidFromSeed('community-person-2'), authorLabel: 'Kojo Mensah', currentVersion: 2, forkCount: 8 },
+  { id: uuidFromSeed('community-blueprint-1'), kind: 'playbook', title: 'Accra garden wedding', summary: 'A practical plan for a relaxed outdoor wedding.', tags: ['wedding', 'outdoor'], authorUserId: uuidFromSeed('community-person-1'), authorLabel: 'Ama Owusu', authorName: 'Ama Owusu', taskCount: 2, currentVersion: 1, forkCount: 14 },
+  { id: uuidFromSeed('community-blueprint-2'), kind: 'playbook', title: 'Community product launch', summary: 'A simple launch plan built around a live event.', tags: ['launch', 'community'], authorUserId: uuidFromSeed('community-person-2'), authorLabel: 'Kojo Mensah', authorName: 'Kojo Mensah', taskCount: 2, currentVersion: 2, forkCount: 8 },
 ]
 const PROFILES: Array<Profile> = [
   { userId: uuidFromSeed('community-person-1'), displayName: 'Ama Owusu', headline: 'Event producer', bio: 'I bring thoughtful gatherings to life.', country: 'GH', city: 'Accra', availability: 'available', skillIds: ['planning'], badges: ['founding_member'] },

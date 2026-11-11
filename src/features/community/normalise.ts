@@ -19,7 +19,8 @@ export function normaliseBlueprint(raw: Raw, detail = false): Blueprint | Bluepr
     summary: text(bpRaw.summary) ?? '', tags: listText(bpRaw.tags),
     authorUserId: text(bpRaw.authorUserId), authorLabel: text(bpRaw.authorLabel) ?? '',
     creditedOrgId: text(bpRaw.creditedOrgId), currentVersion: num(bpRaw.currentVersion),
-    forkCount: num(bpRaw.forkCount), status: text(bpRaw.status),
+    forkCount: num(bpRaw.forkCount), taskCount: num(bpRaw.taskCount) ?? 0,
+    authorName: text(bpRaw.authorName) ?? '', status: text(bpRaw.status),
   }
   if (!detail) return blueprint
   const snap = (raw.snapshot && typeof raw.snapshot === 'object' ? raw.snapshot : {}) as Raw

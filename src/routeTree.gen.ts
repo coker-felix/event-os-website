@@ -20,6 +20,7 @@ import { Route as AttendeeContactRouteImport } from './routes/_attendee/contact'
 import { Route as AttendeeCookiesRouteImport } from './routes/_attendee/cookies'
 import { Route as AttendeePrivacyRouteImport } from './routes/_attendee/privacy'
 import { Route as AttendeeTermsRouteImport } from './routes/_attendee/terms'
+import { Route as CommunityIndexRouteImport } from './routes/community/index'
 import { Route as OrganizersIndexRouteImport } from './routes/organizers/index'
 import { Route as OrganizersOrganizerIdRouteImport } from './routes/organizers/$organizerId'
 import { Route as RsvpTokenRouteImport } from './routes/rsvp.$token'
@@ -94,6 +95,11 @@ const AttendeeTermsRoute = AttendeeTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
   getParentRoute: () => AttendeeRoute,
+} as any)
+const CommunityIndexRoute = CommunityIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CommunityRouteRoute,
 } as any)
 const OrganizersIndexRoute = OrganizersIndexRouteImport.update({
   id: '/',
@@ -199,7 +205,7 @@ const AttendeeEventsEventIdCheckoutRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/community': typeof CommunityRouteRoute
+  '/community': typeof CommunityRouteRouteWithChildren
   '/organizers': typeof OrganizersRouteRouteWithChildren
   '/vendors': typeof VendorsRouteRouteWithChildren
   '/venues': typeof VenuesRouteRouteWithChildren
@@ -216,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/vendors/directory': typeof VendorsDirectoryRoute
   '/venues/$venueId': typeof VenuesVenueIdRoute
   '/venues/directory': typeof VenuesDirectoryRoute
+  '/community/': typeof CommunityIndexRoute
   '/organizers/': typeof OrganizersIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
@@ -231,7 +238,6 @@ export interface FileRoutesByFullPath {
   '/events/$eventId/': typeof AttendeeEventsEventIdIndexRoute
 }
 export interface FileRoutesByTo {
-  '/community': typeof CommunityRouteRoute
   '/careers': typeof AttendeeCareersRoute
   '/contact': typeof AttendeeContactRoute
   '/cookies': typeof AttendeeCookiesRoute
@@ -245,6 +251,7 @@ export interface FileRoutesByTo {
   '/venues/$venueId': typeof VenuesVenueIdRoute
   '/venues/directory': typeof VenuesDirectoryRoute
   '/': typeof AttendeeIndexRoute
+  '/community': typeof CommunityIndexRoute
   '/organizers': typeof OrganizersIndexRoute
   '/vendors': typeof VendorsIndexRoute
   '/venues': typeof VenuesIndexRoute
@@ -261,7 +268,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/community': typeof CommunityRouteRoute
+  '/community': typeof CommunityRouteRouteWithChildren
   '/organizers': typeof OrganizersRouteRouteWithChildren
   '/vendors': typeof VendorsRouteRouteWithChildren
   '/venues': typeof VenuesRouteRouteWithChildren
@@ -279,6 +286,7 @@ export interface FileRoutesById {
   '/venues/$venueId': typeof VenuesVenueIdRoute
   '/venues/directory': typeof VenuesDirectoryRoute
   '/_attendee/': typeof AttendeeIndexRoute
+  '/community/': typeof CommunityIndexRoute
   '/organizers/': typeof OrganizersIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/venues/': typeof VenuesIndexRoute
@@ -313,6 +321,7 @@ export interface FileRouteTypes {
     | '/vendors/directory'
     | '/venues/$venueId'
     | '/venues/directory'
+    | '/community/'
     | '/organizers/'
     | '/vendors/'
     | '/venues/'
@@ -328,7 +337,6 @@ export interface FileRouteTypes {
     | '/events/$eventId/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/community'
     | '/careers'
     | '/contact'
     | '/cookies'
@@ -342,6 +350,7 @@ export interface FileRouteTypes {
     | '/venues/$venueId'
     | '/venues/directory'
     | '/'
+    | '/community'
     | '/organizers'
     | '/vendors'
     | '/venues'
@@ -375,6 +384,7 @@ export interface FileRouteTypes {
     | '/venues/$venueId'
     | '/venues/directory'
     | '/_attendee/'
+    | '/community/'
     | '/organizers/'
     | '/vendors/'
     | '/venues/'
@@ -391,7 +401,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  CommunityRouteRoute: typeof CommunityRouteRoute
+  CommunityRouteRoute: typeof CommunityRouteRouteWithChildren
   OrganizersRouteRoute: typeof OrganizersRouteRouteWithChildren
   VendorsRouteRoute: typeof VendorsRouteRouteWithChildren
   VenuesRouteRoute: typeof VenuesRouteRouteWithChildren
@@ -477,6 +487,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/terms'
       preLoaderRoute: typeof AttendeeTermsRouteImport
       parentRoute: typeof AttendeeRoute
+    }
+    '/community/': {
+      id: '/community/'
+      path: '/'
+      fullPath: '/community/'
+      preLoaderRoute: typeof CommunityIndexRouteImport
+      parentRoute: typeof CommunityRouteRoute
     }
     '/organizers/': {
       id: '/organizers/'
@@ -621,6 +638,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CommunityRouteRouteChildren {
+  CommunityIndexRoute: typeof CommunityIndexRoute
+}
+
+const CommunityRouteRouteChildren: CommunityRouteRouteChildren = {
+  CommunityIndexRoute: CommunityIndexRoute,
+}
+
+const CommunityRouteRouteWithChildren = CommunityRouteRoute._addFileChildren(
+  CommunityRouteRouteChildren,
+)
+
 interface OrganizersRouteRouteChildren {
   OrganizersOrganizerIdRoute: typeof OrganizersOrganizerIdRoute
   OrganizersIndexRoute: typeof OrganizersIndexRoute
@@ -712,7 +741,7 @@ const AttendeeRouteWithChildren = AttendeeRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  CommunityRouteRoute: CommunityRouteRoute,
+  CommunityRouteRoute: CommunityRouteRouteWithChildren,
   OrganizersRouteRoute: OrganizersRouteRouteWithChildren,
   VendorsRouteRoute: VendorsRouteRouteWithChildren,
   VenuesRouteRoute: VenuesRouteRouteWithChildren,
