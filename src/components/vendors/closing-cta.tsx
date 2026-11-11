@@ -16,16 +16,26 @@ export function ClosingCta({
   return (
     <section
       aria-label={label}
-      className="mt-16 rounded-3xl bg-violet p-6 text-white sm:p-10"
+      className="relative isolate mt-20 overflow-hidden rounded-3xl bg-ink p-7 text-white sm:p-10 lg:p-12"
     >
-      <h2 className="max-w-xl text-3xl leading-tight font-extrabold">{heading}</h2>
-      <p className="mt-2 max-w-md text-white/80">{body}</p>
-      <a
-        href={portalUrl(path)}
-        className={`mt-6 ${CTA.onDark}`}
-      >
-        {label}
-      </a>
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_85%_10%,rgba(51,137,99,0.42),transparent_40%),linear-gradient(115deg,#0c2018_0%,#164632_60%,#10453f_100%)]"
+      />
+      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="text-xs font-semibold tracking-[0.18em] text-emerald-100/75 uppercase">
+            Your next step
+          </p>
+          <h2 className="mt-3 max-w-xl text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
+            {heading}
+          </h2>
+          <p className="mt-3 max-w-lg text-white/75">{body}</p>
+        </div>
+        <a href={portalUrl(path)} className={`${CTA.onDark} shrink-0`}>
+          {label}
+        </a>
+      </div>
     </section>
   )
 }

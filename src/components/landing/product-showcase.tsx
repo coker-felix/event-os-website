@@ -43,7 +43,7 @@ export function ProductShowcase({ product }: { product: ShowcaseProductId }) {
   return (
     <section
       aria-labelledby={`${product}-preview-title`}
-      className="mt-16 grid items-center gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-12"
+      className="mt-20 grid items-center gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-12"
     >
       <div className="max-w-md">
         <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
@@ -55,10 +55,12 @@ export function ProductShowcase({ product }: { product: ShowcaseProductId }) {
         >
           {preview.title}
         </h2>
-        <p className="mt-4 text-base leading-relaxed text-mist">{preview.body}</p>
+        <p className="mt-4 text-base leading-relaxed text-mist">
+          {preview.body}
+        </p>
       </div>
 
-      <figure className="overflow-hidden rounded-2xl border border-line bg-secondary p-2 shadow-[0_20px_60px_-36px_rgba(16,37,29,0.45)] sm:p-3">
+      <figure className="overflow-hidden rounded-3xl border border-line bg-secondary p-2 shadow-[0_30px_70px_-42px_rgba(16,37,29,0.5)] sm:p-3">
         <img
           src={preview.image}
           alt={preview.alt}

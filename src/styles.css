@@ -48,20 +48,20 @@
 
 .dark {
   color-scheme: dark;
-  --paper: #0c0e0c;
-  --ink: #080a09;
+  --paper: #121416;
+  --ink: #1b1e20;
   --rail: #1d4a35;
   --rail-ink: #eee5d4;
   --marigold: #f7f3eb;
-  --line: #30352f;
-  --mist: #bdb6a8;
+  --line: #373b3d;
+  --mist: #bac5bd;
 
-  --foreground: #f7f3eb;
-  --card: #171a17;
-  --popover: #171a17;
-  --secondary: #242824;
-  --muted: #242824;
-  --accent: #242824;
+  --foreground: #f6f1e7;
+  --card: #1b1e20;
+  --popover: #1b1e20;
+  --secondary: #272b2e;
+  --muted: #272b2e;
+  --accent: #303537;
 }
 
 @theme inline {

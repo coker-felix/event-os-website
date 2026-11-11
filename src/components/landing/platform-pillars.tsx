@@ -24,22 +24,37 @@ export const PILLARS = [
 
 export function PlatformPillars() {
   return (
-    <section aria-labelledby="platform-pillars-title" className="mt-16">
+    <section aria-labelledby="platform-pillars-title" className="mt-20">
       <div className="max-w-2xl">
+        <p className="text-xs font-semibold tracking-[0.16em] text-violet-ink uppercase">
+          EventRail ecosystem
+        </p>
+        <h2
+          id="platform-pillars-title"
+          className="mt-2 text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
+        >
+          One platform for the work around events.
+        </h2>
         <p className="mt-3 text-base leading-relaxed text-mist">
           The connected operating system for the event industry
         </p>
       </div>
-      <ul className="mt-8 grid gap-4 sm:grid-cols-3">
-        {PILLARS.map((pillar) => (
+      <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+        {PILLARS.map((pillar, index) => (
           <li key={pillar.title}>
             <Link
               to={pillar.to}
-              className="group flex h-full min-h-44 flex-col rounded-2xl border border-line bg-card p-6 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className={`group flex h-full min-h-48 flex-col rounded-3xl border p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${index === 1 ? 'border-ink bg-ink text-white hover:border-ink' : 'border-line bg-card hover:border-primary'}`}
             >
               <h3 className="text-xl font-bold">{pillar.title}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-mist">{pillar.body}</p>
-              <span className="mt-4 text-sm font-semibold text-primary group-hover:underline">
+              <p
+                className={`mt-2 flex-1 text-sm leading-relaxed ${index === 1 ? 'text-white/70' : 'text-mist'}`}
+              >
+                {pillar.body}
+              </p>
+              <span
+                className={`mt-4 text-sm font-semibold ${index === 1 ? 'text-emerald-100' : 'text-primary'} group-hover:underline`}
+              >
                 {pillar.cta} <span aria-hidden="true">→</span>
               </span>
             </Link>

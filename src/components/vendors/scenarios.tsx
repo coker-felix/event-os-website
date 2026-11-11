@@ -2,13 +2,27 @@ import { SCENARIOS } from '#/content/vendor-landing'
 
 export function Scenarios() {
   return (
-    <section aria-label="Who it's for" className="mt-16">
-      <h2 className="text-2xl font-bold">Who it's for</h2>
-      <ul className="mt-4 grid gap-4 md:grid-cols-3">
+    <section aria-label="Who it's for" className="mt-20">
+      <div className="max-w-2xl">
+        <p className="text-xs font-semibold tracking-[0.16em] text-violet-ink uppercase">
+          Built for working vendors
+        </p>
+        <h2 className="mt-2 text-3xl leading-tight font-bold tracking-tight sm:text-4xl">
+          Good work starts with clear expectations.
+        </h2>
+      </div>
+      <ul className="mt-6 grid gap-4 md:grid-cols-3">
         {SCENARIOS.map((s) => (
-          <li key={s.id} className="flex flex-col rounded-2xl border border-line bg-card p-5">
-            <h3 className="text-lg font-bold">{s.who}</h3>
-            <p className="mt-2 text-lg font-semibold text-violet-ink">“{s.situation}”</p>
+          <li
+            key={s.id}
+            className="lift-card flex flex-col rounded-3xl border border-line bg-card p-6 sm:p-7"
+          >
+            <p className="text-xs font-semibold tracking-wide text-primary uppercase">
+              {s.who}
+            </p>
+            <p className="mt-4 text-xl leading-snug font-semibold">
+              “{s.situation}”
+            </p>
             <p className="mt-2 text-mist">{s.today}</p>
             {s.soon && (
               <p className="mt-auto pt-4">
