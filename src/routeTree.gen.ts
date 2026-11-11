@@ -39,6 +39,8 @@ import { Route as AttendeeCheckoutReturnRouteImport } from './routes/_attendee/c
 import { Route as AttendeeEventsIndexRouteImport } from './routes/_attendee/events/index'
 import { Route as AttendeeReviewTokenRouteImport } from './routes/_attendee/review.$token'
 import { Route as AttendeeTicketsHelpRouteImport } from './routes/_attendee/tickets/help'
+import { Route as CommunityBlueprintsIndexRouteImport } from './routes/community/blueprints/index'
+import { Route as CommunityBlueprintsBlueprintIdRouteImport } from './routes/community/blueprints/$blueprintId'
 import { Route as AttendeeEventsEventIdIndexRouteImport } from './routes/_attendee/events/$eventId/index'
 import { Route as AttendeeEventsEventIdCheckoutRouteImport } from './routes/_attendee/events/$eventId/checkout'
 
@@ -191,6 +193,18 @@ const AttendeeTicketsHelpRoute = AttendeeTicketsHelpRouteImport.update({
   path: '/tickets/help',
   getParentRoute: () => AttendeeRoute,
 } as any)
+const CommunityBlueprintsIndexRoute =
+  CommunityBlueprintsIndexRouteImport.update({
+    id: '/blueprints/',
+    path: '/blueprints/',
+    getParentRoute: () => CommunityRouteRoute,
+  } as any)
+const CommunityBlueprintsBlueprintIdRoute =
+  CommunityBlueprintsBlueprintIdRouteImport.update({
+    id: '/blueprints/$blueprintId',
+    path: '/blueprints/$blueprintId',
+    getParentRoute: () => CommunityRouteRoute,
+  } as any)
 const AttendeeEventsEventIdIndexRoute =
   AttendeeEventsEventIdIndexRouteImport.update({
     id: '/events/$eventId/',
@@ -231,9 +245,11 @@ export interface FileRoutesByFullPath {
   '/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/review/$token': typeof AttendeeReviewTokenRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
+  '/community/blueprints/$blueprintId': typeof CommunityBlueprintsBlueprintIdRoute
   '/about/': typeof AttendeeAboutIndexRoute
   '/blog/': typeof AttendeeBlogIndexRoute
   '/events/': typeof AttendeeEventsIndexRoute
+  '/community/blueprints/': typeof CommunityBlueprintsIndexRoute
   '/events/$eventId/checkout': typeof AttendeeEventsEventIdCheckoutRoute
   '/events/$eventId/': typeof AttendeeEventsEventIdIndexRoute
 }
@@ -260,9 +276,11 @@ export interface FileRoutesByTo {
   '/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/review/$token': typeof AttendeeReviewTokenRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
+  '/community/blueprints/$blueprintId': typeof CommunityBlueprintsBlueprintIdRoute
   '/about': typeof AttendeeAboutIndexRoute
   '/blog': typeof AttendeeBlogIndexRoute
   '/events': typeof AttendeeEventsIndexRoute
+  '/community/blueprints': typeof CommunityBlueprintsIndexRoute
   '/events/$eventId/checkout': typeof AttendeeEventsEventIdCheckoutRoute
   '/events/$eventId': typeof AttendeeEventsEventIdIndexRoute
 }
@@ -295,9 +313,11 @@ export interface FileRoutesById {
   '/_attendee/checkout/return': typeof AttendeeCheckoutReturnRoute
   '/_attendee/review/$token': typeof AttendeeReviewTokenRoute
   '/_attendee/tickets/help': typeof AttendeeTicketsHelpRoute
+  '/community/blueprints/$blueprintId': typeof CommunityBlueprintsBlueprintIdRoute
   '/_attendee/about/': typeof AttendeeAboutIndexRoute
   '/_attendee/blog/': typeof AttendeeBlogIndexRoute
   '/_attendee/events/': typeof AttendeeEventsIndexRoute
+  '/community/blueprints/': typeof CommunityBlueprintsIndexRoute
   '/_attendee/events/$eventId/checkout': typeof AttendeeEventsEventIdCheckoutRoute
   '/_attendee/events/$eventId/': typeof AttendeeEventsEventIdIndexRoute
 }
@@ -330,9 +350,11 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/review/$token'
     | '/tickets/help'
+    | '/community/blueprints/$blueprintId'
     | '/about/'
     | '/blog/'
     | '/events/'
+    | '/community/blueprints/'
     | '/events/$eventId/checkout'
     | '/events/$eventId/'
   fileRoutesByTo: FileRoutesByTo
@@ -359,9 +381,11 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/review/$token'
     | '/tickets/help'
+    | '/community/blueprints/$blueprintId'
     | '/about'
     | '/blog'
     | '/events'
+    | '/community/blueprints'
     | '/events/$eventId/checkout'
     | '/events/$eventId'
   id:
@@ -393,9 +417,11 @@ export interface FileRouteTypes {
     | '/_attendee/checkout/return'
     | '/_attendee/review/$token'
     | '/_attendee/tickets/help'
+    | '/community/blueprints/$blueprintId'
     | '/_attendee/about/'
     | '/_attendee/blog/'
     | '/_attendee/events/'
+    | '/community/blueprints/'
     | '/_attendee/events/$eventId/checkout'
     | '/_attendee/events/$eventId/'
   fileRoutesById: FileRoutesById
@@ -621,6 +647,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AttendeeTicketsHelpRouteImport
       parentRoute: typeof AttendeeRoute
     }
+    '/community/blueprints/': {
+      id: '/community/blueprints/'
+      path: '/blueprints'
+      fullPath: '/community/blueprints/'
+      preLoaderRoute: typeof CommunityBlueprintsIndexRouteImport
+      parentRoute: typeof CommunityRouteRoute
+    }
+    '/community/blueprints/$blueprintId': {
+      id: '/community/blueprints/$blueprintId'
+      path: '/blueprints/$blueprintId'
+      fullPath: '/community/blueprints/$blueprintId'
+      preLoaderRoute: typeof CommunityBlueprintsBlueprintIdRouteImport
+      parentRoute: typeof CommunityRouteRoute
+    }
     '/_attendee/events/$eventId/': {
       id: '/_attendee/events/$eventId/'
       path: '/events/$eventId'
@@ -640,10 +680,14 @@ declare module '@tanstack/react-router' {
 
 interface CommunityRouteRouteChildren {
   CommunityIndexRoute: typeof CommunityIndexRoute
+  CommunityBlueprintsBlueprintIdRoute: typeof CommunityBlueprintsBlueprintIdRoute
+  CommunityBlueprintsIndexRoute: typeof CommunityBlueprintsIndexRoute
 }
 
 const CommunityRouteRouteChildren: CommunityRouteRouteChildren = {
   CommunityIndexRoute: CommunityIndexRoute,
+  CommunityBlueprintsBlueprintIdRoute: CommunityBlueprintsBlueprintIdRoute,
+  CommunityBlueprintsIndexRoute: CommunityBlueprintsIndexRoute,
 }
 
 const CommunityRouteRouteWithChildren = CommunityRouteRoute._addFileChildren(

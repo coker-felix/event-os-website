@@ -16,8 +16,8 @@ export function BlueprintCard({ blueprint }: { blueprint: Blueprint }) {
         </ul>}
       </div>
       <div className="mt-5 flex items-center justify-between gap-3 border-t border-line pt-3 text-sm text-muted-foreground">
-        <span>By {formerMember || !blueprint.authorUserId ? blueprint.authorLabel : <a href={`/community/people/${encodeURIComponent(blueprint.authorUserId)}`} className="font-medium text-foreground hover:underline">{blueprint.authorLabel}</a>}</span>
-        <span>{blueprint.forkCount ?? 0} uses</span>
+        <span>{formerMember ? 'By Former member' : blueprint.authorName && blueprint.authorUserId ? <>By <a href={`/community/people/${encodeURIComponent(blueprint.authorUserId)}`} className="font-medium text-foreground hover:underline">{blueprint.authorName}</a></> : blueprint.authorName ? `By ${blueprint.authorName}` : null}</span>
+        <span>{blueprint.taskCount} tasks · {blueprint.forkCount ?? 0} uses</span>
       </div>
     </article>
   )
