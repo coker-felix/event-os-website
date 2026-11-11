@@ -41,6 +41,8 @@ import { Route as AttendeeReviewTokenRouteImport } from './routes/_attendee/revi
 import { Route as AttendeeTicketsHelpRouteImport } from './routes/_attendee/tickets/help'
 import { Route as CommunityBlueprintsIndexRouteImport } from './routes/community/blueprints/index'
 import { Route as CommunityBlueprintsBlueprintIdRouteImport } from './routes/community/blueprints/$blueprintId'
+import { Route as CommunityPeopleIndexRouteImport } from './routes/community/people/index'
+import { Route as CommunityPeopleUserIdRouteImport } from './routes/community/people/$userId'
 import { Route as AttendeeEventsEventIdIndexRouteImport } from './routes/_attendee/events/$eventId/index'
 import { Route as AttendeeEventsEventIdCheckoutRouteImport } from './routes/_attendee/events/$eventId/checkout'
 
@@ -205,6 +207,16 @@ const CommunityBlueprintsBlueprintIdRoute =
     path: '/blueprints/$blueprintId',
     getParentRoute: () => CommunityRouteRoute,
   } as any)
+const CommunityPeopleIndexRoute = CommunityPeopleIndexRouteImport.update({
+  id: '/people/',
+  path: '/people/',
+  getParentRoute: () => CommunityRouteRoute,
+} as any)
+const CommunityPeopleUserIdRoute = CommunityPeopleUserIdRouteImport.update({
+  id: '/people/$userId',
+  path: '/people/$userId',
+  getParentRoute: () => CommunityRouteRoute,
+} as any)
 const AttendeeEventsEventIdIndexRoute =
   AttendeeEventsEventIdIndexRouteImport.update({
     id: '/events/$eventId/',
@@ -246,10 +258,12 @@ export interface FileRoutesByFullPath {
   '/review/$token': typeof AttendeeReviewTokenRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
   '/community/blueprints/$blueprintId': typeof CommunityBlueprintsBlueprintIdRoute
+  '/community/people/$userId': typeof CommunityPeopleUserIdRoute
   '/about/': typeof AttendeeAboutIndexRoute
   '/blog/': typeof AttendeeBlogIndexRoute
   '/events/': typeof AttendeeEventsIndexRoute
   '/community/blueprints/': typeof CommunityBlueprintsIndexRoute
+  '/community/people/': typeof CommunityPeopleIndexRoute
   '/events/$eventId/checkout': typeof AttendeeEventsEventIdCheckoutRoute
   '/events/$eventId/': typeof AttendeeEventsEventIdIndexRoute
 }
@@ -277,10 +291,12 @@ export interface FileRoutesByTo {
   '/review/$token': typeof AttendeeReviewTokenRoute
   '/tickets/help': typeof AttendeeTicketsHelpRoute
   '/community/blueprints/$blueprintId': typeof CommunityBlueprintsBlueprintIdRoute
+  '/community/people/$userId': typeof CommunityPeopleUserIdRoute
   '/about': typeof AttendeeAboutIndexRoute
   '/blog': typeof AttendeeBlogIndexRoute
   '/events': typeof AttendeeEventsIndexRoute
   '/community/blueprints': typeof CommunityBlueprintsIndexRoute
+  '/community/people': typeof CommunityPeopleIndexRoute
   '/events/$eventId/checkout': typeof AttendeeEventsEventIdCheckoutRoute
   '/events/$eventId': typeof AttendeeEventsEventIdIndexRoute
 }
@@ -314,10 +330,12 @@ export interface FileRoutesById {
   '/_attendee/review/$token': typeof AttendeeReviewTokenRoute
   '/_attendee/tickets/help': typeof AttendeeTicketsHelpRoute
   '/community/blueprints/$blueprintId': typeof CommunityBlueprintsBlueprintIdRoute
+  '/community/people/$userId': typeof CommunityPeopleUserIdRoute
   '/_attendee/about/': typeof AttendeeAboutIndexRoute
   '/_attendee/blog/': typeof AttendeeBlogIndexRoute
   '/_attendee/events/': typeof AttendeeEventsIndexRoute
   '/community/blueprints/': typeof CommunityBlueprintsIndexRoute
+  '/community/people/': typeof CommunityPeopleIndexRoute
   '/_attendee/events/$eventId/checkout': typeof AttendeeEventsEventIdCheckoutRoute
   '/_attendee/events/$eventId/': typeof AttendeeEventsEventIdIndexRoute
 }
@@ -351,10 +369,12 @@ export interface FileRouteTypes {
     | '/review/$token'
     | '/tickets/help'
     | '/community/blueprints/$blueprintId'
+    | '/community/people/$userId'
     | '/about/'
     | '/blog/'
     | '/events/'
     | '/community/blueprints/'
+    | '/community/people/'
     | '/events/$eventId/checkout'
     | '/events/$eventId/'
   fileRoutesByTo: FileRoutesByTo
@@ -382,10 +402,12 @@ export interface FileRouteTypes {
     | '/review/$token'
     | '/tickets/help'
     | '/community/blueprints/$blueprintId'
+    | '/community/people/$userId'
     | '/about'
     | '/blog'
     | '/events'
     | '/community/blueprints'
+    | '/community/people'
     | '/events/$eventId/checkout'
     | '/events/$eventId'
   id:
@@ -418,10 +440,12 @@ export interface FileRouteTypes {
     | '/_attendee/review/$token'
     | '/_attendee/tickets/help'
     | '/community/blueprints/$blueprintId'
+    | '/community/people/$userId'
     | '/_attendee/about/'
     | '/_attendee/blog/'
     | '/_attendee/events/'
     | '/community/blueprints/'
+    | '/community/people/'
     | '/_attendee/events/$eventId/checkout'
     | '/_attendee/events/$eventId/'
   fileRoutesById: FileRoutesById
@@ -661,6 +685,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityBlueprintsBlueprintIdRouteImport
       parentRoute: typeof CommunityRouteRoute
     }
+    '/community/people/': {
+      id: '/community/people/'
+      path: '/people'
+      fullPath: '/community/people/'
+      preLoaderRoute: typeof CommunityPeopleIndexRouteImport
+      parentRoute: typeof CommunityRouteRoute
+    }
+    '/community/people/$userId': {
+      id: '/community/people/$userId'
+      path: '/people/$userId'
+      fullPath: '/community/people/$userId'
+      preLoaderRoute: typeof CommunityPeopleUserIdRouteImport
+      parentRoute: typeof CommunityRouteRoute
+    }
     '/_attendee/events/$eventId/': {
       id: '/_attendee/events/$eventId/'
       path: '/events/$eventId'
@@ -681,13 +719,17 @@ declare module '@tanstack/react-router' {
 interface CommunityRouteRouteChildren {
   CommunityIndexRoute: typeof CommunityIndexRoute
   CommunityBlueprintsBlueprintIdRoute: typeof CommunityBlueprintsBlueprintIdRoute
+  CommunityPeopleUserIdRoute: typeof CommunityPeopleUserIdRoute
   CommunityBlueprintsIndexRoute: typeof CommunityBlueprintsIndexRoute
+  CommunityPeopleIndexRoute: typeof CommunityPeopleIndexRoute
 }
 
 const CommunityRouteRouteChildren: CommunityRouteRouteChildren = {
   CommunityIndexRoute: CommunityIndexRoute,
   CommunityBlueprintsBlueprintIdRoute: CommunityBlueprintsBlueprintIdRoute,
+  CommunityPeopleUserIdRoute: CommunityPeopleUserIdRoute,
   CommunityBlueprintsIndexRoute: CommunityBlueprintsIndexRoute,
+  CommunityPeopleIndexRoute: CommunityPeopleIndexRoute,
 }
 
 const CommunityRouteRouteWithChildren = CommunityRouteRoute._addFileChildren(

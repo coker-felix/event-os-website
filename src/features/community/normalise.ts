@@ -45,10 +45,12 @@ export function normaliseBlueprintList(raw: Raw, limit = 12): BlueprintList {
 }
 
 export function normaliseProfile(raw: Raw): Profile {
-  return { userId: String(raw.userId ?? raw.id ?? ''), displayName: text(raw.displayName) ?? '',
-    headline: text(raw.headline), bio: text(raw.bio), country: text(raw.country), city: text(raw.city),
-    availability: text(raw.availability), visibility: text(raw.visibility), status: text(raw.status),
-    skillIds: listText(raw.skillIds), badges: listText(raw.badges) }
+  // GetProfile returns { profile: {...}, accountState, can }; list rows are flat.
+  const profileRaw = (raw.profile && typeof raw.profile === 'object' ? raw.profile : raw) as Raw
+  return { userId: String(profileRaw.userId ?? profileRaw.id ?? ''), displayName: text(profileRaw.displayName) ?? '',
+    headline: text(profileRaw.headline), bio: text(profileRaw.bio), country: text(profileRaw.country), city: text(profileRaw.city),
+    availability: text(profileRaw.availability), visibility: text(profileRaw.visibility), status: text(profileRaw.status),
+    skillIds: listText(profileRaw.skillIds), badges: listText(profileRaw.badges) }
 }
 export function normaliseProfileList(raw: Raw, limit = 12): ProfileList {
   const profiles = rows(raw.profiles).map(normaliseProfile)

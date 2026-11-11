@@ -7,6 +7,7 @@ describe('community normalisers', () => {
     expect(normaliseProfileList({ profiles: [{ userId: 'u', email: 'x', phone: 'y' }] })).toEqual({ profiles: [{ userId: 'u', displayName: '', skillIds: [], badges: [] }], total: 0, hasMore: false })
     expect(normaliseBlueprint({ id: 'b', snapshot: {} }, true).snapshot.tasks).toEqual([])
     expect(normaliseProfile({ userId: 'u', email: 'x', phone: 'y' })).not.toHaveProperty('email')
+    expect(normaliseProfile({ profile: { userId: 'wrapped-user', displayName: 'Wrapped profile' }, accountState: 'established' })).toMatchObject({ userId: 'wrapped-user', displayName: 'Wrapped profile' })
   })
 
   it('defaults missing status flags to false', () => {
