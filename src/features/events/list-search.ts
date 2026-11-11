@@ -44,6 +44,7 @@ export interface EventsSearch {
   prices?: Array<PriceBandId>
   cats?: Array<number>
   formats?: Array<EventFormat>
+  donations?: boolean
   sort?: EventsSort
   view?: 'grid' | 'list'
   page?: number
@@ -96,6 +97,9 @@ export function validateEventsSearch(raw: Record<string, unknown>): EventsSearch
   if (cats.length) out.cats = cats
   const formats = only(raw.formats, FORMATS)
   if (formats.length) out.formats = formats
+  if (raw.donations === true || raw.donations === 'true' || raw.donations === '1') {
+    out.donations = true
+  }
   if (SORTS.includes(raw.sort as EventsSort)) out.sort = raw.sort as EventsSort
   if (raw.view === 'grid' || raw.view === 'list') out.view = raw.view
   const page = Number(raw.page)
@@ -103,7 +107,7 @@ export function validateEventsSearch(raw: Record<string, unknown>): EventsSearch
   return out
 }
 
-type Facet = 'q' | 'cities' | 'when' | 'prices' | 'cats' | 'formats'
+type Facet = 'q' | 'cities' | 'when' | 'prices' | 'cats' | 'formats' | 'donations'
 
 function matchesWhen(
   e: PublicEvent,
@@ -143,6 +147,8 @@ function passes(
     s.formats?.length &&
     !s.formats.includes(e.attendanceType as EventFormat)
   )
+    return false
+  if (skip !== 'donations' && s.donations && e.donationsEnabled !== true)
     return false
   if (skip !== 'prices' && s.prices?.length && !s.prices.some((id) => inBand(e, id)))
     return false
@@ -190,6 +196,7 @@ export interface FacetCounts {
   cities: Map<string, number>
   categories: Map<number, number>
   formats: Map<string, number>
+  donations: number
   prices: Map<PriceBandId, number>
   when: Record<'tonight' | 'weekend' | 'week', number>
 }
@@ -213,6 +220,7 @@ export function facetCounts(
   ignoring('cats').forEach((e) => bump(categories, e.categoryId))
   const formats = new Map<string, number>()
   ignoring('formats').forEach((e) => bump(formats, e.attendanceType))
+  const donations = ignoring('donations').filter((e) => e.donationsEnabled === true).length
   const prices = new Map<PriceBandId, number>()
   const priceBase = ignoring('prices')
   for (const b of PRICE_BANDS) {
@@ -224,7 +232,7 @@ export function facetCounts(
     weekend: whenBase.filter((e) => matchesWhen(e, s, 'weekend', now)).length,
     week: whenBase.filter((e) => matchesWhen(e, s, 'week', now)).length,
   }
-  return { cities, categories, formats, prices, when }
+  return { cities, categories, formats, donations, prices, when }
 }
 
 export interface FilterChip {
@@ -285,6 +293,12 @@ export function activeFilterChips(
       key: `format:${f}`,
       label: FORMAT_LABELS[f],
       remove: (x) => dropValue(x, 'formats', f),
+    })
+  if (s.donations)
+    chips.push({
+      key: 'donations',
+      label: 'Donations welcome',
+      remove: (x) => without(x, 'donations'),
     })
   return chips
 }

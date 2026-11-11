@@ -58,13 +58,13 @@ function VendorLanding() {
         <HowToStart />
       </Reveal>
       <Reveal>
-        <Testimonials audience="vendors" />
-      </Reveal>
-      <Reveal>
         <FaqSection faqs={VENDOR_FAQS} />
       </Reveal>
       <Reveal>
         <ClosingCta />
+      </Reveal>
+      <Reveal>
+        <Testimonials audience="vendors" showSamples />
       </Reveal>
     </div>
   )

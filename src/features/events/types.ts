@@ -15,6 +15,11 @@ export interface PublicEvent {
   currency?: string
   status?: 'draft' | 'published' | 'cancelled' | 'completed'
   donationsEnabled?: boolean
+  /** Recurring-series metadata from the public event listing. */
+  seriesId?: string
+  parentEventId?: string
+  recurrencePattern?: string
+  recurrenceRule?: string
   categoryId?: number
   attendanceType?: 'in_person' | 'virtual' | 'hybrid'
   heroImageUrl?: string

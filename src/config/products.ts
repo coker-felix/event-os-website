@@ -72,7 +72,7 @@ export const PRODUCTS: Record<ProductId, Product> = {
   venues: {
     id: 'venues',
     name: 'EventRail',
-    tagline: 'Fill your venue with events',
+    tagline: 'Run venue operations across every booking source',
     home: '/venues',
     nav: [{ label: 'Directory', to: '/venues/directory' }],
     actions: [

@@ -1,13 +1,17 @@
-/** EventRail's compact rail-and-signal mark, paired with the wordmark. */
+/** EventRail's junction mark, paired with the wordmark. */
 export function BrandMark({ light = false }: { light?: boolean }) {
   return (
-    <span
+    <svg
       aria-hidden="true"
-      className={`grid size-7 shrink-0 grid-cols-3 items-end gap-0.5 rounded-sm p-1 ${light ? 'bg-white/10' : 'bg-primary/10'}`}
+      className="size-7 shrink-0"
+      viewBox="0 0 256 256"
+      fill="none"
     >
-      <span className={`h-2/3 rounded-[1px] ${light ? 'bg-white/70' : 'bg-primary/60'}`} />
-      <span className={`h-full rounded-[1px] ${light ? 'bg-white' : 'bg-primary'}`} />
-      <span className={`h-1/2 rounded-[1px] ${light ? 'bg-[#E8B34B]' : 'bg-[#A96512]'}`} />
-    </span>
+      <g fill={light ? '#FFFFFF' : '#176B5B'}>
+        <rect x="112" y="24" width="32" height="208" rx="16" />
+        <rect x="24" y="112" width="208" height="32" rx="16" />
+      </g>
+      <circle cx="128" cy="128" r="28" fill="#E8B34B" />
+    </svg>
   )
 }

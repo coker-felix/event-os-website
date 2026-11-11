@@ -1,6 +1,6 @@
 import { safeLogoSrc } from '#/features/trusted/visible'
 
-export type TestimonialAudience = 'organizers' | 'vendors'
+export type TestimonialAudience = 'organizers' | 'vendors' | 'venues' | 'attendees'
 
 export interface Testimonial {
   quote: string

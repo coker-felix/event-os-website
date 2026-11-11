@@ -3,6 +3,8 @@ import { FaqSection, faqJsonLd } from '#/components/landing/faq-section'
 import {
   OrganizerClosing,
   OrganizerHero,
+  OrganizerPartnerships,
+  OrganizerPartnerServices,
   OrganizerPersonas,
   OrganizerPillars,
 } from '#/components/landing/organizer-section'
@@ -10,6 +12,7 @@ import { Testimonials } from '#/components/landing/testimonials'
 import { TrustedBy } from '#/components/landing/trusted-by'
 import { Reveal } from '#/components/motion/reveal'
 import { ProductShowcase } from '#/components/landing/product-showcase'
+import { UpcomingFeature } from '#/components/landing/upcoming-feature'
 import { HowToStart } from '#/components/vendors/how-to-start'
 import { HERO, HOW_TO_START, ORGANIZER_FAQS } from '#/content/organizer-landing'
 
@@ -37,7 +40,16 @@ function OrganizersLanding() {
         <OrganizerPillars />
       </Reveal>
       <Reveal>
+        <OrganizerPartnerships />
+      </Reveal>
+      <Reveal>
+        <OrganizerPartnerServices />
+      </Reveal>
+      <Reveal>
         <OrganizerPersonas />
+      </Reveal>
+      <Reveal>
+        <UpcomingFeature audience="organizers" />
       </Reveal>
       <Reveal>
         <ProductShowcase product="organizers" />

@@ -1,5 +1,6 @@
 import { useId, useRef, useState } from 'react'
 import { Check } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 import { CLOSING, HERO, PERSONAS, PILLARS } from '#/content/organizer-landing'
 import { portalUrl } from '#/features/vendors/portal'
 import { CTA } from '#/lib/cta'
@@ -48,6 +49,104 @@ export function OrganizerPillars() {
           </li>
         ))}
       </ul>
+    </section>
+  )
+}
+
+export function OrganizerPartnerships() {
+  return (
+    <section aria-labelledby="organizer-partnerships-title" className="mt-16">
+      <div className="max-w-2xl">
+        <p className="text-xs font-semibold tracking-[0.16em] text-violet-ink uppercase">
+          Grow your event network
+        </p>
+        <h2
+          id="organizer-partnerships-title"
+          className="mt-2 text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
+        >
+          Bring sponsors and sales partners into the plan.
+        </h2>
+        <p className="mt-3 text-base leading-relaxed text-mist">
+          Keep the relationships around your event visible alongside the work
+          happening in your organizer dashboard.
+        </p>
+      </div>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <article className="lift-card rounded-2xl border border-line bg-card p-6 sm:p-7">
+          <p className="text-xs font-semibold tracking-wide text-primary uppercase">
+            Sponsors
+          </p>
+          <h3 className="mt-2 text-xl font-bold">Work with sponsors across events.</h3>
+          <p className="mt-2 text-sm leading-relaxed text-mist">
+            Keep a reusable sponsor list, add partners to an event page and set
+            how each sponsor is featured.
+          </p>
+        </article>
+        <article className="lift-card rounded-2xl border border-line bg-card p-6 sm:p-7">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-semibold tracking-wide text-primary uppercase">
+              Resellers
+            </p>
+            <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-primary">
+              Coming soon
+            </span>
+          </div>
+          <h3 className="mt-2 text-xl font-bold">Keep reseller sales in view.</h3>
+          <p className="mt-2 text-sm leading-relaxed text-mist">
+            Planned dashboard tools will help you manage reseller partners,
+            attribute ticket sales and track commissions.
+          </p>
+        </article>
+      </div>
+    </section>
+  )
+}
+
+const PARTNER_SERVICES = [
+  { title: 'Physical ticket printing', body: 'Printed tickets for box office and event entry.' },
+  { title: 'Ticket wristbands', body: 'Wristbands for admission and access control.' },
+  { title: 'On-site scanning', body: 'Check-in support at the gate on event day.' },
+  { title: 'Banners and flyers', body: 'Printed materials to promote and signpost your event.' },
+  { title: 'Headphones and event kit', body: 'Equipment for the details around your event.' },
+] as const
+
+export function OrganizerPartnerServices() {
+  return (
+    <section aria-labelledby="organizer-partner-services-title" className="mt-16">
+      <div className="grid gap-5 border-b border-line pb-6 md:grid-cols-[1fr_auto] md:items-end">
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold tracking-[0.16em] text-violet-ink uppercase">
+            EventRail partner vendors
+          </p>
+          <h2
+            id="organizer-partner-services-title"
+            className="mt-2 text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
+          >
+            Get practical help for event day.
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-mist">
+            Find vendors who work with EventRail for the services that keep
+            tickets, entry and event promotion moving.
+          </p>
+        </div>
+        <Link to="/vendors/directory" className={CTA.outline}>
+          Browse vendors
+        </Link>
+      </div>
+      <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {PARTNER_SERVICES.map((service) => (
+          <li
+            key={service.title}
+            className="rounded-xl border border-line bg-card p-5"
+          >
+            <h3 className="font-bold">{service.title}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-mist">{service.body}</p>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs text-mist">
+        Look for the Partnered badge in the vendor directory. Services vary by location.
+      </p>
     </section>
   )
 }

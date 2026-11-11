@@ -6,6 +6,7 @@ import {
   COMING_SOON,
   HERO,
   HOW_TO_START,
+  VENUE_OPERATIONS,
 } from './venue-landing'
 
 /** Every string the venues landing page can show, with where it came from. */
@@ -19,6 +20,7 @@ function allCopy(): Array<{ where: string; text: string }> {
   }
   add('HERO', HERO)
   add('AUDIENCES', AUDIENCES)
+  add('VENUE_OPERATIONS', VENUE_OPERATIONS)
   add('BENEFITS', BENEFITS)
   add('COMING_SOON', COMING_SOON)
   add('HOW_TO_START', HOW_TO_START)
@@ -41,7 +43,7 @@ describe('venues copy honesty', () => {
     expect(allCopy().filter((c) => BANNED.test(c.text))).toEqual([])
   })
 
-  it('lists exactly the four things that are real today', () => {
+  it('lists the four EventRail booking capabilities', () => {
     expect(BENEFITS.map((b) => b.id)).toEqual(['profile', 'calendar', 'contract', 'insights'])
   })
 
@@ -61,6 +63,15 @@ describe('venues copy honesty', () => {
 
   it('speaks to venue owners first and organizers second', () => {
     expect(AUDIENCES.map((a) => a.id)).toEqual(['owner', 'organizer'])
+  })
+
+  it('covers private operations, integrations, seat charts and organizer tools', () => {
+    expect(VENUE_OPERATIONS.map((item) => item.id)).toEqual([
+      'integrations',
+      'private-events',
+      'seat-charts',
+      'organizer-tools',
+    ])
   })
 
   it('explains that a booking is a request the owner accepts or declines', () => {

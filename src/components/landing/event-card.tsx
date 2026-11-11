@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { Heart, MapPin } from 'lucide-react'
-import { eventParts, toDate } from '#/features/events/format'
+import { eventParts, recurringSchedule, toDate } from '#/features/events/format'
 import { availabilityBadge } from '#/features/events/availability'
 import { formatPrice } from '#/features/events/money'
 import { usePreferences } from '#/stores/preferences'
@@ -37,6 +37,7 @@ export function EventCard({
     .join(' · ')
   const soldOut = event.availability === 'sold_out'
   const badge = availabilityBadge(event.availability)
+  const repeat = recurringSchedule(event)
 
   return (
     <article className="group relative flex h-full flex-col rounded-2xl border border-line bg-card transition-shadow focus-within:ring-2 focus-within:ring-violet hover:shadow-lg">
@@ -94,6 +95,20 @@ export function EventCard({
             {event.title}
           </Link>
         </h3>
+        {(event.donationsEnabled || repeat) && (
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {event.donationsEnabled && (
+              <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-primary">
+                Donations welcome
+              </span>
+            )}
+            {repeat && (
+              <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-primary">
+                {repeat}
+              </span>
+            )}
+          </div>
+        )}
         {event.promoTagline && (
           <p className="mt-1 line-clamp-1 text-sm text-mist">
             {event.promoTagline}

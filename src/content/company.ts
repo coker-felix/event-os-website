@@ -95,8 +95,9 @@ export const ABOUT = {
  *   { name: 'Ama Mensah', role: 'Co-founder', bio: 'One or two sentences.', photo: '/team/ama.jpg', link: 'https://www.linkedin.com/in/…' },
  */
 export const TEAM: Array<TeamMember> = [
-  { name: 'Felix Coker', role: 'Co-founder' },
-  { name: 'Bright Dzotor', role: 'Co-founder' },
+  { name: 'Felix Coker', role: 'Co-founder & Head of Engineering' },
+  { name: 'Bright Dzotor', role: 'Co-founder & Operations' },
+  { name: 'Jerome Adzaho', role: 'Co-founder & Operations' },
 ]
 
 /**

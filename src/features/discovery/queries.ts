@@ -21,7 +21,7 @@ export const organizerQuery = (id: string) =>
     queryKey: ['organizer', id],
     queryFn: async (): Promise<Organizer> => {
       try {
-        const o = normaliseOrganizer(await apiGet(`/api/v1/organizers/${id}`, { timeoutMs: 4000 }))
+        const o = normaliseOrganizer(await apiGet(`/api/v1/organizers/${id}`, { timeoutMs: 60_000 }))
         if (!o) throw new Error('unusable organizer')
         return o
       } catch (err) {
@@ -43,7 +43,7 @@ export const trendingOrganizersQuery = queryOptions({
     try {
       const res = await apiGet<{ organizers?: Array<unknown> }>(
         '/api/v1/organizers/trending?limit=8',
-        { timeoutMs: 4000 },
+        { timeoutMs: 60_000 },
       )
       return (res.organizers ?? [])
         .map(normaliseOrganizer)
@@ -70,7 +70,7 @@ export const pastEventsQuery = (p: { organizerId?: string; limit?: number }) => 
       try {
         const res = await apiGet<{ events?: Array<unknown> }>(
           `/api/v1/events/past?${qs.toString()}`,
-          { timeoutMs: 4000 },
+          { timeoutMs: 60_000 },
         )
         return (res.events ?? [])
           .map(normalisePastEvent)
@@ -95,7 +95,7 @@ export const reviewSummaryQuery = (s: ReviewSubject) =>
       try {
         const raw = await apiGet(
           `/api/v1/reviews?subject=${s.kind}&id=${encodeURIComponent(s.id)}`,
-          { timeoutMs: 4000 },
+          { timeoutMs: 60_000 },
         )
         return normaliseReviewSummary(raw)
       } catch (err) {
@@ -116,7 +116,7 @@ export const eventMediaQuery = (eventId: string) =>
     queryKey: ['event-media', eventId],
     queryFn: async (): Promise<EventMedia | null> =>
       normaliseEventMedia(
-        await apiGet(`/api/v1/events/${eventId}/media`, { timeoutMs: 4000 }),
+        await apiGet(`/api/v1/events/${eventId}/media`, { timeoutMs: 60_000 }),
       ),
     staleTime: 5 * 60 * 1000,
     retry: false,

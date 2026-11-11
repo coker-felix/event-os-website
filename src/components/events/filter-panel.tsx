@@ -217,6 +217,15 @@ export function FilterPanel({
         ))}
       </Group>
 
+      <Group title="Ways to support">
+        <Option
+          checked={!!search.donations}
+          onChange={() => set({ donations: search.donations ? undefined : true })}
+          label="Donations welcome"
+          count={counts.donations}
+        />
+      </Group>
+
       {visibleCats.length > 0 && (
         <Group title="Category">
           {shownCats.map((c) => (

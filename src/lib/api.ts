@@ -41,7 +41,7 @@ async function readBody(res: Response): Promise<unknown> {
 export async function apiRequest<T = null>(
   method: Method,
   path: string,
-  { body, headers, signal, timeoutMs = 8000 }: ApiRequestOptions = {},
+  { body, headers, signal, timeoutMs = 60_000 }: ApiRequestOptions = {},
 ): Promise<T> {
   const timeout = AbortSignal.timeout(timeoutMs)
   const res = await fetch(`${API_URL}${path}`, {

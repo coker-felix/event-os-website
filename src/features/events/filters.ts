@@ -1,12 +1,13 @@
 import { toDate, zone } from './format'
 import type { PublicEvent } from './types'
 
-export type QuickFilter = 'tonight' | 'weekend' | 'free'
+export type QuickFilter = 'tonight' | 'weekend' | 'free' | 'donations'
 
 export const QUICK_FILTERS: Array<{ id: QuickFilter; label: string }> = [
   { id: 'tonight', label: 'Tonight' },
   { id: 'weekend', label: 'This weekend' },
   { id: 'free', label: 'Free' },
+  { id: 'donations', label: 'Donations welcome' },
 ]
 
 export interface EventFilters {
@@ -41,6 +42,7 @@ export function matchesQuick(
   now: number,
 ): boolean {
   if (quick === 'free') return e.priceFromMinor === 0
+  if (quick === 'donations') return e.donationsEnabled === true
   const start = toDate(e.startsAt)
   if (!start) return false
   if (quick === 'tonight') {

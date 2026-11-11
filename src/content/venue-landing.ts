@@ -1,16 +1,14 @@
 /**
- * Copy for the venues landing page. It promises only what the platform does
- * today; anything else lives in COMING_SOON and is always shown with a
- * "Coming soon" tag. It never tells a visitor they can claim a listing (that
- * flow is behind a flag that is off). src/content/venue-copy.test.ts fails if
- * this file drifts from those rules.
+ * Copy for the venues landing page. Upcoming features stay in COMING_SOON;
+ * venue operations, integrations and internal events are available without a
+ * public listing. src/content/venue-copy.test.ts checks this copy for accuracy.
  */
 
 export const HERO = {
   eyebrow: 'For venues',
-  headline: 'Get your venue seen, and every booking in one place',
+  headline: 'Run your venue, beyond online bookings',
   subline:
-    'List your venue so organizers can find it, see which dates are taken, and send booking requests.',
+    'Manage EventRail and external bookings, internal events and seat charts from one venue portal. A public listing is optional.',
 }
 
 export interface Audience {
@@ -37,6 +35,35 @@ export const AUDIENCES: Array<Audience> = [
       'You need a venue that fits your guest count, and you do not know which dates are free.',
     today:
       'The directory lists venues by place and size, marks which ones are bookable, and shows the dates a venue already holds.',
+  },
+]
+
+export interface VenueOperation {
+  id: 'integrations' | 'private-events' | 'seat-charts' | 'organizer-tools'
+  title: string
+  body: string
+}
+
+export const VENUE_OPERATIONS: Array<VenueOperation> = [
+  {
+    id: 'integrations',
+    title: 'Bring bookings in from other tools',
+    body: 'Connect other booking platforms and AI tools through API integrations, so your venue team can manage activity in one place.',
+  },
+  {
+    id: 'private-events',
+    title: 'Manage internal and private events',
+    body: 'Keep staff events, private functions and venue activity in your workspace without publishing them to the public directory.',
+  },
+  {
+    id: 'seat-charts',
+    title: 'Map rooms and seats',
+    body: 'Build venue maps and seating charts to plan sections, room layouts and guest placement.',
+  },
+  {
+    id: 'organizer-tools',
+    title: 'Organize events from your venue account',
+    body: 'A venue organization can also create and manage its own events with EventRail organizer capabilities.',
   },
 ]
 
@@ -101,7 +128,7 @@ export interface Step {
 
 // A real sequence, so the numbers carry meaning.
 export const HOW_TO_START: Array<Step> = [
-  { title: 'Create your profile', body: "Add your venue's details in the portal. It takes a few minutes." },
-  { title: 'Get reviewed', body: 'We check your details before your venue goes live in the directory.' },
-  { title: 'Receive booking requests', body: 'Organizers send requests for dates. You accept or decline.' },
+  { title: 'Set up your venue workspace', body: 'Start managing venue operations in EventRail. A public directory listing is optional.' },
+  { title: 'Connect your booking sources', body: 'Use EventRail booking requests or connect other platforms and AI tools through APIs.' },
+  { title: 'Manage spaces and events', body: 'Plan seat charts, run private events and organize your own public events from the same organization.' },
 ]

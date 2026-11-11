@@ -65,3 +65,53 @@ export function startsWithinWeek(e: PublicEvent, now: number): boolean {
 export function byStart(a: PublicEvent, b: PublicEvent): number {
   return (toDate(a.startsAt)?.getTime() ?? 0) - (toDate(b.startsAt)?.getTime() ?? 0)
 }
+
+export function isRecurringEvent(event: PublicEvent): boolean {
+  return Boolean(
+    event.seriesId?.trim() ||
+      event.parentEventId?.trim() ||
+      event.recurrencePattern?.trim() ||
+      event.recurrenceRule?.trim(),
+  )
+}
+
+const WEEKDAYS: Record<string, string> = {
+  MO: 'Monday',
+  TU: 'Tuesday',
+  WE: 'Wednesday',
+  TH: 'Thursday',
+  FR: 'Friday',
+  SA: 'Saturday',
+  SU: 'Sunday',
+}
+
+export function recurringSchedule(event: PublicEvent): string | undefined {
+  if (!isRecurringEvent(event)) return undefined
+  const ruleFrequency = event.recurrenceRule
+    ?.match(/(?:^|;)FREQ=([^;]+)/i)?.[1]
+    .toLowerCase()
+  const configuredPattern = event.recurrencePattern?.toLowerCase()
+  const pattern =
+    configuredPattern && configuredPattern !== 'custom'
+      ? configuredPattern
+      : ruleFrequency ?? configuredPattern
+  if (pattern === 'weekly') {
+    const byDay = event.recurrenceRule?.match(/(?:^|;)BYDAY=([^;]+)/i)?.[1]
+    const interval = Number(
+      event.recurrenceRule?.match(/(?:^|;)INTERVAL=(\d+)/i)?.[1] ?? 1,
+    )
+    const days = byDay
+      ?.split(',')
+      .map((day) => WEEKDAYS[day.trim().slice(-2).toUpperCase()])
+      .filter((day): day is string => Boolean(day))
+    if (interval > 1) return `Every ${interval} weeks`
+    if (days?.length === 1) return `Every ${days[0]}`
+    if (days && days.length > 1) return `Every ${days.join(' & ')}`
+    return 'Weekly'
+  }
+  if (pattern === 'daily') return 'Daily'
+  if (pattern === 'monthly') return 'Monthly'
+  if (pattern === 'quarterly') return 'Quarterly'
+  if (pattern === 'yearly') return 'Yearly'
+  return 'Recurring'
+}

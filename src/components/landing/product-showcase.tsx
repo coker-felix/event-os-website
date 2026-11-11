@@ -27,10 +27,10 @@ const PREVIEWS: Record<
   },
   venues: {
     eyebrow: 'The venue workspace',
-    title: 'Know what is happening with your dates.',
-    body: 'Keep enquiries, tentative holds and confirmed bookings visible in one shared calendar.',
+    title: 'One operations hub for every kind of venue activity.',
+    body: 'Bring bookings from EventRail, other platforms and AI tools together with private events and seat charts. A public listing is optional.',
     image: '/media/venue-preview.svg',
-    alt: 'Illustrative EventRail venue calendar with enquiry, hold and confirmed booking examples',
+    alt: 'Illustrative EventRail venue calendar with internal, external and confirmed booking examples',
   },
 }
 

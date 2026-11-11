@@ -3,6 +3,21 @@ import type { Faq } from './faqs'
 // Real facts only. Review the wording against product policy before shipping.
 export const VENUE_FAQS: Array<Faq> = [
   {
+    question: 'Do I need a public listing to use the venue portal?',
+    answer:
+      'No. You can use the venue workspace for venue operations, internal events, API-connected bookings and seat charts without publishing a public directory listing.',
+  },
+  {
+    question: 'Can I bring in bookings from other platforms or AI tools?',
+    answer:
+      'Yes. API integrations can bring bookings from other platforms and AI tools into your venue workflow.',
+  },
+  {
+    question: 'Can my venue organization also organize events?',
+    answer:
+      'Yes. A venue organization can use EventRail organizer capabilities to create and manage its own events.',
+  },
+  {
     question: 'How do I list my venue?',
     answer:
       "Create a profile in the portal and add your venue's details. Once we have reviewed it, it appears in the directory.",

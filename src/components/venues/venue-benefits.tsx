@@ -11,8 +11,8 @@ const ICONS: Record<Benefit['id'], React.ComponentType<{ className?: string }>> 
 
 export function VenueBenefits() {
   return (
-    <section aria-label="What you get today" className="mt-16">
-      <h2 className="text-2xl font-bold">What you get today</h2>
+    <section aria-label="EventRail booking tools" className="mt-16">
+      <h2 className="text-2xl font-bold">Tools for EventRail bookings</h2>
       <ul className="mt-4 grid gap-4 sm:grid-cols-2">
         {BENEFITS.map((b) => {
           const Icon = ICONS[b.id]

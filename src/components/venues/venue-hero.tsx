@@ -6,7 +6,7 @@ import { portalUrl } from '#/features/vendors/portal'
 export function VenueHero() {
   return (
     <section
-      aria-label="Get your venue seen"
+      aria-label="Run your venue with EventRail"
       className="full-bleed bg-ink text-white animate-in fade-in slide-in-from-bottom-2 duration-700"
     >
       <div className="mx-auto flex min-h-[26rem] max-w-6xl flex-col justify-center px-4 py-10 sm:py-14 lg:min-h-[min(70vh,36rem)]">
@@ -19,7 +19,7 @@ export function VenueHero() {
         <p className="mt-4 max-w-xl text-lg text-white/80">{HERO.subline}</p>
         <div className="mt-7 flex flex-wrap items-center gap-3">
           <a href={portalUrl('/register')} className={CTA.onDark}>
-            List your venue
+            Set up your venue
           </a>
           <Link to="/venues/directory" className={CTA.outlineOnDark}>
             Browse venues

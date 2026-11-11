@@ -26,7 +26,7 @@ export const calloutsQuery = (p: { category?: string; page: number }) => {
       if (p.category) qs.set('category', p.category)
       const raw = await apiGet<Record<string, unknown>>(
         `/api/v1/vendor-callouts?${qs.toString()}`,
-        { timeoutMs: 4000 },
+        { timeoutMs: 60_000 },
       )
       const list = normaliseCalloutList(raw, limit)
       // Dev only: with no open callouts, invented ones stand in so the pages can be seen.
@@ -59,7 +59,7 @@ export const vendorDirectoryQuery = (p: {
       if (p.city) qs.set('locality', p.city)
       const raw = await apiGet<Record<string, unknown>>(
         `/api/v1/vendors?${qs.toString()}`,
-        { timeoutMs: 4000 },
+        { timeoutMs: 60_000 },
       )
       const list = normaliseVendorList(raw, limit)
       // Dev only: pad a thin directory with invented vendors that match the filters.
@@ -87,7 +87,7 @@ export const vendorQuery = (id: string) =>
       try {
         const raw = await apiGet<Record<string, unknown>>(
           `/api/v1/vendors/${encodeURIComponent(id)}`,
-          { timeoutMs: 4000 },
+          { timeoutMs: 60_000 },
         )
         return normaliseVendorProfile(raw)
       } catch (err) {

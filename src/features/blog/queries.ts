@@ -17,7 +17,7 @@ export const featuredPostsQuery = queryOptions({
     try {
       const res = await apiGet<BlogPostsResponse>(
         `/api/v1/blog/posts?featured=true&limit=${FEATURED_COUNT}`,
-        { timeoutMs: 4000 },
+        { timeoutMs: 60_000 },
       )
       return valid(res.posts).slice(0, FEATURED_COUNT)
     } catch (err) {
@@ -44,7 +44,7 @@ export const postsQuery = (params: { category?: string; page: number }) => {
       try {
         const res = await apiGet<BlogPostsResponse>(
           `/api/v1/blog/posts?${qs.toString()}`,
-          { timeoutMs: 4000 },
+          { timeoutMs: 60_000 },
         )
         const posts = valid(res.posts)
         const hasMore =
@@ -75,7 +75,7 @@ export const articleQuery = (slug: string) =>
       try {
         return await apiGet<BlogArticle>(
           `/api/v1/blog/posts/${encodeURIComponent(slug)}`,
-          { timeoutMs: 4000 },
+          { timeoutMs: 60_000 },
         )
       } catch (err) {
         if (MOCKS_ENABLED) {

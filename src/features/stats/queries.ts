@@ -10,7 +10,7 @@ export interface PlatformStats {
   venues: number | null
 }
 
-const STATS_TIMEOUT_MS = 4000
+const STATS_TIMEOUT_MS = 60_000
 
 /** Read `total` from a list endpoint without downloading the list. */
 async function total(path: string): Promise<number | null> {

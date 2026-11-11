@@ -25,7 +25,7 @@ export const siteConfigQuery = queryOptions({
   queryFn: async (): Promise<SiteConfig> => {
     try {
       const raw = await apiGet<Record<string, unknown>>('/api/config', {
-        timeoutMs: 4000,
+        timeoutMs: 60_000,
       })
       return {
         supportEmail: text(raw.supportEmail),

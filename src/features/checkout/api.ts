@@ -32,6 +32,7 @@ export async function createCart(
 ): Promise<CartResponse> {
   const raw = await apiRequest<RawCartResponse>('POST', '/api/v1/carts', {
     body: { eventId, lines, ...contact },
+    timeoutMs: 60_000,
   })
   return toCartResponse(raw)
 }
@@ -91,7 +92,7 @@ export async function checkoutCart(
     {
       body,
       headers: { ...tokenHeader(token), 'Idempotency-Key': idempotencyKey },
-      timeoutMs: 20_000,
+      timeoutMs: 60_000,
     },
   )
   return normaliseCheckoutResult(raw)

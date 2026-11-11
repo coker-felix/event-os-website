@@ -8,10 +8,12 @@ import { Audiences } from '#/components/venues/audiences'
 import { VenueBenefits } from '#/components/venues/venue-benefits'
 import { VenueHero } from '#/components/venues/venue-hero'
 import { VenueStrip } from '#/components/venues/venue-strip'
+import { VenueOperations } from '#/components/venues/venue-operations'
 import { VENUE_FAQS } from '#/content/venue-faqs'
 import { COMING_SOON, HERO, HOW_TO_START } from '#/content/venue-landing'
 import { venueDirectoryQuery } from '#/features/venues/queries'
 import { ProductShowcase } from '#/components/landing/product-showcase'
+import { Testimonials } from '#/components/landing/testimonials'
 
 export const Route = createFileRoute('/venues/')({
   // Warm the cache on the server. A failing API must never fail the page.
@@ -43,6 +45,9 @@ function VenueLanding() {
         <Audiences />
       </Reveal>
       <Reveal>
+        <VenueOperations />
+      </Reveal>
+      <Reveal>
         <VenueBenefits />
       </Reveal>
       <Reveal>
@@ -58,12 +63,15 @@ function VenueLanding() {
         <FaqSection faqs={VENUE_FAQS} />
       </Reveal>
       <Reveal>
-      <ClosingCta
-        heading="Ready to fill your calendar?"
-        body="List your venue, get reviewed, and start receiving booking requests."
-        label="List your venue"
-        path="/register"
-      />
+        <ClosingCta
+          heading="Ready to bring your venue operations together?"
+          body="Use the venue portal for bookings, internal events and seat charts. Publish a directory listing whenever you want to receive EventRail booking requests."
+          label="Set up your venue"
+          path="/register"
+        />
+      </Reveal>
+      <Reveal>
+        <Testimonials audience="venues" showSamples />
       </Reveal>
     </div>
   )

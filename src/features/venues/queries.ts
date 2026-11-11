@@ -30,7 +30,7 @@ export const venueDirectoryQuery = (p: { country?: string; page: number }) => {
       if (p.country) qs.set('country', p.country)
       const raw = await apiGet<Record<string, unknown>>(
         `/api/v1/venues?${qs.toString()}`,
-        { timeoutMs: 4000 },
+        { timeoutMs: 60_000 },
       )
       const list = normaliseVenueList(raw, limit)
       // Dev only: pad a thin directory with invented venues that match the filter.
@@ -54,7 +54,7 @@ export const venueQuery = (id: string) =>
       try {
         const raw = await apiGet<Record<string, unknown>>(
           `/api/v1/venues/${encodeURIComponent(id)}`,
-          { timeoutMs: 4000 },
+          { timeoutMs: 60_000 },
         )
         return normaliseVenueProfile(raw)
       } catch (err) {
@@ -87,7 +87,7 @@ export const venueAvailabilityQuery = (id: string, nowSec: number) =>
         })
         const raw = await apiGet<Record<string, unknown>>(
           `/api/v1/venues/${encodeURIComponent(id)}/availability?${qs.toString()}`,
-          { timeoutMs: 4000 },
+          { timeoutMs: 60_000 },
         )
         return { open: true, blocks: normaliseBlocks(raw) }
       } catch (err) {

@@ -155,7 +155,7 @@ export function TrustedBy() {
         ref={rail}
         aria-label="Organizers, brands and sponsors"
         aria-roledescription="carousel"
-        className="mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
+        className="mt-4 flex snap-x snap-mandatory gap-3 overflow-hidden pb-2"
       >
         {brands.map((b) => (
           <li

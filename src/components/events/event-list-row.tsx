@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { availabilityBadge } from '#/features/events/availability'
-import { eventParts, toDate } from '#/features/events/format'
+import { eventParts, recurringSchedule, toDate } from '#/features/events/format'
 import { formatPrice } from '#/features/events/money'
 import type { PublicEvent } from '#/features/events/types'
 
@@ -28,6 +28,7 @@ export function EventListRow({
     .join(', ')
   const badge = availabilityBadge(event.availability)
   const soldOut = event.availability === 'sold_out'
+  const repeat = recurringSchedule(event)
 
   return (
     <article className="relative flex items-center gap-4 rounded-2xl border border-line bg-card p-3 transition-shadow focus-within:ring-2 focus-within:ring-violet hover:shadow-md">
@@ -71,7 +72,14 @@ export function EventListRow({
             .join(' · ')}
         </p>
         <p className="truncate text-xs text-mist">
-          {[categoryName, badge].filter(Boolean).join(' · ')}
+          {[
+            categoryName,
+            badge,
+            event.donationsEnabled ? 'Donations welcome' : undefined,
+            repeat,
+          ]
+            .filter(Boolean)
+            .join(' · ')}
         </p>
       </div>
       <div className="shrink-0 text-right text-sm">

@@ -8,6 +8,8 @@ import { MOCKS_ENABLED } from '#/lib/mocks'
 const HEADING: Record<TestimonialAudience, string> = {
   organizers: 'What organizers say',
   vendors: 'What vendors say',
+  venues: 'What venue teams say',
+  attendees: 'What attendees say',
 }
 
 /**
@@ -15,16 +17,19 @@ const HEADING: Record<TestimonialAudience, string> = {
  * (`src/content/testimonials.ts`); with none for this audience the section is
  * hidden. In dev, invented placeholders stand in so the design can be seen.
  */
-export function Testimonials({ audience }: { audience: TestimonialAudience }) {
+export function Testimonials({ audience, showSamples = false }: { audience: TestimonialAudience; showSamples?: boolean }) {
   const real = visibleTestimonials(TESTIMONIALS, audience)
   const items =
-    real.length > 0 ? real : MOCKS_ENABLED ? visibleTestimonials(MOCK_TESTIMONIALS, audience) : []
+    real.length > 0 ? real : (MOCKS_ENABLED || showSamples) ? visibleTestimonials(MOCK_TESTIMONIALS, audience) : []
   if (items.length === 0) return null
   return (
     <section aria-labelledby={`testimonials-${audience}`} className="mt-16">
-      <h2 id={`testimonials-${audience}`} className="text-2xl font-bold">
-        {HEADING[audience]}
-      </h2>
+      <div className="flex flex-wrap items-end justify-between gap-2">
+        <h2 id={`testimonials-${audience}`} className="text-2xl font-bold">
+          {HEADING[audience]}
+        </h2>
+        {real.length === 0 && showSamples && <span className="text-xs text-mist">Sample testimonials</span>}
+      </div>
       <ul className="mt-4 grid gap-4 md:grid-cols-3">
         {items.map((t) => (
           <li key={t.quote}>

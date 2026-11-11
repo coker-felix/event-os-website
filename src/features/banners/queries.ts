@@ -8,7 +8,7 @@ import type { Banner, BannersResponse } from './types'
 
 const MAX_BANNERS = 5
 /** Past this, show the default banner and stop waiting. */
-const BANNER_TIMEOUT_MS = 3000
+const BANNER_TIMEOUT_MS = 60_000
 const HEX_COLOR = /^#[0-9a-f]{6}$/i
 
 function isUsable(b: Banner, nowSec: number): boolean {

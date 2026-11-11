@@ -25,6 +25,7 @@ import {
 } from '#/features/events/filters'
 import {
   byStart,
+  isRecurringEvent,
   isUpcoming,
   startsWithinWeek,
 } from '#/features/events/format'
@@ -36,9 +37,11 @@ import { OrganizersTeaser } from '#/components/landing/organizers-teaser'
 import { Reveal } from '#/components/motion/reveal'
 import { CTA } from '#/lib/cta'
 import { ProductShowcase } from '#/components/landing/product-showcase'
+import { Testimonials } from '#/components/landing/testimonials'
 
 const MAX_CATEGORY_ROWS = 3
 const MAX_RESULTS = 24
+const MIN_RECURRING_SERIES = 3
 
 interface LandingSearch {
   q?: string
@@ -139,6 +142,17 @@ function Landing() {
       : []
 
     const thisWeek = base.filter((e) => startsWithinWeek(e, now))
+    const recurringSeries = new Set<string>()
+    const recurringEvents = base.filter((event) => {
+      if (!isRecurringEvent(event)) return false
+      const seriesKey =
+        event.seriesId?.trim() ||
+        event.parentEventId?.trim() ||
+        event.id
+      if (recurringSeries.has(seriesKey)) return false
+      recurringSeries.add(seriesKey)
+      return true
+    })
     const byCategory = new Map<number, Array<PublicEvent>>()
     for (const e of base) {
       if (!e.categoryId) continue
@@ -163,6 +177,7 @@ function Landing() {
       filtersActive,
       results,
       thisWeek,
+      recurringEvents,
       categoryRows,
       comingUp,
       savedEvents: upcoming.filter((e) => saved.includes(e.id)),
@@ -284,6 +299,15 @@ function Landing() {
               categoryNames={view.names}
             />
           </Reveal>
+          {view.recurringEvents.length >= MIN_RECURRING_SERIES && (
+            <Reveal>
+              <EventRow
+                title="Happening regularly"
+                events={view.recurringEvents}
+                categoryNames={view.names}
+              />
+            </Reveal>
+          )}
           {view.categoryRows.map((r) => (
             <Reveal key={r.title}>
               <EventRow
@@ -347,6 +371,9 @@ function Landing() {
       </Reveal>
       <Reveal>
         <FaqSection />
+      </Reveal>
+      <Reveal>
+        <Testimonials audience="attendees" showSamples />
       </Reveal>
     </>
   )
