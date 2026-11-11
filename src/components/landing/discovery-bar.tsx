@@ -48,18 +48,20 @@ export function DiscoveryBar({
     return () => window.clearTimeout(id)
   }, [text, value, onChange])
 
-  const active =
-    !!value.q || !!value.quick || value.categoryId !== undefined
+  const active = !!value.q || !!value.quick || value.categoryId !== undefined
 
   return (
-    <section aria-label="Find events" className="mt-6">
+    <section
+      aria-label="Find events"
+      className="relative z-20 mx-auto -mt-14 w-[calc(100vw-2rem)] max-w-7xl rounded-3xl border border-line bg-card p-4 shadow-[0_20px_55px_-35px_rgba(14,51,38,0.5)] sm:-mt-16 sm:p-6"
+    >
       <form
         role="search"
         onSubmit={(e) => {
           e.preventDefault()
           onChange({ ...value, q: text.trim() || undefined })
         }}
-        className="flex flex-col gap-3 sm:flex-row"
+        className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto_auto]"
       >
         <label className="relative flex-1">
           <span className="sr-only">Search events</span>
@@ -71,8 +73,8 @@ export function DiscoveryBar({
             type="search"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Search events, venues or categories"
-            className="h-11 w-full rounded-sm border border-line bg-card pr-4 pl-12 text-base"
+            placeholder="Search events or venues"
+            className="h-12 w-full rounded-full border border-line bg-background pr-4 pl-12 text-base"
           />
         </label>
         {cities.length > 0 && (
@@ -85,7 +87,7 @@ export function DiscoveryBar({
             <select
               value={city ?? ''}
               onChange={(e) => onCityChange(e.target.value || null)}
-              className={`${SELECT_CLASS} w-full pl-10 sm:w-auto`}
+              className={`${SELECT_CLASS} h-12 w-full rounded-full pl-10 md:w-auto`}
             >
               <option value="">All locations</option>
               {cities.map((c) => (
@@ -96,9 +98,15 @@ export function DiscoveryBar({
             </select>
           </label>
         )}
+        <button
+          type="submit"
+          className={`${CTA.primary} h-12 rounded-full px-7`}
+        >
+          Search
+        </button>
       </form>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2">
+      <div className="mt-4 flex flex-col gap-4 border-t border-line pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
         {QUICK_FILTERS.map((f) => {
           const on = value.quick === f.id
           return (
@@ -109,11 +117,7 @@ export function DiscoveryBar({
               onClick={() =>
                 onChange({ ...value, quick: on ? undefined : f.id })
               }
-              className={
-                on
-                  ? `${CTA.chipOn}`
-                  : `${CTA.chipOff}`
-              }
+              className={on ? `${CTA.chipOn}` : `${CTA.chipOff}`}
             >
               {f.label}
             </button>
@@ -132,7 +136,7 @@ export function DiscoveryBar({
                     : undefined,
                 })
               }
-              className={CTA.select}
+              className={`${CTA.select} rounded-full`}
             >
               <option value="">All categories</option>
               {categories.map((c) => (
@@ -158,7 +162,7 @@ export function DiscoveryBar({
         )}
         <Link
           to="/tickets/help"
-          className="ml-auto inline-flex h-9 items-center gap-1.5 text-sm font-semibold text-violet-ink hover:underline"
+          className="inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold text-primary underline-offset-4 hover:underline sm:ml-auto"
         >
           <Ticket className="size-4" aria-hidden />
           Already booked? Find my tickets

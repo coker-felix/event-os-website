@@ -37,8 +37,6 @@ import { OrganizersTeaser } from '#/components/landing/organizers-teaser'
 import { Reveal } from '#/components/motion/reveal'
 import { CTA } from '#/lib/cta'
 import { ProductShowcase } from '#/components/landing/product-showcase'
-import { PlatformPillars } from '#/components/landing/platform-pillars'
-import { Testimonials } from '#/components/landing/testimonials'
 
 const MAX_CATEGORY_ROWS = 3
 const MAX_RESULTS = 24
@@ -372,9 +370,6 @@ function Landing() {
       </Reveal>
       <Reveal>
         <FaqSection />
-      </Reveal>
-      <Reveal>
-        <Testimonials audience="attendees" showSamples />
       </Reveal>
     </>
   )

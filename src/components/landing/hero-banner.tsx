@@ -1,149 +1,97 @@
-import { CTA } from '#/lib/cta'
-import { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight } from 'lucide-react'
-import { bannersQuery, DEFAULT_BANNER } from '#/features/banners/queries'
-import { eventParts, toDate } from '#/features/events/format'
+import { ArrowRight, TicketCheck } from 'lucide-react'
+import { DEFAULT_BANNER } from '#/features/banners/queries'
+import { CTA } from '#/lib/cta'
 import type { Banner } from '#/features/banners/types'
 
-const ROTATE_MS = 6000
+const FALLBACK_IMAGE =
+  'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85'
 
-const KICKER: Record<Banner['type'], string> = {
-  event: 'Featured event',
-  editorial: "Editor's pick",
-  platform: "What's on",
-}
-
-/**
- * Banner slot. Server render and first paint always show the default
- * banner; banners are fetched in the browser with a short timeout and
- * swapped in if they arrive. The slot height is fixed so nothing jumps.
- */
+/** Homepage hero with the featured event image and live discovery controls below it. */
 export function HeroBanner() {
-  const { data } = useQuery(bannersQuery)
-  const banners = data && data.length > 0 ? data : [DEFAULT_BANNER]
-  const [index, setIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
-
-  const active = banners[index % banners.length]
-  const count = banners.length
-
-  useEffect(() => {
-    setIndex(0)
-  }, [count])
-
-  useEffect(() => {
-    if (count < 2 || paused) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const id = window.setInterval(
-      () => setIndex((i) => (i + 1) % count),
-      ROTATE_MS,
-    )
-    return () => window.clearInterval(id)
-  }, [count, paused])
-
+  const active = DEFAULT_BANNER
   return (
     <section
-      aria-roledescription="carousel"
-      aria-label="Highlights"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-      className="full-bleed relative isolate overflow-hidden bg-ink text-white animate-in fade-in slide-in-from-bottom-2 duration-700"
+      id="events"
+      aria-label="What's on"
+      className="relative left-1/2 z-10 -mt-10 mb-0 w-screen -translate-x-1/2"
     >
-      <BannerBackground banner={active} />
-      <div className="relative mx-auto flex min-h-[26rem] max-w-6xl flex-col justify-between gap-8 px-4 py-10 sm:py-14 md:flex-row md:items-end lg:min-h-[min(70vh,36rem)]">
-        <div
-          key={active.id}
-          aria-live={paused ? 'polite' : 'off'}
-          className="max-w-xl animate-in fade-in duration-500"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-            {KICKER[active.type]}
-          </p>
-          <h1 className="mt-3 text-4xl leading-[1.05] font-extrabold sm:text-5xl md:text-6xl">
-            {active.title}
-          </h1>
-          {active.subtitle && (
-            <p className="mt-4 max-w-md text-base text-white/80 sm:text-lg">
-              {active.subtitle}
-            </p>
-          )}
-          <BannerLink
-            banner={active}
-            className={`mt-7 ${CTA.onDark}`}
-          >
-            {active.ctaLabel}
-            <ArrowRight className="size-4" aria-hidden />
-          </BannerLink>
-        </div>
-
-        <div className="flex items-end justify-between gap-6 md:flex-col md:items-end">
-          {active.type === 'event' && <DateStub banner={active} />}
-          {count > 1 && (
-            <div className="flex gap-2" role="group" aria-label="Choose highlight">
-              {banners.map((b, i) => (
-                <button
-                  key={b.id}
-                  type="button"
-                  aria-label={`Show highlight ${i + 1} of ${count}: ${b.title}`}
-                  aria-current={i === index % count}
-                  onClick={() => setIndex(i)}
-                  className={
-                    i === index % count
-                      ? 'h-2.5 w-8 rounded-full bg-white'
-                      : 'h-2.5 w-2.5 rounded-full bg-white/40 hover:bg-white/70'
-                  }
-                />
-              ))}
+      <div className="relative isolate overflow-hidden bg-[#123f32] text-white shadow-[0_24px_60px_-36px_rgba(14,51,38,0.55)]">
+        <div className="grid md:min-h-[34rem] md:grid-cols-[1.08fr_0.92fr]">
+          <div className="flex flex-col items-start justify-center px-6 pt-9 pb-8 sm:px-10 sm:pt-12 sm:pb-10 lg:px-12 lg:py-14">
+            <div
+              className="max-w-2xl"
+            >
+              <p className="text-xs font-bold tracking-[0.2em] text-emerald-100/75 uppercase">
+                What's on
+              </p>
+              <h1 className="mt-4 text-4xl leading-[1.03] font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+                {active.title}
+              </h1>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+                {active.subtitle ||
+                  'Browse upcoming events and get your tickets in a few taps.'}
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <BannerLink
+                  banner={active}
+                  className={`${CTA.onDark} min-h-12 rounded-full px-6`}
+                >
+                  {active.ctaLabel || 'Browse all events'}
+                  <ArrowRight className="size-4" aria-hidden />
+                </BannerLink>
+                <a
+                  href="#how-it-works"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 px-6 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  How it works
+                </a>
+              </div>
             </div>
-          )}
+          </div>
+
+          <div className="relative min-h-64 overflow-hidden sm:min-h-80 md:min-h-full">
+            <HeroImage banner={active} />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-[#0b2d22]/75 via-[#0b2d22]/10 to-transparent md:bg-gradient-to-r md:from-[#123f32]/55 md:via-transparent md:to-transparent"
+            />
+            <div className="absolute right-4 bottom-20 left-4 flex items-center gap-3 rounded-2xl border border-white/20 bg-white/15 p-3 shadow-lg backdrop-blur-xl sm:right-6 sm:left-auto sm:max-w-xs sm:px-4">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#f7f3eb] text-[#123f32]">
+                <TicketCheck className="size-5" aria-hidden />
+              </span>
+              <span>
+                <span className="block text-sm font-semibold">
+                  Ticket ready for the door
+                </span>
+                <span className="mt-0.5 block text-xs text-white/75">
+                  Tied to your contact details
+                </span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-function BannerBackground({ banner }: { banner: Banner }) {
+function HeroImage({ banner }: { banner: Banner }) {
   const [failed, setFailed] = useState(false)
-  useEffect(() => setFailed(false), [banner.imageUrl])
-  return (
-    <div className="absolute inset-0 -z-10" aria-hidden>
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(120deg, #0C0E0C 0%, #1D4A35 62%, #2D6448 100%)',
-        }}
-      />
-      {banner.imageUrl && !failed && (
-        <img
-          src={banner.imageUrl}
-          alt=""
-          onError={() => setFailed(true)}
-          className="absolute inset-0 size-full object-cover"
-        />
-      )}
-      {/* Keeps text readable over any image. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/55 to-ink/25" />
-    </div>
-  )
-}
+  const image = failed ? FALLBACK_IMAGE : banner.imageUrl || FALLBACK_IMAGE
 
-function DateStub({ banner }: { banner: Banner }) {
-  const date = toDate(banner.eventStartsAt)
-  if (!date) return null
-  const p = eventParts(date, banner.eventTimezone)
   return (
-    <div className="rounded-sm bg-flame px-5 py-3 text-center text-ink shadow-lg">
-      <div className="text-xs font-bold uppercase tracking-widest">
-        {p.weekday} · {p.month}
-      </div>
-      <div className="font-display text-5xl leading-none font-extrabold">
-        {p.day}
-      </div>
-      <div className="mt-1 text-xs font-medium">{p.time}</div>
+    <div aria-hidden className="absolute inset-0 bg-[#123f32]">
+      <img
+        key={image}
+        src={image}
+        alt=""
+        onError={() => {
+          if (!failed) setFailed(true)
+        }}
+        className="size-full object-cover"
+      />
     </div>
   )
 }
