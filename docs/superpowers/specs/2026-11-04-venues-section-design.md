@@ -15,7 +15,7 @@ Two audiences use the venues section:
   what decides a shortlist: where, how big, whether it can be booked, and
   which dates are already taken.
 
-The vendor portal (`event-os-ui`) is one app for organizers, vendors and
+The vendor portal (`event-os-org`) is one app for organizers, vendors and
 venues: it has `/login`, `/register` and a venue workspace at `/venue/...`
 (dashboard, profile, spaces, availability). This section does not rebuild
 that. It persuades, lists real venues and hands people to the portal.

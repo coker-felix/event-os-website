@@ -136,7 +136,7 @@ The website calls the API gateway from both the server and the browser.
 4. The payment return page needs an order-status endpoint and the Paystack
    callback URL set to `/checkout/return` (backend request section 8).
 5. The vendors and venues pages send "Sign in", "Create profile" and "List your
-   venue" to the portal (`event-os-ui`) at `VITE_PORTAL_URL`, which must be
+   venue" to the portal (`event-os-org`) at `VITE_PORTAL_URL`, which must be
    running for those links to work. The portal has no screen to apply to a
    callout or to send a venue booking request yet.
 

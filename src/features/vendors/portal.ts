@@ -1,5 +1,5 @@
 /**
- * Where vendors and venues sign up and sign in: the portal (event-os-ui), one
+ * Where vendors and venues sign up and sign in: the portal (event-os-org), one
  * app for all roles. `VITE_VENDOR_PORTAL_URL` is the older name and still works.
  */
 const DEFAULT_BASE =

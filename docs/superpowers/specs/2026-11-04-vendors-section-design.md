@@ -6,7 +6,7 @@ Status: draft for review. Nothing here is built yet.
 
 Vendors (caterers, sound engineers, stage builders and so on) should be able
 to land on the website, see real work they could win, and start. The vendor
-portal (`event-os-ui`, at `/login`, `/register`, `/vendor/dashboard`) already
+portal (`event-os-org`, at `/login`, `/register`, `/vendor/dashboard`) already
 exists, so this section does not rebuild it. Its job is to persuade, to show
 real open callouts and vendors, and to hand people to the portal.
 
