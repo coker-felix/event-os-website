@@ -1,8 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { PRODUCTS } from '#/config/products'
 import type { ProductId } from '#/config/products'
-import { useQuery } from '@tanstack/react-query'
-import { statusQuery } from '#/features/community/queries'
 
 const SWITCHER_ORDER: Array<ProductId> = ['attendees', 'organizers', 'vendors', 'venues', 'community']
 const SWITCHER_LABELS: Record<ProductId, string> = {
@@ -15,8 +13,9 @@ const SWITCHER_LABELS: Record<ProductId, string> = {
 
 /** A small segmented control for moving between the three products. */
 export function ProductSwitcher({ current }: { current: ProductId }) {
-  const communityEnabled = useQuery(statusQuery()).data?.blueprints === true
-  const products = SWITCHER_ORDER.filter((id) => id !== 'community' || communityEnabled)
+  // Community is always reachable; /community itself explains when it is
+  // coming soon or unavailable.
+  const products = SWITCHER_ORDER
   return (
     <nav
       aria-label="Products"

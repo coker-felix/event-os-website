@@ -114,8 +114,11 @@ to UI-4).
 
 Add a `community` product to `src/config/products.ts`: name "Community", home
 `/community`, nav Blueprints · People, and header actions "Join" (primary) and
-"Sign in". The product switcher shows it only when `status.blueprints` is
-true. The attendee footer gains a "Community" link under the same condition.
+"Sign in". The product switcher and the attendee footer always link to
+Community; `/community` itself shows "coming soon" or "can't load" when the
+feature is off or the API is down. The home page has a "Event OS" pillars
+section (Community, Operations, Commerce) whose Community card links to
+`/community`.
 
 ## Mock data
 
@@ -135,7 +138,7 @@ API values always win. No invented data ships in production builds.
 
 | ID | Scenario | Expected |
 |---|---|---|
-| WEB-1 | Status off | Every community route returns 200 with "coming soon"; no data requests; no header item |
+| WEB-1 | Status off | Every community route returns 200 with "coming soon"; no data requests; switcher, footer and home pillar still link to `/community` |
 | WEB-2 | API down | 200 with the retry message; no crash in SSR |
 | WEB-3 | Malformed id | 404 without an API call |
 | WEB-4 | Hidden blueprint | 404 page with the removed/private copy |
