@@ -6,6 +6,9 @@ import { CTA } from '#/lib/cta'
 import { ProductSwitcher } from './product-switcher'
 import { ThemeToggle } from './theme-toggle'
 import { BrandMark } from './brand-mark'
+import { useQuery } from '@tanstack/react-query'
+import { statusQuery } from '#/features/community/queries'
+import { communityLinks } from '#/features/community/links'
 import type { ProductId } from '#/config/products'
 import {
   Sheet,
@@ -21,7 +24,14 @@ import {
  * Full navigation on larger screens and a mode-aware drawer on smaller screens.
  */
 export function SiteHeader({ product }: { product: ProductId }) {
-  const { name, home, nav, actions } = PRODUCTS[product]
+  const { name, home } = PRODUCTS[product]
+  const communityEnabled = useQuery(statusQuery()).data?.blueprints === true
+  const { nav, actions } = PRODUCTS[product]
+  const visibleNav = product === 'community' && !communityEnabled ? [] : nav
+  const visibleActions = product === 'community' && !communityEnabled ? [] : actions
+  const actionHref = (label: string, path: string) => product === 'community'
+    ? label === 'Join' ? communityLinks.join() : communityLinks.signIn()
+    : portalUrl(path)
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-background/85 font-ui backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-0 px-4 xl:flex-nowrap">
@@ -37,7 +47,7 @@ export function SiteHeader({ product }: { product: ProductId }) {
           <ProductSwitcher current={product} />
           <span aria-hidden className="h-4 w-px shrink-0 bg-line" />
           <nav aria-label="Primary" className="flex min-w-0 gap-1 text-sm">
-            {nav.map((item) => (
+            {visibleNav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
@@ -53,10 +63,10 @@ export function SiteHeader({ product }: { product: ProductId }) {
         </div>
 
         <div className="order-2 ml-auto hidden items-center gap-1.5 md:flex xl:order-3 xl:ml-0">
-          {actions?.map((a) => (
+          {visibleActions?.map((a) => (
             <a
               key={a.path}
-              href={portalUrl(a.path)}
+              href={actionHref(a.label, a.path)}
               className={a.variant === 'primary' ? CTA.nav : CTA.navQuiet}
             >
               {a.label}
@@ -98,7 +108,7 @@ export function SiteHeader({ product }: { product: ProductId }) {
                 </div>
               </div>
               <nav aria-label={`${product} navigation`} className="flex flex-col p-3">
-                {nav.map((item) => (
+                {visibleNav.map((item) => (
                   <SheetClose key={item.to} asChild>
                     <Link
                       to={item.to}
@@ -112,12 +122,12 @@ export function SiteHeader({ product }: { product: ProductId }) {
                   </SheetClose>
                 ))}
               </nav>
-              {actions?.length ? (
+              {visibleActions?.length ? (
                 <div className="mt-auto flex flex-col gap-2 border-t border-line p-5">
-                  {actions.map((a) => (
+                  {visibleActions.map((a) => (
                     <SheetClose key={a.path} asChild>
                       <a
-                        href={portalUrl(a.path)}
+                        href={actionHref(a.label, a.path)}
                         className={a.variant === 'primary' ? CTA.nav : CTA.navQuiet}
                       >
                         {a.label}

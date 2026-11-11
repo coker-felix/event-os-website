@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AttendeeRouteImport } from './routes/_attendee'
+import { Route as CommunityRouteRouteImport } from './routes/community/route'
 import { Route as OrganizersRouteRouteImport } from './routes/organizers/route'
 import { Route as VendorsRouteRouteImport } from './routes/vendors/route'
 import { Route as VenuesRouteRouteImport } from './routes/venues/route'
@@ -42,6 +43,11 @@ import { Route as AttendeeEventsEventIdCheckoutRouteImport } from './routes/_att
 
 const AttendeeRoute = AttendeeRouteImport.update({
   id: '/_attendee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRouteRoute = CommunityRouteRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrganizersRouteRoute = OrganizersRouteRouteImport.update({
@@ -193,6 +199,7 @@ const AttendeeEventsEventIdCheckoutRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/community': typeof CommunityRouteRoute
   '/organizers': typeof OrganizersRouteRouteWithChildren
   '/vendors': typeof VendorsRouteRouteWithChildren
   '/venues': typeof VenuesRouteRouteWithChildren
@@ -224,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/events/$eventId/': typeof AttendeeEventsEventIdIndexRoute
 }
 export interface FileRoutesByTo {
+  '/community': typeof CommunityRouteRoute
   '/careers': typeof AttendeeCareersRoute
   '/contact': typeof AttendeeContactRoute
   '/cookies': typeof AttendeeCookiesRoute
@@ -253,6 +261,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/community': typeof CommunityRouteRoute
   '/organizers': typeof OrganizersRouteRouteWithChildren
   '/vendors': typeof VendorsRouteRouteWithChildren
   '/venues': typeof VenuesRouteRouteWithChildren
@@ -287,6 +296,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/community'
     | '/organizers'
     | '/vendors'
     | '/venues'
@@ -318,6 +328,7 @@ export interface FileRouteTypes {
     | '/events/$eventId/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/community'
     | '/careers'
     | '/contact'
     | '/cookies'
@@ -346,6 +357,7 @@ export interface FileRouteTypes {
     | '/events/$eventId'
   id:
     | '__root__'
+    | '/community'
     | '/organizers'
     | '/vendors'
     | '/venues'
@@ -379,6 +391,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  CommunityRouteRoute: typeof CommunityRouteRoute
   OrganizersRouteRoute: typeof OrganizersRouteRouteWithChildren
   VendorsRouteRoute: typeof VendorsRouteRouteWithChildren
   VenuesRouteRoute: typeof VenuesRouteRouteWithChildren
@@ -393,6 +406,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AttendeeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/organizers': {
@@ -692,6 +712,7 @@ const AttendeeRouteWithChildren = AttendeeRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
+  CommunityRouteRoute: CommunityRouteRoute,
   OrganizersRouteRoute: OrganizersRouteRouteWithChildren,
   VendorsRouteRoute: VendorsRouteRouteWithChildren,
   VenuesRouteRoute: VenuesRouteRouteWithChildren,

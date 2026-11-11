@@ -30,6 +30,7 @@ const REAL_ROUTES = [
   '/terms',
   '/privacy',
   '/cookies',
+  '/community',
 ]
 
 describe('footer', () => {

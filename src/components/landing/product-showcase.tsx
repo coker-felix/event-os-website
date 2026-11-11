@@ -1,7 +1,9 @@
 import type { ProductId } from '#/config/products'
 
+type ShowcaseProductId = Exclude<ProductId, 'community'>
+
 const PREVIEWS: Record<
-  ProductId,
+  ShowcaseProductId,
   { eyebrow: string; title: string; body: string; image: string; alt: string }
 > = {
   attendees: {
@@ -35,7 +37,7 @@ const PREVIEWS: Record<
 }
 
 /** Replace the local SVG preview with a product screenshot or video when ready. */
-export function ProductShowcase({ product }: { product: ProductId }) {
+export function ProductShowcase({ product }: { product: ShowcaseProductId }) {
   const preview = PREVIEWS[product]
 
   return (

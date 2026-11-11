@@ -1,4 +1,4 @@
-export type ProductId = 'attendees' | 'vendors' | 'venues' | 'organizers'
+export type ProductId = 'attendees' | 'vendors' | 'venues' | 'organizers' | 'community'
 
 export interface NavItem {
   label: string
@@ -79,4 +79,19 @@ export const PRODUCTS: Record<ProductId, Product> = {
       { label: 'Sign in', path: '/login', variant: 'secondary' },
       { label: 'List your venue', path: '/register', variant: 'primary' },
     ],
-  },}
+  },
+  community: {
+    id: 'community',
+    name: 'EventRail',
+    tagline: 'Plans and people for live events',
+    home: '/community',
+    nav: [
+      { label: 'Blueprints', to: '/community/blueprints' },
+      { label: 'People', to: '/community/people' },
+    ],
+    actions: [
+      { label: 'Sign in', path: '/login?redirect=%2Fcommunity', variant: 'secondary' },
+      { label: 'Join', path: '/register?redirect=%2Fcommunity%2Fprofile', variant: 'primary' },
+    ],
+  },
+}

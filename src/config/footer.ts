@@ -12,6 +12,7 @@ export const FOOTER_COLUMNS = [
     links: [
       { label: 'All events', to: '/events' },
       { label: 'Blog', to: '/blog' },
+      { label: 'Community', to: '/community', when: 'community' },
     ],
   },
   {

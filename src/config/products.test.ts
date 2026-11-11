@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { PRODUCTS } from './products'
 
 describe('products', () => {
-  it('has four products in switcher order: attendees, organizers, vendors, venues', () => {
-    expect(Object.keys(PRODUCTS)).toEqual(['attendees', 'organizers', 'vendors', 'venues'])
+  it('includes the community product after the existing products', () => {
+    expect(Object.keys(PRODUCTS)).toEqual(['attendees', 'organizers', 'vendors', 'venues', 'community'])
   })
 
   it('gives organizers their own home, nav and sign-up action', () => {

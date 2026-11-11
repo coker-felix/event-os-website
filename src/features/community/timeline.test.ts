@@ -1,6 +1,7 @@
 import type { BlueprintTask } from './types'
 import { describe, expect, it } from 'vitest'
 import { offsetLabel, orderTasks } from './timeline'
+
 const task = (key: string, dependsOn: string[] = []): BlueprintTask => ({ key, title: key, dependsOn, offsetAmount: 0, offsetUnit: 'calendar_days', weekendPolicy: '', leadDays: 0 })
 describe('blueprint timeline', () => {
   it('orders dependencies first and otherwise preserves input order', () => {

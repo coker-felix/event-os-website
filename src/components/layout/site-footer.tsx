@@ -4,6 +4,8 @@ import { portalUrl } from '#/features/vendors/portal'
 import { getJobs, getTeam } from '#/features/company/data'
 import { useConsent } from '#/stores/consent'
 import { BrandMark } from './brand-mark'
+import { useQuery } from '@tanstack/react-query'
+import { statusQuery } from '#/features/community/queries'
 
 const LINK = 'text-white/80 hover:text-white'
 
@@ -11,6 +13,8 @@ export function SiteFooter() {
   const openSettings = useConsent((s) => s.openSettings)
   // Team and Careers appear only when there is something to show.
   const has = { team: getTeam().length > 0, careers: getJobs().length > 0 }
+  const communityEnabled = useQuery(statusQuery()).data?.blueprints === true
+  const footerHas = { ...has, community: communityEnabled }
 
   return (
     <footer className="mt-20 bg-ink text-white">
@@ -32,7 +36,7 @@ export function SiteFooter() {
             </h2>
             <ul className="mt-3 space-y-1 text-sm">
               {col.links
-                .filter((l) => !('when' in l) || has[l.when])
+                .filter((l) => !('when' in l) || footerHas[l.when])
                 .map((l) => (
                 <li key={l.label}>
                   {'to' in l ? (
